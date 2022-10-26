@@ -1,0 +1,74 @@
+[
+  {
+    "code": "FR-ARA",
+    "name": "Auvergne-Rhône-Alpes",
+    "regioncapital": "03",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-BFC",
+    "name": "Bourgogne-Franche-Comté",
+    "regioncapital": "21",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-BRE",
+    "name": "Bretagne",
+    "regioncapital": "35",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-CVL",
+    "name": "Centre-Val de Loire",
+    "regioncapital": "45",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-GES",
+    "name": "Grand-Est",
+    "regioncapital": "67",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-HDF",
+    "name": "Hauts-de-France",
+    "regioncapital": "59",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-IDF",
+    "name": "Île-de-France",
+    "regioncapital": "75",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-NAQ",
+    "name": "Nouvelle-Aquitaine",
+    "regioncapital": "33",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-NOR",
+    "name": "Normandie",
+    "regioncapital": "76",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-OCC",
+    "name": "Occitanie",
+    "regioncapital": "31",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-PAC",
+    "name": "Provence-Alpes-Côte-d’Azur",
+    "regioncapital": "13",
+    "parent": "FR"
+  },
+  {
+    "code": "FR-PDL",
+    "name": "Pays-de-la-Loire",
+    "regioncapital": "44",
+    "parent": "FR"
+  }
+]

@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from "react";
+import { Route, Switch } from 'react-router-dom';
+import Home from './pages/home/Home';
+import LocationDetails from './pages/locationDetails/LocationDetails';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <header className="outer-container top-nav-background">
+            <div className="inner-container">
+
+                <div className="top-navigation">
+                    <nav className="top-nav-menu">
+                        <ul>
+                            <li>myLocations</li>
+                            <li>myPreferences</li>
+                            <li>Profile</li>
+                            <li>Login</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+
+
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/location-details">
+          <h2>Andere pagina</h2>
+        </Route>
+        <Route path="/location-details/:key">
+          <LocationDetails />
+        </Route>
+      </Switch>
+    </>
   );
 }
 

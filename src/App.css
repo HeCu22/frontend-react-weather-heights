@@ -1,38 +1,321 @@
-.App {
-  text-align: center;
+/*////////////////////////
+    Table of Contents
+    1. Global Styles
+    2. Typography
+    3. Layout
+        Reusables
+        Other
+    4. Areas
+        Header
+        Introduction
+        JokeList
+        Button search
+        Button next
+        Footer
+    5. Media Queries
+////////////////////////*/
+
+/* ------------------------------- 1. Global Styles -------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    background-color: lightsteelblue;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+main {
+    /*padding: 0 20px;*/
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* ------------------------------- 2. Typography ----------------------------------- */
+
+/* ------------------------------- Layout ----------------------------------- */
+/* ------------------------------- Reusables -------------------------------- */
+/* top-navigation */
+
+.outer-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+/* De buitenste container is altijd de volledige schermbreedte. Het is een flexbox container die zijn inhoud altijd netjes horizontaal centreert */
+.outer-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.top-nav-background {
+    background-color: #E9A372;
+
 }
+
+.main-nav-background {
+    background: #E7CEBA;
+
+}
+
+.inner-container {
+    flex-basis: 1400px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Top Nav  */
+.top-navigation {
+    flex-basis: 50px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+
+}
+
+.top-nav-menu {
+    display: flex;
+    height: 30px;
+}
+
+
+.main-nav {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #E7CEBA;
+}
+
+.main-nav-menu {
+
+}
+
+.main-header-background {
+    background: url('./assets/header-paris.jpg');
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.icon-logo {
+    width: 105px;
+    height: 70px;
+
+}
+
+.favorite-icon, .search-icon {
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+}
+
+.search-icon > path, .favorite-icon > path {
+    fill: grey;
+
+}
+
+
+.left-nav {
+    flex-basis: 90px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 0 30px;
+}
+
+.mid-nav {
+    flex-basis: 800px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    /*background-color: fuchsia;*/
+    display: flex;
+    justify-content: center;
+}
+
+
+.right-nav {
+    flex-basis: 300px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 10px 30px;
+    /*background-color: #D19C97;*/
+}
+
+.mid {
+    width: 100%;
+    flex-basis: 20px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+}
+
+.header-content {
+    flex-basis: 200px;
+    flex-grow: 0.8;
+    flex-shrink: 1;
+    margin-bottom: 10px;
+    color: #e5e4cf;
+}
+
+.header-content p {
+    font-size: 14px;
+}
+
+
+
+.cards {
+    width: 100%;
+    flex-basis: 20px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #E7CEBA;
+    padding: 0 50px;
+    font-size: 20px;
+}
+
+.card {
+    height: 300px;
+    flex-basis: 400px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    /*background-color: fuchsia;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+button {
+    color: white;
+    background: #E9A372;
+    width: 204px;
+    height: 46px;
+    border-radius: 12px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 30px;
+
+    padding: 8px 60px 8px 60px;
+    text-transform: lowercase;
+    cursor: pointer;
+}
+
+.header-button {
+    background: #3E2F36;
+    padding: 1px 30px 10px 30px;
+    color: #E7CEBA;
+}
+
+
+button:hover {
+    background-color: #BC4C2A;
+    color: white;
+    transition: all .4s ease-in-out;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    border-color: #D08169;
+    color: gray;
+}
+
+article {
+    position: relative;
+    text-align: center;
+    margin: 16px;
+    border: 1px solid #20ACE9;
+    border-radius: 8px;;
+
+}
+
+.tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #20ACE9;
+    font-size: 8px;
+    padding: 4px;
+}
+
+article p {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+
+}
+
+article p span {
+    font-size: 18px;
+    margin: 1px;
+}
+
+article > p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.max {
+    height: 414px;
+    /*flex-basis: 200px;*/
+    flex-grow: 0;
+    flex-shrink: 1;
+
+}
+
+.moved {
+    width: 100%;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+section {
+    background-color: #E7CEBA;
+    font-size: 10px;
+    height: 100px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section p {
+    max-width: 200px;
+}
+
+
+
+

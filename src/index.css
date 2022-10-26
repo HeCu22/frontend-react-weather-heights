@@ -1,13 +1,57 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&family=Poppins:wght@200;300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&family=Roboto&family=Rock+Salt&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+
+}
+
+/* CSS HEX */
+.palette {
+    --eggshell: #e1e0caff;
+    --top-header: #E9A372;
+    --main-header: #E7CEBA;
+    --button-find: #E9A372;
+    --offwhite: #e5e4cf;
+    --button-go: #3E2F36l;
+    --bordertile: #20ACE9;
+
+}
+
+
+p {
+    font-family: Poppins, Arial, sans-serif;
+    margin: 16px 0;
+}
+
+h1 {
+    font-family: 'Rock Salt', Georgia, serif;
+    font-weight: 400;
+}
+
+h2, h3, h4 {
+    font-family: 'Merriweather', Georgia, serif;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+img {
+    width: 100%;
+    margin-left: 10px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 48px;
 }
