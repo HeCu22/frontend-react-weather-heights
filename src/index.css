@@ -10,19 +10,6 @@
 
 }
 
-/* CSS HEX */
-.palette {
-    --eggshell: #e1e0caff;
-    --top-header: #E9A372;
-    --main-header: #E7CEBA;
-    --button-find: #E9A372;
-    --offwhite: #e5e4cf;
-    --button-go: #3E2F36l;
-    --bordertile: #20ACE9;
-
-}
-
-
 p {
     font-family: Poppins, Arial, sans-serif;
     margin: 16px 0;

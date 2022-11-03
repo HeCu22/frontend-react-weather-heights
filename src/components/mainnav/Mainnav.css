@@ -1,0 +1,9 @@
+button a:hover::after {
+    width: 50%;
+    content: " search";
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}

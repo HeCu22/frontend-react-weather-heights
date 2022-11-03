@@ -4,26 +4,20 @@ import fetchConditions from "./fetchConditions";
 
 
 
-async function fetchLocationCity(city,currConditions,setCurrConditions,location,setLocation) {
+async function fetchLocationCity(city,location,setLocation,error,toggleError) {
 
-    console.log(' city',(city))
+    console.log('fetch location city',(city), `https://dataservice.accuweather.com/locations/v1/search?q=${city},FR&apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
     try {
-        // const {data} = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/neighbors/146551?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
-        //   const {data} = await axios.get(`https://dataservice.accuweather.com/locations/v1/adminareas/fr-36?apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
-        //       const {data} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/623?apikey=${process.env.REACT_APP_API_KEY}`);
-        const {data: [data]} = await axios.get(`https://dataservice.accuweather.com/locations/v1/search?q={city},FR&apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
+        toggleError(false);
+        const {data: [data]} = await axios.get(`https://dataservice.accuweather.com/locations/v1/search?q=${city},FR&apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
         console.log('data city', (data));
         setLocation((data));
 
 
-        if (!currConditions) {
-            fetchConditions((data.Key), currConditions, setCurrConditions)
-        } else {
-            console.log('currcond', (currConditions));
-        }
-
     } catch (e) {
         console.error(e);
+        toggleError(true);
+
     }
 }
 

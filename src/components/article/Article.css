@@ -5,7 +5,7 @@ article {
     text-align: center;
     margin: 16px;
     border: 1px solid #20ACE9;
-    border-radius: 8px;;
+    border-radius: 8px;
 
 }
 
@@ -21,6 +21,11 @@ article p {
 
 article  h1, h2 {
     font-size: 1.2em;
+
+}
+
+article  h3, h4 {
+    font-size: 1em;
 
 }
 

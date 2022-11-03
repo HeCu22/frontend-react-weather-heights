@@ -84,7 +84,7 @@
     "name": "Provence-Alpes-Côte-d’Azur",
     "regioncapital": "13",
     "capital": "Marseille",
-    "regionnAllame": "Bouches-de-Rhône",
+    "regionname": "Bouches-de-Rhône",
     "parent": "FR"
   },
   {

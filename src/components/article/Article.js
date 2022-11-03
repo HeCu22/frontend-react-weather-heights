@@ -6,24 +6,42 @@ import './Article.css';
 import fetchConditions from "../../helpers/fetchConditions"
 import fetchLocationKey from "../../helpers/fetchLocactionKey";
 import fetchLocationCity from "../../helpers/fetchLocationCity";
+import test from "../../data/test.json";
+import tslocation from "../../data/tslocation.json";
 
 
 
 function Article({tag, imagecode, region, city, department, departmentname}) {
     console.log('tag', tag, city);
     const [location,setLocation] = useState(null);
+    const [error,toggleError] = useState(false);
 
     const [currConditions, setCurrConditions] = useState(null);
 
     useEffect(() => {
 
-        if (!currConditions) {
+        if (!location) {
             fetchLocationCity(city,currConditions,setCurrConditions,location,setLocation)
+            console.log(tslocation[0]);
+            setLocation(tslocation[0]);
         } else {
             console.log('currcond', (currConditions));
         }
 
     }, []);
+
+    useEffect(() => {
+
+
+        if (!currConditions && location) {
+            fetchConditions((location.Key), currConditions, setCurrConditions,error,toggleError)
+            setCurrConditions(test[0]);
+            console.log(test[0]);
+        } else {
+            console.log('currcond', (currConditions));
+        }
+
+    }, [location]);
 
 
     return (
@@ -52,10 +70,10 @@ function Article({tag, imagecode, region, city, department, departmentname}) {
             </div>
             {currConditions &&
                 <>
-                    <h2>
+                    <h4>
                         <span>{currConditions.Wind.Direction.English} </span> {currConditions.Wind.Speed.Metric.Value}
 
-                    </h2>
+                    </h4>
                     <h3>{currConditions.PrecipitationSummary.Past6Hours.Metric.value}</h3>
                 </>
             }
