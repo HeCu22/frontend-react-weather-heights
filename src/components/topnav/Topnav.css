@@ -1,0 +1,11 @@
+a {
+    color: white;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: #BC4C2A;
+    color: white;
+    content: "search";
+    transition: all .4s ease-in-out;
+}

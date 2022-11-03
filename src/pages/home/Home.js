@@ -1,70 +1,60 @@
 import React, {useEffect, useState} from 'react';
-import {ReactComponent as Logo} from "../../assets/logo-weather-heights.svg";
-import {ReactComponent as Goto} from "../../assets/go.svg";
-import {ReactComponent as Back} from "../../assets/back-arrow.svg";
-import {ReactComponent as Forward} from "../../assets/forward-arrow.svg";
-import {ReactComponent as Search} from "../../assets/search.svg";
-import {ReactComponent as Favorite} from "../../assets/star.svg"
-import {ReactComponent as Weathericon6} from "../../assets/weather-icon6.svg";
-import im13 from "../../assets/images/impression13.jpg";
+import {ReactComponent as Goto} from "../../assets/icons/go.svg";
+import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
+import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
+import fetchLocationCity from "../../helpers/fetchLocationCity";
+import fetchConditions from "../../helpers/fetchConditions";
+import imConstruct from "../../helpers/imConstruct";
 import regions from '../../data/regions.json';
-
+import iconMapper from "../../helpers/iconMapper";
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
+import tslocation from '../../data/tslocation.json';
+import test from '../../data/test.json';
 import './Home.css';
-import LocationItem from '../../components/locationItem/locationItem';
 import axios from 'axios';
+import Mainnav from "../../components/mainnav/Mainnav";
+
+import fetchForecast from "../../helpers/fetchForecast";
+
 
 function Home() {
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
+    const [error, toggleError] = useState(false);
 
     regions.sort((a, b) => a.regioncapital - b.regioncapital);
-    console.log(regions);
-
-    async function fetchLocation() {
-        const postcode = "01000"
-        console.log('fetchloc')
-        try {
-            // const {data} = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/neighbors/146551?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
-            //   const {data} = await axios.get(`https://dataservice.accuweather.com/locations/v1/adminareas/fr-36?apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
-            //       const {data} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/623?apikey=${process.env.REACT_APP_API_KEY}`);
-            const {data: [data]} = await axios.get(`https://dataservice.accuweather.com/locations/v1/search?q=paris,FR&apikey=Jq0GXT92W5N47EvhMYKiHyXW6iJlKUIA&offset=1`);
-            console.log((data));
-            setLocation((data));
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    async function fetchConditions() {
-
-        console.log('fetchcond')
-        try {
-
-            const {data: [data]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/623?apikey=Jq0GXT92W5N47EvhMYKiHyXW6iJlKUIA`);
-
-            console.log((data));
-            setCurrConditions((data));
-        } catch (e) {
-            console.error(e);
-        }
-    }
+    console.log(regions)
 
 
     useEffect(() => {
         if (!location) {
-            fetchLocation();
+            fetchLocationCity("Paris",location,setLocation,error,toggleError);
+            console.log(tslocation[0]);
+            setLocation(tslocation[0]);
 
         } else {
             console.log('location', (location));
         }
-        if (!currConditions) {
-            fetchConditions()
+
+    }, []);
+
+    useEffect(() => {
+
+        console.log('useeffecct2');
+
+
+        if (!currConditions && location) {
+            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError)
+            setCurrConditions(test[0]);
+            console.log(test[0]);
+
         } else {
             console.log('currcond', (currConditions));
         }
-    }, []);
+
+
+    }, [location]);
 
     function doThingsOnClick() {
         console.log('Geliked!');
@@ -72,33 +62,15 @@ function Home() {
 
     return (
         <>
+            {console.log('render', (currConditions), (location))}
+            {error &&
 
-            <div className="outer-container main-nav-background">
-                <div className="outer-row">
-                    <div className="left-nav">
-                        <span className="max">
-                        <Logo className="icon-logo"/>
-                        </span>
-                    </div>
-                    <div className="mid-nav">
-                        <ul className="outer-row">
-                            <li>France</li>
-                            <li>Regions</li>
-                            <li>Departments</li>
-                            <li>Cities</li>
-                        </ul>
-                    </div>
-                    <div className="right-nav">
-                        <Button
-                            clickHandler={() => console.log("Find")}
-                            isDisabled={false}> <Search/> city</Button>
+                <span>  Something went wrong fetching the data  </span>
 
-                        <Favorite className="favorite-icon"/>
+            }
 
-                    </div>
-                </div>
+            <Mainnav/>
 
-            </div>
 
             <main className="outer-container main-header-background">
                 <div className="inner-container">
@@ -117,8 +89,12 @@ function Home() {
                                 {currConditions &&
                                     <>
 
-                                        <p> {currConditions.WeatherText}</p>
-                                        <Weathericon6/>
+                                        <p> {currConditions.WeatherText}
+                                            <span>
+                                                {iconMapper(currConditions.WeatherIcon)}
+                                        </span>
+                                        </p>
+
                                         <h2><span
                                             className="big-tekst">{currConditions.Temperature.Metric.Value} </span> ° {currConditions.Temperature.Metric.Unit}
                                         </h2>
@@ -135,24 +111,31 @@ function Home() {
 
                 </div>
             </main>
-            <main className="outer-container main-nav-background">
+            <main className="outer-container main-background">
                 <div className="inner-container">
                     <div className="cards">
                         <p>Regions</p>
                         <span><Back/> <Forward/></span>
                     </div>
-                    <div className="outer-container main-nav-background">
+                    <div className="outer-container main-background">
                         <div className="inner-container">
 
                             <div className="outer-row">
-                                {regions.map((region) => {
-                                    return <Article key={region.code}
-                                                    tag={region.code}
-                                                    image={im13}
-                                                    title={region.regioncapital}
-                                                    description={region.name}
-                                    />
-                                })}S
+
+                                {regions.length > 0 && regions.map((region, index) => {
+
+                                    if (index < 4) {
+
+                                        return <Article key={region.code}
+                                                        tag={region.code}
+                                                        imagecode={imConstruct(region.regioncapital)}
+                                                        region={region.name}
+                                                        city={region.capital}
+                                                        department={region.regioncapital}
+                                                        departmentname={region.regionname}
+                                        />
+                                    }
+                                })}
                             </div>
                         </div>
                     </div>

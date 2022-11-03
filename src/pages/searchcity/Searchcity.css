@@ -1,0 +1,18 @@
+.empty-header-background {
+    background-color: var(--main-body);
+    background-size: cover;
+}
+
+#input-city {
+    background: var(--main-body);
+    width: 100%;
+padding: 0 10px;
+    margin: 0 20px;
+    /*height: 71px;*/
+    border: solid 2px var(--bordertile);
+    border-radius: 8px;
+}
+
+::placeholder {
+    color: gray;
+}

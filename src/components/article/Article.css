@@ -1,3 +1,53 @@
+
+
+article {
+    position: relative;
+    text-align: center;
+    margin: 16px;
+    border: 1px solid #20ACE9;
+    border-radius: 8px;
+
+}
+
+article p {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+
+}
+
+article  h1, h2 {
+    font-size: 1.2em;
+
+}
+
+article  h3, h4 {
+    font-size: 1em;
+
+}
+
+article p span {
+    font-size: 18px;
+    margin: 1px;
+}
+
+article > p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #20ACE9;
+    font-size: 8px;
+    padding: 4px;
+}
+
 .pictures {
     flex-basis: 100px;
     flex-grow: 0;
