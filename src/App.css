@@ -42,6 +42,7 @@ body {
     font-weight: 300;
     font-size: 16px;
     background-color: var(--main-body);
+
 }
 
 main {
@@ -276,14 +277,6 @@ button:disabled {
     border-color: #D08169;
     color: gray;
 }
-
-
-
-
-
-
-
-
 
 .max {
     height: 414px;

@@ -12,16 +12,16 @@ import Article from "../../components/article/Article";
 import tslocation from '../../data/tslocation.json';
 import test from '../../data/test.json';
 import './Home.css';
-import axios from 'axios';
+
 import Mainnav from "../../components/mainnav/Mainnav";
 
-import fetchForecast from "../../helpers/fetchForecast";
 
 
 function Home() {
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
     const [error, toggleError] = useState(false);
+    const [loading,toggleLoading] = useState(false);
 
     regions.sort((a, b) => a.regioncapital - b.regioncapital);
     console.log(regions)
@@ -29,9 +29,10 @@ function Home() {
 
     useEffect(() => {
         if (!location) {
-            fetchLocationCity("Paris",location,setLocation,error,toggleError);
-            console.log(tslocation[0]);
-            setLocation(tslocation[0]);
+            fetchLocationCity("Paris",location,setLocation,error,toggleError,loading,toggleLoading);
+            toggleLoading(false);
+ //           console.log(tslocation[0]);
+ //           setLocation(tslocation[0]);
 
         } else {
             console.log('location', (location));
@@ -41,13 +42,14 @@ function Home() {
 
     useEffect(() => {
 
-        console.log('useeffecct2');
+        console.log('useffect update');
 
 
         if (!currConditions && location) {
-            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError)
-            setCurrConditions(test[0]);
-            console.log(test[0]);
+            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading)
+            toggleLoading(false);
+   //         setCurrConditions(test[0]);
+    //        console.log(test[0]);
 
         } else {
             console.log('currcond', (currConditions));
@@ -64,11 +66,9 @@ function Home() {
         <>
             {console.log('render', (currConditions), (location))}
             {error &&
-
                 <span>  Something went wrong fetching the data  </span>
-
             }
-
+            {loading && <span>Loading...</span>}
             <Mainnav/>
 
 

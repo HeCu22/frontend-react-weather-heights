@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
 
-async function fetchConditions(locationKey,currConditions,setCurrConditions,error,toggleError) {
 
+async function fetchConditions(locationKey, currConditions, setCurrConditions, error, toggleError, loading, toggleLoading) {
+    toggleLoading(true);
     console.log('fetchconditions')
     try {
         toggleError(false);
@@ -15,6 +16,7 @@ async function fetchConditions(locationKey,currConditions,setCurrConditions,erro
         toggleError(true);
     }
 }
+
 
 
 export default fetchConditions;
