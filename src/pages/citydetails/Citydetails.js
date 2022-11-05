@@ -11,6 +11,7 @@ import makeDay from "../../helpers/makeDay";
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import fetchConditions from "../../helpers/fetchConditions";
 import fetchForecast from "../../helpers/fetchForecast";
+import Mainnav from "../../components/mainnav/Mainnav";
 
 function Citydetails(props) {
     const {city} = useParams();
@@ -79,6 +80,13 @@ function Citydetails(props) {
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
+            <Mainnav>
+                <ul className="outer-row">
+                    <li> France</li>
+                    <li> City</li>
+                    <li> Details</li>
+                </ul>
+            </Mainnav>
             <main className={background}>
                 <div className="inner-container">
                     <div className="mid">

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signup.css';
+import Mainnav from "../../components/mainnav/Mainnav";
 
 
 function SignUp() {
@@ -52,23 +53,17 @@ function SignUp() {
 
     return (
         <>
-        <div className="outer-container main-nav-background">
-            <div className="outer-row">
-                <div className="left-nav">
-                        <span className="max">
-                        <Logo className="icon-logo"/>
-                        </span>
-                </div>
-                <div className="mid-nav">
-                    <h1>Register</h1>
-
-                </div>
-            </div>
-        </div>
+        <Mainnav>
+            <ul className="outer-row">
+                <li> France</li>
+                <li> Weather Heights</li>
+            </ul>
+        </Mainnav>
 
         <main className="outer-container empty-header-background">
             <div className="inner-container">
                 <div className="mid">
+                        <h1>Register</h1>
                     <form className="formSpace" onSubmit={handleSubmit}>
                         <legend>
                             <label htmlFor="input-email">

@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import {AuthContext} from "./context/AuthContext";
 import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile/Profile";
 import MyLocations from "./pages/mylocations/MyLocations";
 import Topnav from "./components/topnav/Topnav";
 import Home from './pages/home/Home';
@@ -14,6 +14,7 @@ import Citydetails from "./pages/citydetails/Citydetails";
 
 function App() {
   const {isAuthenticated} = useContext(AuthContext);
+
   return (
     <>
     <Topnav/>
@@ -25,10 +26,10 @@ function App() {
         <Route exact path="/search">
          <Searchcity/>
         </Route>
-        <Route path="/details/:city">
+        <Route exact path="/details/:city">
           <Citydetails />
         </Route>
-        <Route path="/location-details/:key">
+        <Route exact path="/location-details/:key">
           <LocationDetails />
         </Route>
         <Route path="/mylocations">

@@ -37,36 +37,6 @@ function AuthContextProvider({children}) {
 
     }, []);  // <--- [] betekent MOUNT effect
 
-    function login(token) {
-        console.log('token', token);
-        // token opslaan in local storage
-        localStorage.setItem('weatherheightsToken', token);
-        // token decoderen
-        const decodedToken = jwtDecode(token);
-        console.log('decoded token', decodedToken);
-        // nieuwe data opvragen van gebruiker
-        getUserdetails(token,decodedToken.sub);
-        // loggen
-        console.log('Gebruiker is ingelogd!');
-        // redirect
-        history.push('/');
-    }
-
-
-       function logout() {
-           // local storage leegmaken en state leegmaken
-           localStorage.clear();
-           setAuth({
-               ...auth,
-               isAuth: false,
-               user: null,
-           });
-           // loggen
-           console.log('user is uitgelogd');
-           // redirect
-           history.push('/');
-    }
-
     const history = useHistory();
 
     async function getUserdetails(token,id) {
@@ -98,6 +68,36 @@ function AuthContextProvider({children}) {
 
     }
 
+
+    function login(token) {
+        console.log('token', token);
+        // token opslaan in local storage
+        localStorage.setItem('weatherheightsToken', token);
+        // token decoderen
+        const decodedToken = jwtDecode(token);
+        console.log('decoded token', decodedToken);
+        // nieuwe data opvragen van gebruiker
+        getUserdetails(token,decodedToken.sub);
+        // loggen
+        console.log('Gebruiker is ingelogd!');
+        // redirect
+        history.push('/');
+    }
+
+
+       function logout() {
+           // local storage leegmaken en state leegmaken
+           localStorage.clear();
+           setAuth({
+               ...auth,
+               isAuth: false,
+               user: null,
+           });
+           // loggen
+           console.log('user is uitgelogd');
+           // redirect
+           history.push('/');
+    }
 
 
     const contextData = {

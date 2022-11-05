@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
@@ -9,15 +9,18 @@ import regions from '../../data/regions.json';
 import iconMapper from "../../helpers/iconMapper";
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
+import {AuthContext} from "../../context/AuthContext";
 import tslocation from '../../data/tslocation.json';
 import test from '../../data/test.json';
 import './Home.css';
 
 import Mainnav from "../../components/mainnav/Mainnav";
+import {Link} from "react-router-dom";
 
 
 
 function Home() {
+    const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
     const [error, toggleError] = useState(false);
@@ -69,7 +72,19 @@ function Home() {
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
-            <Mainnav/>
+            <Mainnav>
+                <ul className="outer-row">
+                    <li> France</li>
+                    <li><Link to="/"> Regions</Link></li>
+                    <li><Link to="/"> Departments </Link></li>
+                    {isAuthenticated &&
+                        <li><Link to="/"> MyLocations </Link></li>
+                    }
+                    <li><Link to="/"> Cities </Link></li>
+
+                </ul>
+
+            </Mainnav>
 
 
             <main className="outer-container main-header-background">

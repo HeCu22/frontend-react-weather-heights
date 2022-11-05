@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Mainnav from "../../components/mainnav/Mainnav";
 import './Searchcity.css';
 import {Link, useHistory} from "react-router-dom";
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";

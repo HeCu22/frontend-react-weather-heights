@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signin.css';
+import Mainnav from "../../components/mainnav/Mainnav";
 
 function SignIn() {
     const [error, toggleError] = useState(false);
@@ -17,6 +18,7 @@ function SignIn() {
     const source = axios.CancelToken.source();
     // mocht onze pagina ge-unmount worden voor we klaar zijn met data ophalen, aborten we het request
     useEffect(() => {
+        console.log('cleanup');
         return function cleanup() {
             source.cancel();
         }
@@ -53,23 +55,18 @@ function SignIn() {
     return (
         <>
 
-            <div className="outer-container main-nav-background">
-                <div className="outer-row">
-                    <div className="left-nav">
-                        <span className="max">
-                        <Logo className="icon-logo"/>
-                        </span>
-                    </div>
-                    <div className="mid-nav">
-                        <h1>Sign In</h1>
+            <Mainnav>
+                <ul className="outer-row">
+                    <li> France</li>
+                    <li> Weather Heights</li>
 
-                    </div>
-                </div>
-            </div>
+                </ul>
+            </Mainnav>
 
             <main className="outer-container empty-header-background">
                 <div className="inner-container">
                     <div className="mid">
+                        <h1>Sign In</h1>
                         <form className="formSpace" onSubmit={handleSubmit}>
                             <legend>
                                 <label htmlFor="input-user">
