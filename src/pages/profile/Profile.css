@@ -1,0 +1,35 @@
+.empty-header-background {
+    background-color: var(--main-body);
+    background-size: cover;
+}
+
+#input-user, #input-pw, #input-email {
+    background: var(--main-body);
+    width: 100%;
+    /*padding: 0 10px;*/
+    /*margin: 0 20px;*/
+    height: 60px;
+    border: solid 2px var(--bordertile);
+    border-radius: 8px;
+}
+
+::placeholder {
+    color: gray;
+}
+
+
+.formSpace {
+    flex-basis: 400px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--main-tile);
+    border: 1px solid var(--bordertile);
+    border-radius: 8px;
+    padding: 50px;
+
+}

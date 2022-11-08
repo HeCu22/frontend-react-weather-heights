@@ -1,5 +1,10 @@
-import React, {useEffect, useState} from "react";
-import { Route, Switch } from 'react-router-dom';
+import React, {useContext} from "react";
+import { Route, Switch, Redirect } from 'react-router-dom';
+import {AuthContext} from "./context/AuthContext";
+import SignIn from "./pages/signin/SignIn";
+import SignUp from "./pages/signup/SignUp";
+import Profile from "./pages/profile/Profile";
+import MyLocations from "./pages/mylocations/MyLocations";
 import Topnav from "./components/topnav/Topnav";
 import Home from './pages/home/Home';
 import LocationDetails from './pages/locationDetails/LocationDetails';
@@ -8,6 +13,8 @@ import Searchcity from "./pages/searchcity/Searchcity";
 import Citydetails from "./pages/citydetails/Citydetails";
 
 function App() {
+  const {isAuthenticated} = useContext(AuthContext);
+
   return (
     <>
     <Topnav/>
@@ -19,15 +26,25 @@ function App() {
         <Route exact path="/search">
          <Searchcity/>
         </Route>
-        <Route path="/details/:city">
+        <Route exact path="/details/:city">
           <Citydetails />
         </Route>
-        <Route exact path="/location-details">
-          <h2>Andere pagina</h2>
-        </Route>
-        <Route path="/location-details/:key">
+        <Route exact path="/location-details/:key">
           <LocationDetails />
         </Route>
+        <Route path="/mylocations">
+          {isAuthenticated ? <MyLocations /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/profile">
+          {isAuthenticated ? <Profile /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/signin">
+          <SignIn/>
+        </Route>
+        <Route exact path="/signup">
+          <SignUp/>
+        </Route>
+
       </Switch>
     </>
   );

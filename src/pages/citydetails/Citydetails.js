@@ -11,6 +11,7 @@ import makeDay from "../../helpers/makeDay";
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import fetchConditions from "../../helpers/fetchConditions";
 import fetchForecast from "../../helpers/fetchForecast";
+import Mainnav from "../../components/mainnav/Mainnav";
 
 function Citydetails(props) {
     const {city} = useParams();
@@ -20,17 +21,21 @@ function Citydetails(props) {
     const [currConditions, setCurrConditions] = useState(null);
     const [forecastData, setForecastData] = useState(null)
     const [error, toggleError] = useState(false);
+    const [errorFc, toggleErrorFc] = useState(false);
+    const [loading,toggleLoading] = useState(false);
+
     useEffect(() => {
 
         console.log('useeffecct');
 
         if (!location) {
-            fetchLocationCity((city), location, setLocation, error, toggleError)
-            setBackground("outer-container impression01")
+            fetchLocationCity((city), location, setLocation, error, toggleError,loading,toggleLoading);
+            toggleLoading(false);
+            setBackground("outer-container impression01");
 
 
-            console.log(tslocation[0]);
-            setLocation(tslocation[0]);
+        //    console.log(tslocation[0]);
+        //    setLocation(tslocation[0]);
 
         } else {
             console.log('location', (location));
@@ -46,14 +51,16 @@ function Citydetails(props) {
 
 
         if (!currConditions && location) {
-            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError)
-            setCurrConditions(test[0]);
-            console.log(test[0]);
+            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError,loading,toggleLoading);
+            toggleLoading(false);
+     //       setCurrConditions(test[0]);
+     //      console.log(test[0]);
 
             if (!forecastData && location) {
-                fetchForecast((location.Key), forecastData, setForecastData, error, toggleError)
-                setForecastData(tsforecast[0]);
-                console.log('forecast', tsforecast[0]);
+                fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc,loading,toggleLoading);
+                toggleLoading(false);
+     //           setForecastData(tsforecast[0]);
+      //          console.log('forecast', tsforecast[0]);
 
             } else {
                 console.log('forecast', (forecastData));
@@ -70,11 +77,16 @@ function Citydetails(props) {
         <>
             {console.log('render', (currConditions), (location), (forecastData))}
             {error &&
-
                 <span>  Something went wrong fetching the data  </span>
-
             }
-
+            {loading && <span>Loading...</span>}
+            <Mainnav>
+                <ul className="outer-row">
+                    <li> France</li>
+                    <li> City</li>
+                    <li> Details</li>
+                </ul>
+            </Mainnav>
             <main className={background}>
                 <div className="inner-container">
                     <div className="mid">
@@ -126,6 +138,10 @@ function Citydetails(props) {
                         <div className="tile">
 
                             <div className="currentconditions">
+                                {error &&
+                                    <span>  Something went wrong fetching the data  </span>
+                                }
+                                {loading && <span>Loading...</span>}
                                 <h5>Currently</h5>
                                 {currConditions &&
                                     <>
@@ -177,6 +193,10 @@ function Citydetails(props) {
                             }
                         </div>
                         <div className="tile">
+                            {errorFc &&
+                                <span>  Something went wrong fetching the data  </span>
+                            }
+                            {loading && <span>Loading...</span>}
                             <div className="forecast-header">
                                 <h5>Forecast</h5>
                                 <p>Min/Max °C</p>
@@ -192,13 +212,13 @@ function Citydetails(props) {
                                     {forecastData.DailyForecasts.length > 0 &&
 
                                         forecastData.DailyForecasts.map((forecastday) => {
-                                            return <div className="forecastline">
+                                            return <div className="forecastline" key={forecastday.Date}>
                                                 <p>{makeDay(forecastday.EpochDate)}</p>
-                                                <p> {iconMapper(forecastday.Day.Icon)}</p>
-                                                <p>{forecastday.Day.IconPhrase}</p>
-                                                <p>{forecastday.Temperature.Minimum.Value} / {forecastday.Temperature.Maximum.Value}</p>
+                                                <p className="pictures"> <span className="small-picture-span"> {iconMapper(forecastday.Day.Icon)} </span></p>
+                                                <p className="small-text">{forecastday.Day.IconPhrase}</p>
+                                                <p>{forecastday.Temperature.Minimum.Value}/{forecastday.Temperature.Maximum.Value}</p>
                                                 <p>{forecastday.Day.Rain.Value}</p>
-                                                <p>{forecastday.Day.Wind.Direction.English} {forecastday.Day.Wind.Speed.Value} / {forecastday.Day.WindGust.Speed.Value}</p>
+                                                <p>{forecastday.Day.Wind.Direction.English} {forecastday.Day.Wind.Speed.Value}/{forecastday.Day.WindGust.Speed.Value}</p>
                                                 <p>{forecastday.HoursOfSun} {forecastday.AirAndPollen[5].Category} </p>
                                                 <p>{forecastday.AirAndPollen[0].Category}</p>
                                             </div>
