@@ -4,7 +4,7 @@
 }
 
 .tile {
-    height: 500px;
+    /*height: 500px;*/
     flex-basis: 650px;
     flex-grow: 0;
     flex-shrink: 1;
@@ -42,16 +42,13 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     background-color: white;
     gap: 15px;
     padding: 0 50px;
     font-size: 12px;
 }
 
-.forecast-header:first-child {
-    justify-self: flex-start;
-}
 
 .forecast-header, currentconditions h5 {
     font-size: 14px;
@@ -75,7 +72,7 @@ h3, h4 {
     width: 100%;
 }
 
-.small-picture-span {
+.small-span {
     height: 30px;
     flex-basis: 50px;
     flex-grow: 0;
@@ -87,3 +84,7 @@ h3, h4 {
 .small-picture-img {
     width: 100%;
 }
+
+svg {
+    max-width: 75px;
+    max-height: 45px;}
