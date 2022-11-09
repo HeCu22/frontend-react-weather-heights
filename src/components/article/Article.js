@@ -8,6 +8,7 @@ import fetchLocationKey from "../../helpers/fetchLocactionKey";
 import fetchLocationCity from "../../helpers/fetchLocationCity";
 import test from "../../data/test.json";
 import tslocation from "../../data/tslocation.json";
+import {ReactComponent as Favorite} from "../../assets/icons/star.svg";
 
 
 function Article({tag, imagecode, region, city, department, departmentname}) {
@@ -55,7 +56,7 @@ function Article({tag, imagecode, region, city, department, departmentname}) {
                 {loading && <span>Loading...</span>}
                 <span className="tag">{tag}</span>
                 <h1> {region} </h1>
-                <h2> {city} </h2>
+                <h2> {city}  <span> <Favorite/> </span> </h2>
                 {currConditions &&
                     <>
                         <h2>

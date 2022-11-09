@@ -12,6 +12,7 @@ import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import fetchConditions from "../../helpers/fetchConditions";
 import fetchForecast from "../../helpers/fetchForecast";
 import Mainnav from "../../components/mainnav/Mainnav";
+import {ReactComponent as Favorite} from "../../assets/icons/star.svg";
 
 function Citydetails(props) {
     const {city} = useParams();
@@ -22,20 +23,20 @@ function Citydetails(props) {
     const [forecastData, setForecastData] = useState(null)
     const [error, toggleError] = useState(false);
     const [errorFc, toggleErrorFc] = useState(false);
-    const [loading,toggleLoading] = useState(false);
+    const [loading, toggleLoading] = useState(false);
 
     useEffect(() => {
 
         console.log('useeffecct');
 
         if (!location) {
-            fetchLocationCity((city), location, setLocation, error, toggleError,loading,toggleLoading);
+            fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
             setBackground("outer-container impression01");
 
 
-        //    console.log(tslocation[0]);
-        //    setLocation(tslocation[0]);
+            //    console.log(tslocation[0]);
+            //    setLocation(tslocation[0]);
 
         } else {
             console.log('location', (location));
@@ -51,16 +52,16 @@ function Citydetails(props) {
 
 
         if (!currConditions && location) {
-            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError,loading,toggleLoading);
+            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
-     //       setCurrConditions(test[0]);
-     //      console.log(test[0]);
+            //       setCurrConditions(test[0]);
+            //      console.log(test[0]);
 
             if (!forecastData && location) {
-                fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc,loading,toggleLoading);
+                fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
                 toggleLoading(false);
-     //           setForecastData(tsforecast[0]);
-      //          console.log('forecast', tsforecast[0]);
+                //           setForecastData(tsforecast[0]);
+                //          console.log('forecast', tsforecast[0]);
 
             } else {
                 console.log('forecast', (forecastData));
@@ -94,7 +95,7 @@ function Citydetails(props) {
                             {location &&
                                 <>
                                     <h1>Weather Heights France {location.AdministrativeArea.EnglishName}</h1>
-                                    <h2>{city}</h2>
+                                    <h2>{city} <span> <Favorite/> </span></h2>
                                     <p><span
                                         className="small-text"> Coordinates: {location.GeoPosition.Latitude} / {location.GeoPosition.Longitude} </span>
                                     </p>
@@ -165,29 +166,34 @@ function Citydetails(props) {
                                         </p>
                                         <p>
                                             {currConditions.Pressure.Metric.Value} {currConditions.Pressure.Metric.Unit} </p>
-
-
                                     </div>
-                                    <div className="rain">
-                                        <br></br>
-                                        <p> Rain precipitation 1
-                                            hour: {currConditions.Precip1hr.Metric.Value} {currConditions.Precip1hr.Metric.Unit} </p>
-                                        <p> Rain past
-                                            hour
-                                            : {currConditions.PrecipitationSummary.PastHour.Metric.Value} {currConditions.PrecipitationSummary.PastHour.Metric.Unit} </p>
-                                        <p> Rain past 3
-                                            hours: {currConditions.PrecipitationSummary.Past3Hours.Metric.Value} {currConditions.PrecipitationSummary.Past3Hours.Metric.Unit} </p>
+                                    <br></br>
+                                    <div className="row">
+                                        <div className="rain">
 
-                                        <p> Rain past 6
-                                            hours: {currConditions.PrecipitationSummary.Past6Hours.Metric.Value} {currConditions.PrecipitationSummary.Past6Hours.Metric.Unit} </p>
-                                        <p> Rain past 9
-                                            hours: {currConditions.PrecipitationSummary.Past9Hours.Metric.Value} {currConditions.PrecipitationSummary.Past9Hours.Metric.Unit} </p>
-                                        <p> Rain past 12
-                                            hours: {currConditions.PrecipitationSummary.Past12Hours.Metric.Value} {currConditions.PrecipitationSummary.Past12Hours.Metric.Unit} </p>
-                                        <p> Rain past 18
-                                            hours: {currConditions.PrecipitationSummary.Past18Hours.Metric.Value} {currConditions.PrecipitationSummary.Past18Hours.Metric.Unit} </p>
-                                        <p> Rain past 24
-                                            hours: {currConditions.PrecipitationSummary.Past24Hours.Metric.Value} {currConditions.PrecipitationSummary.Past24Hours.Metric.Unit} </p>
+                                            <p> Rain precipitation 1
+                                                hour: {currConditions.Precip1hr.Metric.Value} {currConditions.Precip1hr.Metric.Unit} </p>
+                                            <p> Rain past
+                                                hour
+                                                : {currConditions.PrecipitationSummary.PastHour.Metric.Value} {currConditions.PrecipitationSummary.PastHour.Metric.Unit} </p>
+                                            <p> Rain past 3
+                                                hours: {currConditions.PrecipitationSummary.Past3Hours.Metric.Value} {currConditions.PrecipitationSummary.Past3Hours.Metric.Unit} </p>
+
+                                            <p> Rain past 6
+                                                hours: {currConditions.PrecipitationSummary.Past6Hours.Metric.Value} {currConditions.PrecipitationSummary.Past6Hours.Metric.Unit} </p>
+                                            <p> Rain past 9
+                                                hours: {currConditions.PrecipitationSummary.Past9Hours.Metric.Value} {currConditions.PrecipitationSummary.Past9Hours.Metric.Unit} </p>
+                                            <p> Rain past 12
+                                                hours: {currConditions.PrecipitationSummary.Past12Hours.Metric.Value} {currConditions.PrecipitationSummary.Past12Hours.Metric.Unit} </p>
+                                        </div>
+                                        <div className="rain">
+                                            <p> Rain past 12
+                                                hours: {currConditions.PrecipitationSummary.Past12Hours.Metric.Value} {currConditions.PrecipitationSummary.Past12Hours.Metric.Unit} </p>
+                                            <p> Rain past 18
+                                                hours: {currConditions.PrecipitationSummary.Past18Hours.Metric.Value} {currConditions.PrecipitationSummary.Past18Hours.Metric.Unit} </p>
+                                            <p> Rain past 24
+                                                hours: {currConditions.PrecipitationSummary.Past24Hours.Metric.Value} {currConditions.PrecipitationSummary.Past24Hours.Metric.Unit} </p>
+                                        </div>
                                     </div>
                                 </>
                             }
@@ -214,7 +220,9 @@ function Citydetails(props) {
                                         forecastData.DailyForecasts.map((forecastday) => {
                                             return <div className="forecastline" key={forecastday.Date}>
                                                 <p>{makeDay(forecastday.EpochDate)}</p>
-                                                <p className="pictures"> <span className="small-picture-span"> {iconMapper(forecastday.Day.Icon)} </span></p>
+                                                <p className="pictures"><span
+                                                    className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
+                                                </p>
                                                 <p className="small-text">{forecastday.Day.IconPhrase}</p>
                                                 <p>{forecastday.Temperature.Minimum.Value}/{forecastday.Temperature.Maximum.Value}</p>
                                                 <p>{forecastday.Day.Rain.Value}</p>

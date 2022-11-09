@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
+import {ReactComponent as Favorite} from "../../assets/icons/star.svg";
 import fetchLocationCity from "../../helpers/fetchLocationCity";
 import fetchConditions from "../../helpers/fetchConditions";
 import imConstruct from "../../helpers/imConstruct";
@@ -15,11 +16,12 @@ import test from '../../data/test.json';
 import './Home.css';
 
 import Mainnav from "../../components/mainnav/Mainnav";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 
 
 function Home() {
+    const history = useHistory();
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
@@ -92,7 +94,7 @@ function Home() {
                     <div className="mid">
                         <div className="header-content">
                             <h1>Weather Heights France</h1>
-                            <h2>Paris</h2>
+                            <h2>Paris  <span> <Favorite/> </span> </h2>
 
                             {location &&
                                 <p><span
@@ -118,10 +120,11 @@ function Home() {
                             </div>
 
                             <Button fieldClass="header-button"
-                                    clickHandler={() => console.log("See more")}
+                                    // clickHandler={() => console.log("See more")}
+                                    clickHandler={ () => history.push(`/details/Paris`)}
                                     isDisabled={false}> See more <Goto className="search-icon"/></Button>
                         </div>
-
+<p className="invitation-tekst"> Please mark ten locations as your favorite and login to compare them</p>
                     </div>
 
                 </div>

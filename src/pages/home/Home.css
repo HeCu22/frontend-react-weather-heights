@@ -4,3 +4,7 @@
 .big-tekst {
     font-size: 38px;
 }
+
+.invitation-tekst {
+    color: var(--offwhite);
+}
