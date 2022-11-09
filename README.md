@@ -183,6 +183,6 @@ Let op! Het is belangrijk deze server op te starten voordat je de applicatie "We
    * npm run start
    · vervolgens zie je de warning '? Something is already running on port 3000. Would you like to run the app on another port instead? (Y/N)'
    Beantwoord de vraag met Y
-   vervolgens zie je een link verschijnen zoals: ‘https://local host:3001’
+   vervolgens zie je een link verschijnen zoals: ‘https://localhost:3001’
    Click op de link.
    · Vervolgens zie je het hoofdmenu van Weather Heights.
