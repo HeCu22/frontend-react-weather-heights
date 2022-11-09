@@ -40,13 +40,14 @@ Omdat er al een package.json aanwezig is in het bestand, kun je dit doen met het
 
 * npm install
 
-Alle benodigde dependencies worden dan binnengehaald! Als je de applicatie wil starten, doe dat dan met het volgende commando:
-* npm run start
+Er moet een eigen .env bestand in de rootmap aangemaakt worden en gevuld worden met de beschikbaargestelde API key. Ken de waarde hiervan toe aan de variabele-naam REACT_APP_API_KEY zoals beschreven in .env.dist bestand.
+Run daarna in Webstorm terminal het comando:
+npm run build
 
 Axios staat ook in de package.json en het is dus niet meer nodig om het te installeren.
-React en React-router staan al in de package.json en het is dus niet meer nodig het te installeren.
+React en React-router staan al in de package.json en het is dus ook niet meer nodig deze te installeren.
 
-
+Alle benodigde dependencies worden dan binnengehaald! Als je de applicatie wil starten, moeten we toch eerst hetvolgende doen:
 Om data in local storage op te slaan na het inloggen hebben we een fake server nodig. Dit moet opgestart worden via een apart (backend) project genaamd frontend-fake-server.
 Haal dit project binnen in Webstorm (via https://github.com/hogeschoolnovi/frontend-fake-server) en installeer dit met:
 
@@ -58,6 +59,10 @@ Vervolgens start je deze op met:
 
 Bovenstaand comando in de webstorm terminal zorgt ervoor dat deze draait op http://localhost:3000.
 Let op! Het is belangrijk deze server op te starten voordat je de applicatie "Weather Heights' opstart.
+
+
+Als je dit hebt gedaan kun je de Weather Heights applicatie starten. Doe dat in de terminal van Weather Heights met het volgende commando:
+* npm run start
 
 Authenticatie
 
@@ -73,7 +78,7 @@ JWT-decode wordt gebruikt voor het coderen en decoderen van 'tokens' en staat al
   GIT is het VCS, distributed version control system, dat gebruikt is. De applicatie staat op een GITHUB repository, en dus is het handig als GIT geïnstalleerd is op je computer om de applicatie te kunnen clonen in Webstorm.
 
 * Op basis van de informatie uit de Accuweather API, moet er een API key gebuikt worden. In elke javascript met een fetch erin die ik volgens mijn user profile mag gebruiken.
-  De API key die ik gebruik kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffnde environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
+  De API key die ik gebruik kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffende environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
 
 ## Andere beschikbare npm commando’s
 
@@ -139,7 +144,12 @@ Om de applicatie Weither Heigst te installeren op een laptop of personal compute
    Verwijder de link met de remote en type het comando:
    git remote remove origin
 
-5. API key
+5. Webstorm Terminal:
+   Installeer de packages die included zijn in package.json van Weather Heights.
+   Enter het commando:
+* npm install
+
+6. API key
 
 De API key die ik gebruik is iVlBSPKXxBblFMS3PQHkuUemNsAlPxlF en deze kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffnde environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
 Bij deze applicatie maak ik gebruik van HTTP requests naar de Accuweather API (https://accuweather.com/.....) om zo de juiste data op te vragen en te verwerken in mijn applicatie. De documentatie over de verschillende endpoints kun je hier vinden.
@@ -150,29 +160,29 @@ In deze versie is gebuik gemaakt van de endpoints:
 
 
 
-Webstorm:
+7. Webstorm Weather Heights:
 Maak een eigen .env bestand in de rootmap aan vul en deze met de variabel-namen zoals beschreven in .env.dist bestand en ken daar bovengenoemde apiKey aan toe.
 Run daarna in Webstorm terminal het comando:
-npm run build
+* npm run build
 
-Dit moet dus gebeuren voor hetvolgende punt 7.
+Bovenstaand comando in de webstorm terminal zorgt ervoor dat de goede APIkey gaat werken.
+Let op! Het is belangrijk dit te doen voordat je de applicatie "Weather Heights' opstart via punt 9.
 
-6. Webstorm
+8. Webstorm
    Clone tevens ook de NOVI-backend server in webstorm.(via https://github.com/hogeschoolnovi/frontend-fake-server) en installeer dit in de terminal van webstorm met het comando:
    npm install
    Vervolgens start je de fake-server op in de webstorm terminal met:
-   npm run json:server
+*  npm run json:server
 
 Bovenstaand comando in de webstorm terminal zorgt ervoor dat deze draait op http://localhost:3000.
-Let op! Het is belangrijk deze server op te starten voordat je de applicatie "Weather Heights' opstart via punt 7.
+Let op! Het is belangrijk deze server op te starten voordat je de applicatie "Weather Heights' opstart via punt 9.
 
-7. Webstorm Terminal van Weather Heights:
-   · enter het commando:
-   npm install
+9. Webstorm Terminal van Weather Heights:
+ 
    · vervolgens run met commando:
-   npm run start
+   * npm run start
    · vervolgens zie je de warning '? Something is already running on port 3000. Would you like to run the app on another port instead? (Y/N)'
    Beantwoord de vraag met Y
    vervolgens zie je een link verschijnen zoals: ‘https://local host:3001’
-   click op de link.
+   Click op de link.
    · Vervolgens zie je het hoofdmenu van Weather Heights.
