@@ -1,32 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import ImgMapper from "../imgMapper";
 import iconMapper from "../../helpers/iconMapper";
 import './Article.css';
 import fetchConditions from "../../helpers/fetchConditions"
-import fetchLocationKey from "../../helpers/fetchLocactionKey";
 import fetchLocationCity from "../../helpers/fetchLocationCity";
 import test from "../../data/test.json";
 import tslocation from "../../data/tslocation.json";
-import {ReactComponent as Favorite} from "../../assets/icons/star.svg";
+import LocMarker from "../locmarker/LocMarker";
 
 
 function Article({tag, imagecode, region, city, department, departmentname}) {
-    console.log('tag', tag, city);
     const [location, setLocation] = useState(null);
+    const [marked, setMarked] = useState("white");
+    const [checked, toggleChecked] = useState(false);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const [currConditions, setCurrConditions] = useState(null);
 
+
     useEffect(() => {
 
         if (!location) {
-            fetchLocationCity(city, location, setLocation, error, toggleError, loading, toggleLoading);
+            fetchLocationCity(city,  location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
-            //         console.log(tslocation[0]);
-            //         setLocation(tslocation[0]);
-        } else {
-            console.log('currcond', (currConditions));
+            // console.log(tslocation[0]);
+            // setLocation(tslocation[0]);
         }
 
     }, []);
@@ -36,10 +34,8 @@ function Article({tag, imagecode, region, city, department, departmentname}) {
         if (!currConditions && location) {
             fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
-            //        setCurrConditions(test[0]);
-            //        console.log(test[0]);
-        } else {
-            console.log('currcond', (currConditions));
+            // setCurrConditions(test[0]);
+            // console.log(test[0]);
         }
 
     }, [location]);
@@ -47,7 +43,7 @@ function Article({tag, imagecode, region, city, department, departmentname}) {
 
     return (
         <>
-            {console.log('render', (currConditions), (location))}
+            {/*{console.log('render', (currConditions), (location))}*/}
             <article className="card">
 
                 {error &&
@@ -56,7 +52,17 @@ function Article({tag, imagecode, region, city, department, departmentname}) {
                 {loading && <span>Loading...</span>}
                 <span className="tag">{tag}</span>
                 <h1> {region} </h1>
-                <h2> {city}  <span> <Favorite/> </span> </h2>
+                <h2> {city}
+                    {location &&
+                        <LocMarker
+                            checked={checked}
+                            toggleChecked={toggleChecked}
+                            marked={marked}
+                            setMarked={setMarked}
+                            locationKey={location.Key}
+                        />
+                    }
+                </h2>
                 {currConditions &&
                     <>
                         <h2>

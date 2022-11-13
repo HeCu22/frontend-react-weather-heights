@@ -290,6 +290,11 @@ button:disabled {
     width: 100%;
 }
 
+.marked  {
+    fill: white;
+}
+
+
 footer {
     display: flex;
     flex-direction: row;

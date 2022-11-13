@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
-import {ReactComponent as Favorite} from "../../assets/icons/star.svg";
+
 import fetchLocationCity from "../../helpers/fetchLocationCity";
 import fetchConditions from "../../helpers/fetchConditions";
 import imConstruct from "../../helpers/imConstruct";
@@ -11,38 +11,39 @@ import iconMapper from "../../helpers/iconMapper";
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
 import {AuthContext} from "../../context/AuthContext";
+
 import tslocation from '../../data/tslocation.json';
 import test from '../../data/test.json';
 import './Home.css';
 
 import Mainnav from "../../components/mainnav/Mainnav";
 import {Link, useHistory} from "react-router-dom";
-
+import LocMarker from "../../components/locmarker/LocMarker";
 
 
 function Home() {
     const history = useHistory();
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
+
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
+    const [marked, setMarked] = useState("white");
+    const [checked, toggleChecked] = useState(false);
     const [error, toggleError] = useState(false);
-    const [loading,toggleLoading] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+
 
     regions.sort((a, b) => a.regioncapital - b.regioncapital);
-    console.log(regions)
+    // console.log(regions)
 
 
     useEffect(() => {
         if (!location) {
-            fetchLocationCity("Paris",location,setLocation,error,toggleError,loading,toggleLoading);
+            fetchLocationCity("Paris", location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
- //           console.log(tslocation[0]);
- //           setLocation(tslocation[0]);
-
-        } else {
-            console.log('location', (location));
+            // console.log(tslocation[0]);
+            // setLocation(tslocation[0]);
         }
-
     }, []);
 
     useEffect(() => {
@@ -53,15 +54,15 @@ function Home() {
         if (!currConditions && location) {
             fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading)
             toggleLoading(false);
-   //         setCurrConditions(test[0]);
-    //        console.log(test[0]);
+            // setCurrConditions(test[0]);
+            // console.log(test[0]);
 
-        } else {
-            console.log('currcond', (currConditions));
         }
 
 
     }, [location]);
+
+
 
     function doThingsOnClick() {
         console.log('Geliked!');
@@ -69,7 +70,7 @@ function Home() {
 
     return (
         <>
-            {console.log('render', (currConditions), (location))}
+
             {error &&
                 <span>  Something went wrong fetching the data  </span>
             }
@@ -94,7 +95,17 @@ function Home() {
                     <div className="mid">
                         <div className="header-content">
                             <h1>Weather Heights France</h1>
-                            <h2>Paris  <span> <Favorite/> </span> </h2>
+                            <h2>Paris
+                                {location &&
+                                    <LocMarker
+                                        checked={checked}
+                                        toggleChecked={toggleChecked}
+                                        marked={marked}
+                                        setMarked={setMarked}
+                                        locationKey={location.Key}
+                                    />
+                                }
+                            </h2>
 
                             {location &&
                                 <p><span
@@ -120,11 +131,13 @@ function Home() {
                             </div>
 
                             <Button fieldClass="header-button"
-                                    // clickHandler={() => console.log("See more")}
-                                    clickHandler={ () => history.push(`/details/Paris`)}
+                                    clickHandler={() => history.push(`/details/Paris`)}
                                     isDisabled={false}> See more <Goto className="search-icon"/></Button>
                         </div>
-<p className="invitation-tekst"> Please mark ten locations as your favorite and login to compare them</p>
+
+
+                        <p className="invitation-tekst"> Please mark ten locations as your favorite and login to compare
+                            them</p>
                     </div>
 
                 </div>

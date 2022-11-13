@@ -12,15 +12,17 @@ import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import fetchConditions from "../../helpers/fetchConditions";
 import fetchForecast from "../../helpers/fetchForecast";
 import Mainnav from "../../components/mainnav/Mainnav";
-import {ReactComponent as Favorite} from "../../assets/icons/star.svg";
+
+import LocMarker from "../../components/locmarker/LocMarker";
 
 function Citydetails(props) {
     const {city} = useParams();
-
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
     const [forecastData, setForecastData] = useState(null)
+    const [marked, setMarked] = useState("white");
+    const [checked, toggleChecked] = useState(false);
     const [error, toggleError] = useState(false);
     const [errorFc, toggleErrorFc] = useState(false);
     const [loading, toggleLoading] = useState(false);
@@ -33,14 +35,8 @@ function Citydetails(props) {
             fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
             setBackground("outer-container impression01");
-
-
-            //    console.log(tslocation[0]);
-            //    setLocation(tslocation[0]);
-
-        } else {
-            console.log('location', (location));
-
+            // console.log(tslocation[0]);
+            // setLocation(tslocation[0]);
         }
 
 
@@ -54,29 +50,25 @@ function Citydetails(props) {
         if (!currConditions && location) {
             fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
-            //       setCurrConditions(test[0]);
-            //      console.log(test[0]);
+            // setCurrConditions(test[0]);
+            // console.log(test[0]);
 
             if (!forecastData && location) {
                 fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
                 toggleLoading(false);
-                //           setForecastData(tsforecast[0]);
-                //          console.log('forecast', tsforecast[0]);
+                // setForecastData(tsforecast[0]);
+                // console.log('forecast', tsforecast[0]);
 
-            } else {
-                console.log('forecast', (forecastData));
             }
 
-        } else {
-            console.log('currcond', (currConditions));
         }
-
 
     }, [location]);
 
+
     return (
         <>
-            {console.log('render', (currConditions), (location), (forecastData))}
+
             {error &&
                 <span>  Something went wrong fetching the data  </span>
             }
@@ -95,7 +87,18 @@ function Citydetails(props) {
                             {location &&
                                 <>
                                     <h1>Weather Heights France {location.AdministrativeArea.EnglishName}</h1>
-                                    <h2>{city} <span> <Favorite/> </span></h2>
+                                    <h2>{city}
+                                        {location &&
+                                            <LocMarker
+                                                checked={checked}
+                                                toggleChecked={toggleChecked}
+                                                marked={marked}
+                                                setMarked={setMarked}
+                                                locationKey={location.Key}
+                                            />
+                                        }
+
+                                    </h2>
                                     <p><span
                                         className="small-text"> Coordinates: {location.GeoPosition.Latitude} / {location.GeoPosition.Longitude} </span>
                                     </p>

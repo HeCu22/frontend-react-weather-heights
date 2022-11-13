@@ -8,3 +8,7 @@
 .invitation-tekst {
     color: var(--offwhite);
 }
+
+.marked {
+    color: var(--bordertile);
+}
