@@ -19,6 +19,7 @@ function Citydetails(props) {
     const {city} = useParams();
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
+    const [more, toggleMore] = useState(false);
     const [currConditions, setCurrConditions] = useState(null);
     const [forecastData, setForecastData] = useState(null)
     const [marked, setMarked] = useState("white");
@@ -26,6 +27,8 @@ function Citydetails(props) {
     const [error, toggleError] = useState(false);
     const [errorFc, toggleErrorFc] = useState(false);
     const [loading, toggleLoading] = useState(false);
+
+    console.log((city))
 
     useEffect(() => {
 
@@ -35,8 +38,7 @@ function Citydetails(props) {
             fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
             setBackground("outer-container impression01");
-            // console.log(tslocation[0]);
-            // setLocation(tslocation[0]);
+            setLocation(tslocation[0]);
         }
 
 
@@ -47,23 +49,21 @@ function Citydetails(props) {
         console.log('useeffecct2');
 
 
-        if (!currConditions && location) {
+        if (more && !currConditions && location) {
             fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
-            // setCurrConditions(test[0]);
-            // console.log(test[0]);
+            setCurrConditions(test[0]);
+
 
             if (!forecastData && location) {
                 fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
-                toggleLoading(false);
-                // setForecastData(tsforecast[0]);
-                // console.log('forecast', tsforecast[0]);
-
+               toggleLoading(false);
+                setForecastData(tsforecast[0]);
             }
 
         }
 
-    }, [location]);
+    }, [more,location]);
 
 
     return (
@@ -105,6 +105,10 @@ function Citydetails(props) {
                                 </>
                             }
 
+                            <Button fieldClass="header-button"
+                                    clickHandler={ () => toggleMore(!more) }
+                                    isDisabled={false}> See more <Goto className="search-icon"/></Button>
+
                             <div className='row'>
                                 {currConditions &&
                                     <>
@@ -129,9 +133,7 @@ function Citydetails(props) {
                                 }
                             </div>
 
-                            <Button fieldClass="header-button"
-                                    clickHandler={() => console.log("See more")}
-                                    isDisabled={false}> See more <Goto className="search-icon"/></Button>
+
                         </div>
                     </div>
                 </div>

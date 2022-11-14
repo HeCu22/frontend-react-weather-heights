@@ -27,6 +27,7 @@ function Home() {
 
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
+    const [more, toggleMore] = useState(false);
     const [marked, setMarked] = useState("white");
     const [checked, toggleChecked] = useState(false);
     const [error, toggleError] = useState(false);
@@ -41,8 +42,7 @@ function Home() {
         if (!location) {
             fetchLocationCity("Paris", location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
-            // console.log(tslocation[0]);
-            // setLocation(tslocation[0]);
+            setLocation(tslocation[0]);
         }
     }, []);
 
@@ -54,8 +54,7 @@ function Home() {
         if (!currConditions && location) {
             fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading)
             toggleLoading(false);
-            // setCurrConditions(test[0]);
-            // console.log(test[0]);
+            setCurrConditions(test[0]);
 
         }
 
@@ -64,9 +63,7 @@ function Home() {
 
 
 
-    function doThingsOnClick() {
-        console.log('Geliked!');
-    }
+
 
     return (
         <>
@@ -95,6 +92,7 @@ function Home() {
                     <div className="mid">
                         <div className="header-content">
                             <h1>Weather Heights France</h1>
+
                             <h2>Paris
                                 {location &&
                                     <LocMarker
@@ -105,6 +103,7 @@ function Home() {
                                         locationKey={location.Key}
                                     />
                                 }
+                                <span className="invitation-tekst"> mark as favorite and login to compare</span>
                             </h2>
 
                             {location &&
@@ -132,12 +131,11 @@ function Home() {
 
                             <Button fieldClass="header-button"
                                     clickHandler={() => history.push(`/details/Paris`)}
-                                    isDisabled={false}> See more <Goto className="search-icon"/></Button>
+                                    isDisabled={false}> details <Goto className="search-icon"/></Button>
                         </div>
 
 
-                        <p className="invitation-tekst"> Please mark ten locations as your favorite and login to compare
-                            them</p>
+
                     </div>
 
                 </div>
@@ -146,7 +144,12 @@ function Home() {
                 <div className="inner-container">
                     <div className="cards">
                         <p>Regions</p>
-                        <span><Back/> <Forward/></span>
+                        <div className="cards-mid-content">
+                        <Button fieldClass="cards-button"
+                                clickHandler={ () => toggleMore(!more) }
+                                isDisabled={false}> see also current weather of capitals below... </Button>
+                        </div>
+                            <span><Back/> <Forward/></span>
                     </div>
                     <div className="outer-container main-background">
                         <div className="inner-container">
@@ -164,6 +167,7 @@ function Home() {
                                                         city={region.capital}
                                                         department={region.regioncapital}
                                                         departmentname={region.regionname}
+                                                        more={more}
                                         />
                                     }
                                 })}

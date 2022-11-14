@@ -38,6 +38,10 @@ article > p {
     font-size: 14px;
 }
 
+article a {
+    color: var(--bordertile);
+}
+
 .tag {
     position: absolute;
     top: 0;

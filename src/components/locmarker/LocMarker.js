@@ -39,7 +39,7 @@ function LocMarker({checked, toggleChecked, marked, setMarked,locationKey}) {
     return (
         <>
 
-            <span className="star-wrapper"> fav {favLocations}
+            <span className="star-wrapper">
                 <input type="checkbox"
                        className="marking-box"
                        id="favor-mark"
