@@ -149,6 +149,14 @@ main {
     background-size: cover;
 }
 
+.impression13 {
+    background: url('./assets/images/impression13.jpg');
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 .icon-logo {
     width: 105px;
     height: 70px;

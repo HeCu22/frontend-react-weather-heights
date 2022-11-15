@@ -5,6 +5,7 @@ import iconMapper from "../../helpers/iconMapper";
 import './Article.css';
 import fetchConditions from "../../helpers/fetchConditions"
 import fetchLocationCity from "../../helpers/fetchLocationCity";
+import fetchLocationKey from "../../helpers/fetchLocactionKey";
 import test from "../../data/test.json";
 import tslocation from "../../data/tslocation.json";
 import LocMarker from "../locmarker/LocMarker";
@@ -21,10 +22,17 @@ function Article({tag, imagecode, region, city, department, departmentname, more
 
     useEffect(() => {
 
-        if (!location) {
-            fetchLocationCity(city.concat(',', department), location, setLocation, error, toggleError, loading, toggleLoading);
+        if (!location && city) {
+            // fetchLocationCity(city.concat(',', department), location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
             setLocation(tslocation[0]);
+        } else {
+            if (!location && !city) {
+                // fetchLocationKey(department, location, setLocation, error, toggleError, loading, toggleLoading);
+                toggleLoading(false);
+                setLocation(tslocation[0]);
+
+            }
         }
 
     }, []);
@@ -32,7 +40,7 @@ function Article({tag, imagecode, region, city, department, departmentname, more
     useEffect(() => {
 
         if (more && !currConditions && location) {
-            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
+            // fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
             setCurrConditions(test[0]);
 
@@ -49,17 +57,41 @@ function Article({tag, imagecode, region, city, department, departmentname, more
                 {loading && <span>Loading...</span>}
                 <span className="tag">{tag}</span>
                 <h1> {region} </h1>
-                <h2><Link to={`/details/${city},${department}`} > {city} </Link>
-                    {location &&
-                        <LocMarker
-                            checked={checked}
-                            toggleChecked={toggleChecked}
-                            marked={marked}
-                            setMarked={setMarked}
-                            locationKey={location.Key}
-                        />
-                    }
-                </h2>
+                {city ?
+                    <h2><Link to={`/details/${city},${department}`}> {city} </Link>
+                        {location &&
+                            <LocMarker
+                                checked={checked}
+                                toggleChecked={toggleChecked}
+                                marked={marked}
+                                setMarked={setMarked}
+                                locationKey={location.Key}
+                            />
+                        }
+                    </h2>
+                    :
+                    <>
+                        {location &&
+                            <h2><Link
+                                to={`/details/${location.EnglishName},${department}`}> {location.EnglishName} </Link>
+                                {location &&
+                                    <LocMarker
+                                        checked={checked}
+                                        toggleChecked={toggleChecked}
+                                        marked={marked}
+                                        setMarked={setMarked}
+                                        locationKey={location.Key}
+                                    />
+                                }
+                            </h2>
+                        }
+                    </>
+                }
+                {location &&
+                    <h3><span
+                        className="small-text"> {location.GeoPosition.Latitude} / {location.GeoPosition.Longitude} </span>
+                    </h3>
+                }
                 {currConditions &&
                     <>
                         <h2>
@@ -70,24 +102,31 @@ function Article({tag, imagecode, region, city, department, departmentname, more
                     </>
                 }
                 <div className="pictures">
-            <span className="small-picture-span">
-                   <ImgMapper
-                       imCode={imagecode}
-                       department={departmentname}/>
-            </span>
+                    <span className="small-picture-span">
+                        <ImgMapper
+                            imCode={imagecode}
+                            department={departmentname}/>
+                    </span>
 
-                </div>
                 {currConditions &&
                     <>
-                        <h4>
-                            <span>{currConditions.Wind.Direction.English} </span> {currConditions.Wind.Speed.Metric.Value}
-
+                        <h4 className="row">
+                            <span>{currConditions.Wind.Direction.English} {currConditions.Wind.Speed.Metric.Value} </span>
+                            <span> {currConditions.PrecipitationSummary.Precipitation.Metric.Value}{currConditions.PrecipitationSummary.Precipitation.Metric.Unit} </span>
                         </h4>
-                        <h3>{currConditions.PrecipitationSummary.Past6Hours.Metric.value}</h3>
                     </>
                 }
-
-                <p><span>{department} {departmentname} </span></p>
+                </div>
+                {city &&
+                    <p><Link to={`/departments/${department}`}> {department} </Link>
+                        <span> {departmentname} </span>
+                    </p>
+                }
+                {(!city && location) &&
+                    <p><span
+                        className="small-text"> Arrondissement: {location.SupplementalAdminAreas[0].EnglishName} </span>
+                    </p>
+                }
             </article>
         </>
     );

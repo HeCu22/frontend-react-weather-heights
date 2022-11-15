@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import fetchConditions from "./fetchConditions";
 
 
 async function fetchLocationCity(city, location, setLocation, error, toggleError, loading, toggleLoading) {

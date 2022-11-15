@@ -2,11 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
-
-import fetchLocationCity from "../../helpers/fetchLocationCity";
+import fetchLocationKey from "../../helpers/fetchLocactionKey";
 import fetchConditions from "../../helpers/fetchConditions";
 import imConstruct from "../../helpers/imConstruct";
-import regions from '../../data/regions.json';
+import departments from '../../data/departments.json';
 import iconMapper from "../../helpers/iconMapper";
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
@@ -14,17 +13,17 @@ import {AuthContext} from "../../context/AuthContext";
 
 import tslocation from '../../data/tslocation.json';
 import test from '../../data/test.json';
-import './Home.css';
-
+import './Departments.css';
 import Mainnav from "../../components/mainnav/Mainnav";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import LocMarker from "../../components/locmarker/LocMarker";
 
 
-function Home() {
+function Departments(props) {
+    const {department} = useParams();
     const history = useHistory();
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
-
+    const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
     const [more, toggleMore] = useState(false);
@@ -33,16 +32,26 @@ function Home() {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
+    const string = "".concat("FR-",department);
+    const region = departments.find((departfound) => {
+        return departfound.code === string
+        }
+    )
 
-    regions.sort((a, b) => a.regioncapital - b.regioncapital);
-    // console.log(regions)
+
+    const regionDepartments =  departments.filter((regionDepartment) => {
+        return regionDepartment.parent === region.parent
+    })
+
+    console.log(regionDepartments.length);
 
 
     useEffect(() => {
         if (!location) {
-            // fetchLocationCity("Paris,FR", location, setLocation, error, toggleError, loading, toggleLoading);
+            fetchLocationKey(department, location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
-            setLocation(tslocation[0]);
+            setBackground("outer-container impression13");
+            // setLocation(tslocation[0]);
         }
     }, []);
 
@@ -52,9 +61,9 @@ function Home() {
 
 
         if (!currConditions && location) {
-            // fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading)
+            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading)
             toggleLoading(false);
-            setCurrConditions(test[0]);
+            // setCurrConditions(test[0]);
 
         }
 
@@ -84,7 +93,7 @@ function Home() {
             </Mainnav>
 
 
-            <main className="outer-container main-header-background">
+            <main className={background}>
                 <div className="inner-container">
                     <div className="mid">
 
@@ -92,8 +101,9 @@ function Home() {
                             <h1>Weather Heights France </h1>
                             <div className="outer-row">
                                 <div>
-                                    <h2>Paris
-                                        {location &&
+                                    {location &&
+                                    <h2>{location.EnglishName}
+
                                             <LocMarker
                                                 checked={checked}
                                                 toggleChecked={toggleChecked}
@@ -101,9 +111,10 @@ function Home() {
                                                 setMarked={setMarked}
                                                 locationKey={location.Key}
                                             />
-                                        }
+
 
                                     </h2>
+                                    }
 
                                     {location &&
                                         <p><span
@@ -130,10 +141,10 @@ function Home() {
                                             isDisabled={false}> details <Goto className="search-icon"/></Button>
                                 </div>
 
-                            <div>
-                                <h2><span className="invitation-tekst"> Mark ten locations in France as your favorite and login to compare</span>
-                                </h2>
-                            </div>
+                                <div>
+                                    <h2><span className="invitation-tekst"> Mark ten locations in France as your favorite and login to compare</span>
+                                    </h2>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -142,7 +153,7 @@ function Home() {
             <main className="outer-container main-background">
                 <div className="inner-container">
                     <div className="cards">
-                        <p>Regions</p>
+                        <p>Departments</p>
                         <div className="cards-mid-content">
                             <Button fieldClass="cards-button"
                                     clickHandler={() => toggleMore(!more)}
@@ -155,17 +166,16 @@ function Home() {
 
                             <div className="outer-row">
 
-                                {regions.length > 0 && regions.map((region, index) => {
+                                {regionDepartments.length > 0 && regionDepartments.map((regDep, index) => {
 
                                     if (index < 4) {
 
-                                        return <Article key={region.code}
-                                                        tag={region.code}
-                                                        imagecode={imConstruct(region.code)}
-                                                        region={region.name}
-                                                        city={region.capital}
-                                                        department={region.regioncapital}
-                                                        departmentname={region.regionname}
+                                        return <Article key={regDep.code}
+                                                        tag={regDep.code}
+                                                        imagecode={imConstruct(regDep.code.slice(-2))}
+                                                        region={regDep.name}
+
+                                                        department={regDep.code.slice(-2)}
                                                         more={more}
                                         />
                                     }
@@ -183,4 +193,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Departments;

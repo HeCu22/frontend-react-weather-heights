@@ -11,6 +11,7 @@ import LocationDetails from './pages/locationDetails/LocationDetails';
 import './App.css';
 import Searchcity from "./pages/searchcity/Searchcity";
 import Citydetails from "./pages/citydetails/Citydetails";
+import Departments from "./pages/departments/Departments";
 
 function App() {
   const {isAuthenticated} = useContext(AuthContext);
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route exact path="/details/:city">
           <Citydetails />
+        </Route>
+        <Route exact path="/departments/:department">
+          <Departments />
         </Route>
         <Route exact path="/location-details/:key">
           <LocationDetails />
