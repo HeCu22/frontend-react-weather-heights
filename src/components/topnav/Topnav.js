@@ -14,10 +14,11 @@ function Topnav(props) {
                     <div className="top-navigation">
                         <nav className="top-nav-menu">
                             <ul>
+                                <li><Link to="/mylocations">myLocations</Link></li>
                                 {isAuthenticated ?
                                     <>
-                                    <li><Link to="/">myLocations</Link></li>
-                                    <li><Link to="/">myPreferences</Link></li>
+
+                                    <li><Link to="/mypreferences">myPreferences</Link></li>
                                     <li><Link to="/profile">Profile</Link></li>
                                     <li><button
                                         type="button"

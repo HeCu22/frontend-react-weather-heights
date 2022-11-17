@@ -5,13 +5,15 @@ import iconMapper from "../../helpers/iconMapper";
 import './Article.css';
 import fetchConditions from "../../helpers/fetchConditions"
 import fetchLocationCity from "../../helpers/fetchLocationCity";
-import fetchLocationKey from "../../helpers/fetchLocactionKey";
+import fetchLocationPC from "../../helpers/fetchLocactionPC";
+import fetchLocationData from "../../helpers/fetchLocationData";
 import test from "../../data/test.json";
 import tslocation from "../../data/tslocation.json";
 import LocMarker from "../locmarker/LocMarker";
 
 
-function Article({tag, imagecode, region, city, department, departmentname, more}) {
+
+function Article({tag, imagecode, locationKey, region, city, department, departmentname, more}) {
     const [location, setLocation] = useState(null);
     const [marked, setMarked] = useState("white");
     const [checked, toggleChecked] = useState(false);
@@ -22,16 +24,23 @@ function Article({tag, imagecode, region, city, department, departmentname, more
 
     useEffect(() => {
 
-        if (!location && city) {
-            // fetchLocationCity(city.concat(',', department), location, setLocation, error, toggleError, loading, toggleLoading);
-            toggleLoading(false);
+        if (locationKey) {
+            console.log('locationKey');
+            //      fetchLocationData(locationKey,location,setLocation,error, toggleError, loading, toggleLoading) ;
             setLocation(tslocation[0]);
+            toggleLoading(false);
         } else {
-            if (!location && !city) {
-                // fetchLocationKey(department, location, setLocation, error, toggleError, loading, toggleLoading);
+            if (!location && city) {
+                //        fetchLocationCity(city.concat(',', department), location, setLocation, error, toggleError, loading, toggleLoading);
                 toggleLoading(false);
                 setLocation(tslocation[0]);
+            } else {
+                if (!location && !city) {
+                    //          fetchLocationPC(department, location, setLocation, error, toggleError, loading, toggleLoading);
+                    toggleLoading(false);
+                    setLocation(tslocation[0]);
 
+                }
             }
         }
 
@@ -108,20 +117,28 @@ function Article({tag, imagecode, region, city, department, departmentname, more
                             department={departmentname}/>
                     </span>
 
-                {currConditions &&
-                    <>
-                        <h4 className="row">
-                            <span>{currConditions.Wind.Direction.English} {currConditions.Wind.Speed.Metric.Value} </span>
-                            <span> {currConditions.PrecipitationSummary.Precipitation.Metric.Value}{currConditions.PrecipitationSummary.Precipitation.Metric.Unit} </span>
-                        </h4>
-                    </>
-                }
+                    {currConditions &&
+                        <>
+                            <h4 className="row">
+                                <span>{currConditions.Wind.Direction.English} {currConditions.Wind.Speed.Metric.Value} </span>
+                                <span> {currConditions.PrecipitationSummary.Precipitation.Metric.Value}{currConditions.PrecipitationSummary.Precipitation.Metric.Unit} </span>
+                            </h4>
+                        </>
+                    }
                 </div>
+                {/* search was done via locationKey */}
+                {(locationKey && location) &&
+                    <p><Link to={`/departments/${location.AdministrativeArea.ID}`}> {location.AdministrativeArea.ID} </Link>
+                        <span> {location.AdministrativeArea.EnglishName} </span>
+                    </p>
+                }
+                {/* search was done via city name */}
                 {city &&
                     <p><Link to={`/departments/${department}`}> {department} </Link>
                         <span> {departmentname} </span>
                     </p>
                 }
+                {/* search was done via postalcode */}
                 {(!city && location) &&
                     <p><span
                         className="small-text"> Arrondissement: {location.SupplementalAdminAreas[0].EnglishName} </span>

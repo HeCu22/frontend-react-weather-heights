@@ -13,7 +13,7 @@ function AuthContextProvider({children}) {
     });
 
     useEffect(() => {
-        console.log('de context is zojuist opnieuw opgestart')
+        console.log('de contextAuth is zojuist opnieuw opgestart')
         // is er een token?
         const token = localStorage.getItem('weatherheightsToken');
         console.log(token);

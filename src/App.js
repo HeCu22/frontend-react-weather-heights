@@ -5,6 +5,7 @@ import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
 import Profile from "./pages/profile/Profile";
 import MyLocations from "./pages/mylocations/MyLocations";
+import MyPreferences from "./pages/mypreferences/MyPreferences";
 import Topnav from "./components/topnav/Topnav";
 import Home from './pages/home/Home';
 import LocationDetails from './pages/locationDetails/LocationDetails';
@@ -37,7 +38,10 @@ function App() {
           <LocationDetails />
         </Route>
         <Route path="/mylocations">
-          {isAuthenticated ? <MyLocations /> : <Redirect to="/" />}
+          <MyLocations />
+        </Route>
+        <Route path="/mypreferences">
+          <MyPreferences />
         </Route>
         <Route path="/profile">
           {isAuthenticated ? <Profile /> : <Redirect to="/" />}

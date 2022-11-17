@@ -3,7 +3,11 @@ import React, {createContext, useEffect, useState} from 'react';
 export const LocContext = createContext({})
 
 function LocContextProvider({children}) {
-    const [myLocs, setMyLocs] = useState([]);
+    const [myLocs, setMyLocs] = useState([{
+        key: "",
+        city: "",
+    }
+    ]);
 
     useEffect(() => {
         console.log('de contextLoc is zojuist opnieuw opgestart');
@@ -25,7 +29,8 @@ function LocContextProvider({children}) {
     }
 
     const locContextData = {
-        favLocations: myLocs,
+        favLocations: myLocs.key,
+        favCities: myLocs.city,
         setFavLocFunction: setFavLoc,
     }
     return (

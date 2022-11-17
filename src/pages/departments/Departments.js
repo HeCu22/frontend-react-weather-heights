@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
-import fetchLocationKey from "../../helpers/fetchLocactionKey";
+import fetchLocationPC from "../../helpers/fetchLocactionPC";
 import fetchConditions from "../../helpers/fetchConditions";
 import imConstruct from "../../helpers/imConstruct";
 import departments from '../../data/departments.json';
@@ -48,10 +48,10 @@ function Departments(props) {
 
     useEffect(() => {
         if (!location) {
-            fetchLocationKey(department, location, setLocation, error, toggleError, loading, toggleLoading);
+            // fetchLocationPC(department, location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);
             setBackground("outer-container impression13");
-            // setLocation(tslocation[0]);
+            setLocation(tslocation[0]);
         }
     }, []);
 

@@ -39,6 +39,7 @@ function Home() {
 
 
     useEffect(() => {
+        console.log('useffect mount');
         if (!location) {
             // fetchLocationCity("Paris,FR", location, setLocation, error, toggleError, loading, toggleLoading);
             toggleLoading(false);

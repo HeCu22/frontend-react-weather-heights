@@ -1,0 +1,41 @@
+.tiles {
+    width: 100%;
+    flex-basis: 20px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--main-body);
+    padding: 0 50px;
+    font-size: 20px;
+}
+
+
+.tile {
+    /*height: 500px;*/
+    flex-basis: 650px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--main-tile);
+    border: 1px solid var(--bordertile);
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+#input-city {
+    background: var(--main-body);
+    width: 100%;
+    padding: 0 10px;
+    margin: 10px 20px;
+    height: 60px;
+    border: solid 2px var(--bordertile);
+    border-radius: 8px;
+}
+
+::placeholder {
+    color: gray;
+}

@@ -9,7 +9,7 @@ import departments from "../../data/adminarea.json";
 function Searchcity(props) {
     const history = useHistory();
     const [state, setState] = useState({
-        searchcity: "",
+        searchcity: "Paris",
         department: "FR",
     })
 
