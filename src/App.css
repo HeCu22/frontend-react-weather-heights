@@ -247,6 +247,10 @@ main {
     justify-content: center;
 }
 
+.top-card {
+    border-color: var(--eggshell);
+
+}
 
 button {
     color: white;

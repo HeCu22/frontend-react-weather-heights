@@ -1,0 +1,73 @@
+[
+  {
+    "LocalObservationDateTime": "2022-11-21T11:27:00+01:00",
+    "EpochTime": 1669026420,
+    "WeatherText": "Mostly cloudy",
+    "WeatherIcon": 6,
+    "HasPrecipitation": false,
+    "PrecipitationType": null,
+    "IsDayTime": true,
+    "Temperature": {
+      "Metric": {
+        "Value": 7.8,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "Imperial": {
+        "Value": 46,
+        "Unit": "F",
+        "UnitType": 18
+      }
+    },
+    "MobileLink": "http://www.accuweather.com/en/fr/dijon/132390/current-weather/132390?lang=en-us",
+    "Link": "http://www.accuweather.com/en/fr/dijon/132390/current-weather/132390?lang=en-us"
+  }
+,
+  {
+    "LocalObservationDateTime": "2022-11-21T11:27:00+01:00",
+    "EpochTime": 1669026420,
+    "WeatherText": "Mostly cloudy",
+    "WeatherIcon": 6,
+    "HasPrecipitation": false,
+    "PrecipitationType": null,
+    "IsDayTime": true,
+    "Temperature": {
+      "Metric": {
+        "Value": 10.8,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "Imperial": {
+        "Value": 46,
+        "Unit": "F",
+        "UnitType": 18
+      }
+    },
+    "MobileLink": "http://www.accuweather.com/en/fr/dijon/132390/current-weather/132390?lang=en-us",
+    "Link": "http://www.accuweather.com/en/fr/dijon/132390/current-weather/132390?lang=en-us"
+  }
+,
+  {
+    "LocalObservationDateTime": "2022-11-21T11:27:00+01:00",
+    "EpochTime": 1669026420,
+    "WeatherText": "Mostly cloudy",
+    "WeatherIcon": 6,
+    "HasPrecipitation": false,
+    "PrecipitationType": null,
+    "IsDayTime": true,
+    "Temperature": {
+      "Metric": {
+        "Value": 20,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "Imperial": {
+        "Value": 46,
+        "Unit": "F",
+        "UnitType": 18
+      }
+    },
+    "MobileLink": "http://www.accuweather.com/en/fr/dijon/132390/current-weather/132390?lang=en-us",
+    "Link": "http://www.accuweather.com/en/fr/dijon/132390/current-weather/132390?lang=en-us"
+  }
+]

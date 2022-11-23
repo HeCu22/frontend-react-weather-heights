@@ -1,4 +1,4 @@
-import im00 from "../assets/images/impression00.jpg";
+import im00 from "../assets/images/impression00.png";
 import im01 from "../assets/images/impression01.jpg";
 import im04 from "../assets/images/impression04.jpg";
 import im07 from "../assets/images/impression07.jpg";
@@ -15,6 +15,7 @@ import im39 from "../assets/images/impression39.jpg";
 import im44 from "../assets/images/impression44.jpg";
 import im58 from "../assets/images/impression58.jpg";
 import im63 from "../assets/images/impression63.jpg";
+import im75 from "../assets/images/impression75.jpg";
 import im84 from "../assets/images/impression84.jpg";
 import ara from "../assets/images/ara.png";
 import bre from "../assets/images/bre.png";
@@ -149,6 +150,7 @@ function ImgMapper({imCode,description}) {
         case "im73":
         case "im74":
         case "im75":
+            return <img className="small-picture-img" src={im75} alt={description}/>;
         case "im76":
         case "im77":
         case "im78":

@@ -28,6 +28,14 @@ h2 {
     color: #e5e4cf;
 }
 
+.mid-picture-span {
+    height: 120px;
+    flex-basis: 120px;
+    flex-grow: 0;
+    flex-shrink: 1;
+     /*padding: 16px;*/
+}
+
 .cards-button {
     width: 100%;
     background: var(--main-tile);

@@ -35,10 +35,11 @@ function Citydetails(props) {
         console.log('useeffecct');
 
         if (!location) {
-            // fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
-            toggleLoading(false);
-            setBackground("outer-container impression01");
-            setLocation(tslocation[0]);
+            console.log('set');
+                // fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
+                toggleLoading(false);
+                setBackground("outer-container impression01");
+                setLocation(tslocation[0]);
         }
 
 
@@ -49,16 +50,18 @@ function Citydetails(props) {
         console.log('useeffecct2');
 
 
-        if (more && !currConditions && location) {
-            // fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
-            toggleLoading(false);
-            setCurrConditions(test[0]);
+        if (!currConditions && location) {
+            if (more) {
+                // fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
+                toggleLoading(false);
+                setCurrConditions(test[0]);
 
 
-            if (!forecastData && location) {
-                // fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
-               toggleLoading(false);
-                setForecastData(tsforecast[0]);
+                if (!forecastData && location) {
+                    // fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
+                    toggleLoading(false);
+                    setForecastData(tsforecast[0]);
+                }
             }
 
         }

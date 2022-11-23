@@ -64,6 +64,8 @@ function MyLocations(props) {
                                     if (index < 10) {
 
                                         return <Article key={favLoc}
+                                                        fieldClass="card"
+                                                        pictureClass="small-picture-span"
                                                         locationKey={favLoc}
                                                         more={more}
                                         />

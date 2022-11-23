@@ -1,0 +1,378 @@
+[
+  {
+    "departmentcode": "01",
+    "capitalname": "Bourg-en-Bresse"
+  },
+  {
+    "departmentcode": "02",
+    "capitalname": "Laon"
+  },
+  {
+    "departmentcode": "03",
+    "capitalname": "Moulins"
+  },
+  {
+    "departmentcode": "04",
+    "capitalname": "Digne-les-Bains"
+  },
+  {
+    "departmentcode": "05",
+    "capitalname": "Gap"
+  },
+  {
+    "departmentcode": "06",
+    "capitalname": "Nice"
+  },
+  {
+    "departmentcode": "07",
+    "capitalname": "Privas"
+  },
+  {
+    "departmentcode": "08",
+    "capitalname": "Charleville-Mézières"
+  },
+  {
+    "departmentcode": "09",
+    "capitalname": "Foix"
+  },
+  {
+    "departmentcode": "10",
+    "capitalname": "Troyes"
+  },
+  {
+    "departmentcode": "11",
+    "capitalname": "Carcassonne"
+  },
+  {
+    "departmentcode": "12",
+    "capitalname": "Rodez"
+  },
+  {
+    "departmentcode": "13",
+    "capitalname": "Marseille"
+  },
+  {
+    "departmentcode": "14",
+    "capitalname": "Caen"
+  },
+  {
+    "departmentcode": "15",
+    "capitalname": "Aurillac"
+  },
+  {
+    "departmentcode": "16",
+    "capitalname": "Angoulême"
+  },
+  {
+    "departmentcode": "17",
+    "capitalname": "La Rochelle"
+  },
+  {
+    "departmentcode": "18",
+    "capitalname": "Bourges"
+  },
+  {
+    "departmentcode": "19",
+    "capitalname": "Tulle"
+  },
+  {
+    "departmentcode": "21",
+    "capitalname": "Dijon"
+  },
+  {
+    "departmentcode": "22",
+    "capitalname": "Saint-Brieuc"
+  },
+  {
+    "departmentcode": "23",
+    "capitalname": "Guéret"
+  },
+  {
+    "departmentcode": "24",
+    "capitalname": "Périgueux"
+  },
+  {
+    "departmentcode": "25",
+    "capitalname": "Besançon"
+  },
+  {
+    "departmentcode": "26",
+    "capitalname": "Valence"
+  },
+  {
+    "departmentcode": "27",
+    "capitalname": "Évreux"
+  },
+  {
+    "departmentcode": "28",
+    "capitalname": "Chartres"
+  },
+  {
+    "departmentcode": "29",
+    "capitalname": "Quimper"
+  },
+  {
+    "departmentcode": "30",
+    "capitalname": "Nîmes"
+  },
+  {
+    "departmentcode": "31",
+    "capitalname": "Toulouse"
+  },
+  {
+    "departmentcode": "32",
+    "capitalname": "Auch"
+  },
+  {
+    "departmentcode": "33",
+    "capitalname": "Bordeaux"
+  },
+  {
+    "departmentcode": "34",
+    "capitalname": "Montpellier"
+  },
+  {
+    "departmentcode": "35",
+    "capitalname": "Rennes"
+  },
+  {
+    "departmentcode": "36",
+    "capitalname": "Châteauroux"
+  },
+  {
+    "departmentcode": "37",
+    "capitalname": "Tours"
+  },
+  {
+    "departmentcode": "38",
+    "capitalname": "Grenoble"
+  },
+  {
+    "departmentcode": "39",
+    "capitalname": "Lons-le-Saunier"
+  },
+  {
+    "departmentcode": "40",
+    "capitalname": "Mont-de-Marsan"
+  },
+  {
+    "departmentcode": "41",
+    "capitalname": "Blois"
+  },
+  {
+    "departmentcode": "42",
+    "capitalname": "Saint-Étienne"
+  },
+  {
+    "departmentcode": "43",
+    "capitalname": "Le Puy-en-Velay"
+  },
+  {
+    "departmentcode": "44",
+    "capitalname": "Nantes"
+  },
+  {
+    "departmentcode": "45",
+    "capitalname": "Orléans"
+  },
+  {
+    "departmentcode": "46",
+    "capitalname": "Cahors"
+  },
+  {
+    "departmentcode": "47",
+    "capitalname": "Agen"
+  },
+  {
+    "departmentcode": "48",
+    "capitalname": "Mende"
+  },
+  {
+    "departmentcode": "49",
+    "capitalname": "Angers"
+  },
+  {
+    "departmentcode": "50",
+    "capitalname": "Saint-Lô"
+  },
+  {
+    "departmentcode": "51",
+    "capitalname": "Châlons-en-Champagne"
+  },
+  {
+    "departmentcode": "52",
+    "capitalname": "Chaumont"
+  },
+  {
+    "departmentcode": "53",
+    "capitalname": "Laval"
+  },
+  {
+    "departmentcode": "54",
+    "capitalname": "Nancy"
+  },
+  {
+    "departmentcode": "55",
+    "capitalname": "Bar-le-Duc"
+  },
+  {
+    "departmentcode": "56",
+    "capitalname": "Vannes"
+  },
+  {
+    "departmentcode": "57",
+    "capitalname": "Metz"
+  },
+  {
+    "departmentcode": "58",
+    "capitalname": "Nevers"
+  },
+  {
+    "departmentcode": "59",
+    "capitalname": "Lille"
+  },
+  {
+    "departmentcode": "60",
+    "capitalname": "Beauvais"
+  },
+  {
+    "departmentcode": "61",
+    "capitalname": "Alençon"
+  },
+  {
+    "departmentcode": "62",
+    "capitalname": "Arras"
+  },
+  {
+    "departmentcode": "63",
+    "capitalname": "Clermont-Ferrand"
+  },
+  {
+    "departmentcode": "64",
+    "capitalname": "Pau"
+  },
+  {
+    "departmentcode": "65",
+    "capitalname": "Tarbes"
+  },
+  {
+    "departmentcode": "66",
+    "capitalname": "Perpignan"
+  },
+  {
+    "departmentcode": "67",
+    "capitalname": "Strasbourg"
+  },
+  {
+    "departmentcode": "68",
+    "capitalname": "Colmar"
+  },
+  {
+    "departmentcode": "69",
+    "capitalname": "Lyon"
+  },
+  {
+    "departmentcode": "70",
+    "capitalname": "Vesoul"
+  },
+  {
+    "departmentcode": "71",
+    "capitalname": "Mâcon"
+  },
+  {
+    "departmentcode": "72",
+    "capitalname": "Le Mans"
+  },
+  {
+    "departmentcode": "73",
+    "capitalname": "Chambéry"
+  },
+  {
+    "departmentcode": "74",
+    "capitalname": "Annecy"
+  },
+  {
+    "departmentcode": "75",
+    "capitalname": "Paris"
+  },
+  {
+    "departmentcode": "76",
+    "capitalname": "Rouen"
+  },
+  {
+    "departmentcode": "77",
+    "capitalname": "Melun"
+  },
+  {
+    "departmentcode": "78",
+    "capitalname": "Versailles"
+  },
+  {
+    "departmentcode": "79",
+    "capitalname": "Niort"
+  },
+  {
+    "departmentcode": "80",
+    "capitalname": "Amiens"
+  },
+  {
+    "departmentcode": "81",
+    "capitalname": "Albi"
+  },
+  {
+    "departmentcode": "82",
+    "capitalname": "Montauban"
+  },
+  {
+    "departmentcode": "83",
+    "capitalname": "Toulon"
+  },
+  {
+    "departmentcode": "84",
+    "capitalname": "Avignon"
+  },
+  {
+    "departmentcode": "85",
+    "capitalname": "La Roche-sur-Yon"
+  },
+  {
+    "departmentcode": "86",
+    "capitalname": "Poitiers"
+  },
+  {
+    "departmentcode": "87",
+    "capitalname": "Limoges"
+  },
+  {
+    "departmentcode": "88",
+    "capitalname": "Épinal"
+  },
+  {
+    "departmentcode": "89",
+    "capitalname": "Auxerre"
+  },
+  {
+    "departmentcode": "90",
+    "capitalname": "Belfort"
+  },
+  {
+    "departmentcode": "91",
+    "capitalname": "Évry"
+  },
+  {
+    "departmentcode": "92",
+    "capitalname": "Nanterre"
+  },
+  {
+    "departmentcode": "93",
+    "capitalname": "Bobigny"
+  },
+  {
+    "departmentcode": "94",
+    "capitalname": "Créteil"
+  },
+  {
+    "departmentcode": "95",
+    "capitalname": "Pontoise"
+  }
+]

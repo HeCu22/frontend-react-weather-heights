@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
-import fetchLocationPC from "../../helpers/fetchLocactionPC";
-import fetchConditions from "../../helpers/fetchConditions";
 import imConstruct from "../../helpers/imConstruct";
 import departments from '../../data/departments.json';
-import iconMapper from "../../helpers/iconMapper";
+import adminarea from '../../data/adminarea.json';
+import regions from '../../data/regions.json';
+import depcapitals from '../../data/depcapitals.json';
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
 import {AuthContext} from "../../context/AuthContext";
@@ -21,7 +21,6 @@ import LocMarker from "../../components/locmarker/LocMarker";
 
 function Departments(props) {
     const {department} = useParams();
-    const history = useHistory();
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
@@ -32,43 +31,28 @@ function Departments(props) {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
-    const string = "".concat("FR-",department);
+    const string = "".concat("FR-", department);
     const region = departments.find((departfound) => {
-        return departfound.code === string
+            return departfound.code === string
         }
     )
 
-
-    const regionDepartments =  departments.filter((regionDepartment) => {
+    // hier filter ik de departments behorende bij de regio van doorgegeven department uit
+    const regionDepartments = departments.filter((regionDepartment) => {
         return regionDepartment.parent === region.parent
     })
 
-    console.log(regionDepartments.length);
+    // hier zoek ik de naam van doorgegeven department op
+    const adminDepartment = adminarea.find((departmentFound) => {
+        return departmentFound.ID === `${department}`
+        // return departmentFound.EnglishName === region.name
+    })
 
-
-    useEffect(() => {
-        if (!location) {
-            // fetchLocationPC(department, location, setLocation, error, toggleError, loading, toggleLoading);
-            toggleLoading(false);
-            setBackground("outer-container impression13");
-            setLocation(tslocation[0]);
-        }
-    }, []);
-
-    useEffect(() => {
-
-        console.log('useffect update');
-
-
-        if (!currConditions && location) {
-            fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading)
-            toggleLoading(false);
-            // setCurrConditions(test[0]);
-
-        }
-
-
-    }, [location]);
+    // om na te gaan wat hoofdstad van de regio is en de location key daarvan
+    const regioncapital = regions.find((found) => {
+        return found.regioncapital === `${department}`
+    })
+    console.log('regioncapital', regioncapital);
 
 
     return (
@@ -101,49 +85,19 @@ function Departments(props) {
                             <h1>Weather Heights France </h1>
                             <div className="outer-row">
                                 <div>
-                                    {location &&
-                                    <h2>{location.EnglishName}
+                                    <Article
+                                        fieldClass="top-card"
+                                        pictureClass="mid-picture-span"
+                                        tag={region.parent}
+                                        imagecode={imConstruct(department)}
+                                        locationKey={regioncapital.key}
+                                        city={regioncapital.capital}
+                                        department={department}
+                                        departmentname={adminDepartment.EnglishName}
+                                        more={more}
+                                    />
 
-                                            <LocMarker
-                                                checked={checked}
-                                                toggleChecked={toggleChecked}
-                                                marked={marked}
-                                                setMarked={setMarked}
-                                                locationKey={location.Key}
-                                            />
 
-
-                                    </h2>
-                                    }
-
-                                    {location &&
-                                        <p><span
-                                            className="small-text"> Coordinates: {location.GeoPosition.Latitude} / {location.GeoPosition.Longitude} </span>
-                                        </p>
-                                    }
-
-                                    <div className='row'>
-                                        {currConditions &&
-                                            <> <p> {currConditions.WeatherText}
-                                                <span> {iconMapper(currConditions.WeatherIcon)}
-                                        </span>
-                                            </p>
-
-                                                <h2><span
-                                                    className="big-tekst">{currConditions.Temperature.Metric.Value} </span> ° {currConditions.Temperature.Metric.Unit}
-                                                </h2>
-                                            </>
-                                        }
-                                    </div>
-
-                                    <Button fieldClass="header-button"
-                                            clickHandler={() => history.push(`/details/Paris`)}
-                                            isDisabled={false}> details <Goto className="search-icon"/></Button>
-                                </div>
-
-                                <div>
-                                    <h2><span className="invitation-tekst"> Mark ten locations in France as your favorite and login to compare</span>
-                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -168,14 +122,21 @@ function Departments(props) {
 
                                 {regionDepartments.length > 0 && regionDepartments.map((regDep, index) => {
 
-                                    if (index < 4) {
+                                    if (index < 99 && !regDep.code.includes((department))) {
 
+                                        // ophalen hoofdstad van department
+                                        const departmentCapital = depcapitals.find((depname) => {
+                                            return depname.departmentcode === regDep.code.slice(-2)
+                                        })
                                         return <Article key={regDep.code}
-                                                        tag={regDep.code}
+                                                        fieldClass="card"
+                                                        pictureClass="small-picture-span"
+                                                        tag={regDep.parent}
                                                         imagecode={imConstruct(regDep.code.slice(-2))}
                                                         region={regDep.name}
-
+                                                        city={departmentCapital.capitalname}
                                                         department={regDep.code.slice(-2)}
+                                                        departmentname={regDep.name}
                                                         more={more}
                                         />
                                     }
