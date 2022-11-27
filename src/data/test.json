@@ -382,7 +382,7 @@
   ,
   {
     "LocalObservationDateTime": "2022-11-17T18:57:00+01:00",
-    "EpochTime": 1668707820,
+    "8Time": 1668707820,
     "WeatherText": "Cloudy",
     "WeatherIcon": 7,
     "HasPrecipitation": false,

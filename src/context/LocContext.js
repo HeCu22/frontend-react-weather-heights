@@ -3,25 +3,27 @@ import React, {createContext, useEffect, useState} from 'react';
 export const LocContext = createContext({})
 
 function LocContextProvider({children}) {
-    const [myLocs, setMyLocs] = useState([]);
+    const [myLocs, setMyLocs] = useState([{}]
+    );
 
     useEffect(() => {
         console.log('de contextLoc is zojuist opnieuw opgestart');
-      if (JSON.parse(localStorage["weatherheightsMyLocations"] || null)) {
-          const locationsInStorage = JSON.parse(localStorage.getItem('weatherheightsMyLocations'));
-          console.log('locationsInStorage', locationsInStorage);
-          if (locationsInStorage) {
-              setMyLocs(locationsInStorage);
-          }
-      }
+        if (JSON.parse(localStorage["weatherheightsMyLocations"] || null)) {
+            const locationsInStorage = JSON.parse(localStorage.getItem('weatherheightsMyLocations'));
+            console.log('locationsInStorage', locationsInStorage);
+            if (locationsInStorage) {
+                setMyLocs(locationsInStorage);
+            }
+        }
 
 
     }, []);  // <--- mounting;
 
     function setFavLoc(mylocations) {
         console.log('changelocs', mylocations);
-       setMyLocs(mylocations);
-       localStorage.setItem('weatherheightsMyLocations', JSON.stringify(mylocations));
+
+        setMyLocs(mylocations);
+        localStorage.setItem('weatherheightsMyLocations', JSON.stringify(mylocations));
     }
 
     const locContextData = {

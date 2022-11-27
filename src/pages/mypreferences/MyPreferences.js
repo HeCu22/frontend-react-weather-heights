@@ -4,12 +4,7 @@ import {LocContext} from "../../context/LocContext";
 import Mainnav from "../../components/mainnav/Mainnav";
 import {Link} from "react-router-dom";
 import './MyPreferences.css';
-import comparefunction from "../../helpers/comparefunction";
-import Article from "../../components/article/Article";
 import Compare from "../../components/compare/Compare";
-import Button from "../../components/button/Button";
-import {ReactComponent as Goto} from "../../assets/icons/go.svg";
-import myLocations from "../mylocations/MyLocations";
 
 function MyPreferences(props) {
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
@@ -47,7 +42,7 @@ function MyPreferences(props) {
 
     return (
         <>
-            {console.log('comapare', performCompare)}
+            {console.log('compare', performCompare)}
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -113,6 +108,7 @@ function MyPreferences(props) {
                             <div className="tile">
                                     {favLocations.length > 0 &&
                                         <Compare
+                                            key={favLocations}
                                             mylocations={favLocations}
                                             tempmin={state.tempmin}
                                             tempmax={state.tempmax}

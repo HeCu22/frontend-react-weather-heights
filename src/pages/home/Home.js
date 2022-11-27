@@ -1,37 +1,23 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
-
-import fetchLocationCity from "../../helpers/fetchLocationCity";
-import fetchConditions from "../../helpers/fetchConditions";
 import imConstruct from "../../helpers/imConstruct";
 import regions from '../../data/regions.json';
-import iconMapper from "../../helpers/iconMapper";
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
 import {AuthContext} from "../../context/AuthContext";
-
-import tslocation from '../../data/tslocation.json';
-import test from '../../data/test.json';
 import './Home.css';
-
 import Mainnav from "../../components/mainnav/Mainnav";
-import {Link, useHistory} from "react-router-dom";
-import LocMarker from "../../components/locmarker/LocMarker";
-
+import {Link} from "react-router-dom";
 
 function Home() {
-    const history = useHistory();
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const [more, toggleMore] = useState(false);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
-
     regions.sort((a, b) => a.regioncapital - b.regioncapital);
-
-
+    console.log('regions', regions);
 
     return (
         <>
@@ -44,11 +30,11 @@ function Home() {
                 <ul className="outer-row">
                     <li> France</li>
                     <li><Link to="/"> Regions</Link></li>
-                    <li><Link to="/"> Departments </Link></li>
+                    <li><Link to="/departments/75"> Departments </Link></li>
                     {isAuthenticated &&
-                        <li><Link to="/"> MyLocations </Link></li>
+                        <li><Link to="/mylocations"> MyLocations </Link></li>
                     }
-                    <li><Link to="/"> Cities </Link></li>
+                    <li><Link to="/search"> Cities </Link></li>
 
                 </ul>
 
@@ -63,12 +49,16 @@ function Home() {
                             <h1>Weather Heights France </h1>
                             <div className="outer-row">
                                 <Article
+                                    key="IDF"
                                     fieldClass="top-card"
                                     pictureClass="mid-picture-span"
+                                    tag="IDF"
+                                    region="Île-de-France"
                                     imagecode="im75"
                                     city="Paris"
                                     locationKey="623"
                                     department="75"
+                                    departmentname="Ville de Paris"
                                     more={more}
                                 />
 

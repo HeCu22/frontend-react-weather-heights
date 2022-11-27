@@ -3,6 +3,10 @@ a {
     text-decoration: none;
 }
 
+.top-nav-menu button {
+    border: none;
+}
+
 button:hover {
     background-color: #BC4C2A;
     color: white;

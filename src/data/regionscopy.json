@@ -4,7 +4,7 @@
     "name": "Auvergne-Rhône-Alpes",
     "regioncapital": "69",
     "capital": "Lyon",
-    "key": "8015556",
+    "key": "171210",
     "regionname": "Rhône",
     "parent": "FR"
   },
@@ -13,7 +13,7 @@
     "name": "Bourgogne-Franche-Comté",
     "regioncapital": "21",
     "capital": "Dijon",
-    "key": "3006622",
+    "key": "132390",
     "regionname": "Côte-d'Or",
     "parent": "FR"
   },
@@ -22,7 +22,7 @@
     "name": "Bretagne",
     "regioncapital": "35",
     "capital": "Rennes",
-    "key": "6432801",
+    "key": "132537",
     "regionname": "Ile-et-Vilaine",
     "parent": "FR"
   },
@@ -31,7 +31,7 @@
     "name": "Centre-Val de Loire",
     "regioncapital": "45",
     "capital": "Orléans",
-    "key": "2980885",
+    "key": "132608",
     "regionname": "Loiret",
     "parent": "FR"
   },
@@ -40,7 +40,7 @@
     "name": "Grand-Est",
     "regioncapital": "67",
     "capital": "Strasbourg",
-    "key": "2973781",
+    "key": "131836",
     "regionname": "Bas-Rhin",
     "parent": "FR"
   },
@@ -49,7 +49,7 @@
     "name": "Hauts-de-France",
     "regioncapital": "59",
     "capital": "Lille",
-    "key": "2011132",
+    "key": "135564",
     "regionname": "Nord",
     "parent": "FR"
   },
@@ -58,7 +58,7 @@
     "name": "Île-de-France",
     "regioncapital": "75",
     "capital": "Paris",
-    "key": "6618620",
+    "key": "623",
     "regionname": "Île-de-France",
     "parent": "FR"
   },
@@ -67,7 +67,7 @@
     "name": "Nouvelle-Aquitaine",
     "regioncapital": "33",
     "capital": "Bordeaux",
-    "key": "3031582",
+    "key": "131913",
     "regionname": "Gironde",
     "parent": "FR"
   },
@@ -76,7 +76,7 @@
     "name": "Normandie",
     "regioncapital": "76",
     "capital": "Rouen",
-    "key": "6454707",
+    "key": "133479",
     "regionname": "Seine-Maritime",
     "parent": "FR"
   },
@@ -85,7 +85,7 @@
     "name": "Occitanie",
     "regioncapital": "31",
     "capital": "Toulouse",
-    "key": "2972315",
+    "key": "135244",
     "regionname": "Haute-Garonne",
     "parent": "FR"
   },
@@ -94,7 +94,7 @@
     "name": "Provence-Alpes-Côte-d’Azur",
     "regioncapital": "13",
     "capital": "Marseille",
-"key": "2995469",
+    "key": "170960",
     "regionname": "Bouches-du-Rhône",
     "parent": "FR"
   },
@@ -103,7 +103,7 @@
     "name": "Pays-de-la-Loire",
     "regioncapital": "44",
     "capital": "Nantes",
-    "key": "2990969",
+    "key": "135976",
     "regionname": "Loire-Atlantique",
     "parent": "FR"
   }

@@ -12,8 +12,7 @@ import tslocation from "../../data/tslocation.json";
 import LocMarker from "../locmarker/LocMarker";
 
 
-function Article({
-                     fieldClass,
+function Article({  fieldClass,
                      pictureClass,
                      tag,
                      imagecode,
@@ -30,7 +29,13 @@ function Article({
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const [currConditions, setCurrConditions] = useState(null);
-
+    console.log('article props', tag,
+        imagecode,
+        locationKey,
+        region,
+        city,
+        department,
+        departmentname);
 
     useEffect(() => {
         console.log('useeffect mount')
@@ -102,6 +107,7 @@ function Article({
                                     marked={marked}
                                     setMarked={setMarked}
                                     locationKey={locationKey}
+                                    cityName={city}
                                 />
                             </>
                         }
@@ -136,6 +142,8 @@ function Article({
                                             marked={marked}
                                             setMarked={setMarked}
                                             locationKey={location.Key}
+                                            cityName={location.EnglishName}
+
                                         />
                                     }
                                 </h2>
@@ -174,20 +182,22 @@ function Article({
                     }
                 </div>
                 {/* search was done via locationKey */}
-                {(locationKey && location) &&
-                    <p><Link
+                {(locationKey && location &&!city) &&
+                    <p>
+                        <Link
                         to={`/departments/${location.AdministrativeArea.ID}`}> {location.AdministrativeArea.ID} </Link>
                         <span> {location.AdministrativeArea.EnglishName} </span>
                     </p>
                 }
                 {/* search was done via city name */}
                 {city &&
-                    <p><Link to={`/departments/${department}`}> {department} </Link>
+                    <p>
+                        <Link to={`/departments/${department}`}> {department} </Link>
                         <span> {departmentname} </span>
                     </p>
                 }
                 {/* search was done via postalcode */}
-                {(!city && location) &&
+                {(!city && location.includes("_PC")) &&
                     <p><span
                         className="small-text"> {department} {departmentname} ,Arrondissement: {location.SupplementalAdminAreas[0].EnglishName} </span>
 

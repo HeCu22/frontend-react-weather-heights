@@ -60,13 +60,14 @@ function MyLocations(props) {
                             <div className="outer-row">
 
                                 {favLocations.length > 0 && favLocations.map((favLoc, index) => {
-                                    console.log('favloc');
-                                    if (index < 10) {
 
-                                        return <Article key={favLoc}
+                                    if (favLoc.key > "" && index < 10) {
+
+                                        return <Article key={favLoc.key}
                                                         fieldClass="card"
                                                         pictureClass="small-picture-span"
-                                                        locationKey={favLoc}
+                                                        locationKey={favLoc.key}
+                                                        city={favLoc.city}
                                                         more={more}
                                         />
                                     }

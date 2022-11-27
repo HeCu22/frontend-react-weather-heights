@@ -8,7 +8,6 @@ import MyLocations from "./pages/mylocations/MyLocations";
 import MyPreferences from "./pages/mypreferences/MyPreferences";
 import Topnav from "./components/topnav/Topnav";
 import Home from './pages/home/Home';
-import LocationDetails from './pages/locationDetails/LocationDetails';
 import './App.css';
 import Searchcity from "./pages/searchcity/Searchcity";
 import Citydetails from "./pages/citydetails/Citydetails";
@@ -31,11 +30,11 @@ function App() {
         <Route exact path="/details/:city">
           <Citydetails />
         </Route>
-        <Route exact path="/departments/:department">
-          <Departments />
+        <Route exact path="/details/">
+          <Citydetails />
         </Route>
-        <Route exact path="/location-details/:key">
-          <LocationDetails />
+        <Route exact path="/departments/:department">
+          <Departments/>
         </Route>
         <Route path="/mylocations">
           <MyLocations />

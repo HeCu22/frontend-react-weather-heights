@@ -15,12 +15,12 @@ import tslocation from '../../data/tslocation.json';
 import test from '../../data/test.json';
 import './Departments.css';
 import Mainnav from "../../components/mainnav/Mainnav";
-import {Link, useHistory, useParams} from "react-router-dom";
-import LocMarker from "../../components/locmarker/LocMarker";
+import {Link, useParams} from "react-router-dom";
 
 
 function Departments(props) {
     const {department} = useParams();
+
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
@@ -52,8 +52,6 @@ function Departments(props) {
     const regioncapital = regions.find((found) => {
         return found.regioncapital === `${department}`
     })
-    console.log('regioncapital', regioncapital);
-
 
     return (
         <>
@@ -62,94 +60,97 @@ function Departments(props) {
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
-            <Mainnav>
-                <ul className="outer-row">
-                    <li> France</li>
-                    <li><Link to="/"> Regions</Link></li>
-                    <li><Link to="/"> Departments </Link></li>
-                    {isAuthenticated &&
-                        <li><Link to="/"> MyLocations </Link></li>
-                    }
-                    <li><Link to="/"> Cities </Link></li>
+            {!regioncapital ? <span>Capital of this department is not capital or region. Go back to previous page.</span>
+                :
+                <>
+                    <Mainnav>
+                        <ul className="outer-row">
+                            <li> France</li>
+                            <li><Link to="/"> Regions</Link></li>
+                            <li><Link to="/"> Departments </Link></li>
+                            {isAuthenticated &&
+                                <li><Link to="/"> MyLocations </Link></li>
+                            }
+                            <li><Link to="/"> Cities </Link></li>
 
-                </ul>
+                        </ul>
 
-            </Mainnav>
-
-
-            <main className={background}>
-                <div className="inner-container">
-                    <div className="mid">
-
-                        <div className="header-content">
-                            <h1>Weather Heights France </h1>
-                            <div className="outer-row">
-                                <div>
-                                    <Article
-                                        fieldClass="top-card"
-                                        pictureClass="mid-picture-span"
-                                        tag={region.parent}
-                                        imagecode={imConstruct(department)}
-                                        locationKey={regioncapital.key}
-                                        city={regioncapital.capital}
-                                        department={department}
-                                        departmentname={adminDepartment.EnglishName}
-                                        more={more}
-                                    />
+                    </Mainnav>
 
 
+                    <main className={background}>
+                        <div className="inner-container">
+                            <div className="mid">
+
+                                <div className="header-content">
+                                    <h1>Weather Heights France </h1>
+                                    <div className="outer-row">
+                                        <div>
+                                            <Article
+                                                fieldClass="top-card"
+                                                pictureClass="mid-picture-span"
+                                                tag={region.parent}
+                                                region={regioncapital.name}
+                                                imagecode={imConstruct(department)}
+                                                locationKey={regioncapital.key}
+                                                city={regioncapital.capital}
+                                                department={department}
+                                                departmentname={adminDepartment.EnglishName}
+                                                more={more}
+                                            />
+
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </main>
-            <main className="outer-container main-background">
-                <div className="inner-container">
-                    <div className="cards">
-                        <p>Departments</p>
-                        <div className="cards-mid-content">
-                            <Button fieldClass="cards-button"
-                                    clickHandler={() => toggleMore(!more)}
-                                    isDisabled={false}> see also current weather of capitals below... </Button>
-                        </div>
-                        <span><Back/> <Forward/></span>
-                    </div>
-                    <div className="outer-container main-background">
+                    </main>
+                    <main className="outer-container main-background">
                         <div className="inner-container">
-
-                            <div className="outer-row">
-
-                                {regionDepartments.length > 0 && regionDepartments.map((regDep, index) => {
-
-                                    if (index < 99 && !regDep.code.includes((department))) {
-
-                                        // ophalen hoofdstad van department
-                                        const departmentCapital = depcapitals.find((depname) => {
-                                            return depname.departmentcode === regDep.code.slice(-2)
-                                        })
-                                        return <Article key={regDep.code}
-                                                        fieldClass="card"
-                                                        pictureClass="small-picture-span"
-                                                        tag={regDep.parent}
-                                                        imagecode={imConstruct(regDep.code.slice(-2))}
-                                                        region={regDep.name}
-                                                        city={departmentCapital.capitalname}
-                                                        department={regDep.code.slice(-2)}
-                                                        departmentname={regDep.name}
-                                                        more={more}
-                                        />
-                                    }
-                                })}
+                            <div className="cards">
+                                <p>Departments</p>
+                                <div className="cards-mid-content">
+                                    <Button fieldClass="cards-button"
+                                            clickHandler={() => toggleMore(!more)}
+                                            isDisabled={false}> see also current weather of capitals below... </Button>
+                                </div>
+                                <span><Back/> <Forward/></span>
                             </div>
+                            <div className="outer-container main-background">
+                                <div className="inner-container">
+
+                                    <div className="outer-row">
+
+                                        {regionDepartments.length > 0 && regionDepartments.map((regDep, index) => {
+
+                                            if (index < 99 && !regDep.code.includes((department))) {
+
+                                                // ophalen hoofdstad van department
+                                                const departmentCapital = depcapitals.find((depname) => {
+                                                    return depname.departmentcode === regDep.code.slice(-2)
+                                                })
+                                                return <Article key={regDep.code}
+                                                                fieldClass="card"
+                                                                pictureClass="small-picture-span"
+                                                                tag={regDep.parent}
+                                                                imagecode={imConstruct(regDep.code.slice(-2))}
+                                                                region={regDep.name}
+                                                                city={departmentCapital.capitalname}
+                                                                department={regDep.code.slice(-2)}
+                                                                departmentname={regDep.name}
+                                                                more={more}
+                                                />
+                                            }
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
+                    </main>
 
-                </div>
-            </main>
-            <ul>
-
-            </ul>
+                </>}
         </>
     );
 }

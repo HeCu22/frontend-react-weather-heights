@@ -3,12 +3,16 @@ import './LocMarker.css';
 import {ReactComponent as Favorite} from "../../assets/icons/star.svg";
 import {LocContext} from "../../context/LocContext";
 
-function LocMarker({checked, toggleChecked, marked, setMarked,locationKey}) {
+function LocMarker({checked, toggleChecked, marked, setMarked, locationKey, cityName}) {
 
     const {favLocations, setFavLocFunction} = useContext(LocContext);
-    console.log('props', (checked), (marked), (locationKey), (favLocations));
 
-    if (favLocations.includes(locationKey)) {
+    console.log('props', (cityName), (checked), (marked), (locationKey), (favLocations));
+
+    // if (favLocations && favLocations[0].key === locationKey) {
+    if (favLocations.find((found) => {
+        return found.key === locationKey;
+    })) {
         toggleChecked(true);
         setMarked("var(--bordertile)");
 
@@ -26,7 +30,9 @@ function LocMarker({checked, toggleChecked, marked, setMarked,locationKey}) {
 
         } else {
             setMarked("var(--bordertile)");
-            favLocations.push(locationKey);
+            console.log('push', favLocations);
+            // obj.push({key: locationKey, city: ""})
+            favLocations.push({key: locationKey, city: cityName});
             setFavLocFunction(favLocations);
         }
         ;

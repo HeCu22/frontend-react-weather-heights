@@ -28,27 +28,19 @@ function Citydetails(props) {
     const [errorFc, toggleErrorFc] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
-    console.log((city))
 
     useEffect(() => {
 
-        console.log('useeffecct');
-
         if (!location) {
-            console.log('set');
                 // fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
                 toggleLoading(false);
                 setBackground("outer-container impression01");
                 setLocation(tslocation[0]);
         }
 
-
     }, []);
 
     useEffect(() => {
-
-        console.log('useeffecct2');
-
 
         if (!currConditions && location) {
             if (more) {
@@ -71,7 +63,6 @@ function Citydetails(props) {
 
     return (
         <>
-
             {error &&
                 <span>  Something went wrong fetching the data  </span>
             }
@@ -98,6 +89,7 @@ function Citydetails(props) {
                                                 marked={marked}
                                                 setMarked={setMarked}
                                                 locationKey={location.Key}
+                                                cityName={city}
                                             />
                                         }
 
