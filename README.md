@@ -13,7 +13,7 @@ Versie 1.0
 
 ## Inleiding
 
-Er zijn natuurlijk al heel veel applicaties te vinden via welke je het weer kan opvragen en via google vind je waarschijnlijk al heel veel. Maar een locatie zoeken afhankelijk van je weer is misschien toch een iets andere optiek, vooral als je de locatie nog niet weet en die wil laten afhangen van het weer.
+LocMarker zijn natuurlijk al heel veel applicaties te vinden via welke je het weer kan opvragen en via google vind je waarschijnlijk al heel veel. Maar een locatie zoeken afhankelijk van je weer is misschien toch een iets andere optiek, vooral als je de locatie nog niet weet en die wil laten afhangen van het weer.
 De applicatie ‘Weather Heights’ kan hier misschien bij helpen. Op het hoofdscherm zie je eerst de hoofdstad van Frankrijk met een korte weerflash en onderaan de pagina vier tegels met vier hoofdregio's van Frankrijk, ook met hoofdstad en korte weerflash. Je kunt indien gewenst via See More button de weerdetails van Parijs zien, maar ook kun je via de search button een stad in Frankrijk zoeken.
 Via 'Register' in de navigatie balk kun je een account aanmaken en via 'Login' inloggen.
 Je wordt uitgenodigd een aantal locaties in Frankrijk als favoriet te markeren om ze later met elkaar te kunnen vergelijken.
@@ -40,7 +40,7 @@ Omdat er al een package.json aanwezig is in het bestand, kun je dit doen met het
 
 * npm install
 
-Er moet een eigen .env bestand in de rootmap aangemaakt worden en gevuld worden met de beschikbaargestelde API key. Ken de waarde hiervan toe aan de variabele-naam REACT_APP_API_KEY zoals beschreven in .env.dist bestand.
+LocMarker moet een eigen .env bestand in de rootmap aangemaakt worden en gevuld worden met de beschikbaargestelde API key. Ken de waarde hiervan toe aan de variabele-naam REACT_APP_API_KEY zoals beschreven in .env.dist bestand.
 Run daarna in Webstorm terminal het comando:
 npm run build
 

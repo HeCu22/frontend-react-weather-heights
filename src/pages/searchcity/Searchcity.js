@@ -1,26 +1,24 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import './Searchcity.css';
 import {Link, useHistory} from "react-router-dom";
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
-import {ReactComponent as Search} from "../../assets/icons/search.svg";
 import Button from "../../components/button/Button";
-import {ReactComponent as Goto} from "../../assets/icons/go.svg";
-import {useState} from "react";
+import departments from "../../data/adminarea.json";
+
 
 function Searchcity(props) {
     const history = useHistory();
     const [state, setState] = useState({
-        searchcity: ""
+        searchcity: "Paris",
+        department: "FR",
     })
 
-    function doThingsOnClick() {
-        console.log('Geliked!');
-    }
 
     function onFormSubmit(e) {
         e.preventDefault();
         setState(state.searchcity);
-        history.push(`/details/${state.searchcity}`);
+        setState(state.department);
+        history.push(`/details/${state.searchcity},${state.department}`);
     }
 
     function handleChange(e) {
@@ -28,6 +26,8 @@ function Searchcity(props) {
         const value = e.target.value;
         setState({...state, [e.target.name]: value});
     }
+
+    console.log('departments', departments.length)
 
     return (
         <>
@@ -40,13 +40,31 @@ function Searchcity(props) {
                     </div>
                     <div className="mid-nav">
                         <form className="outer-row" onSubmit={onFormSubmit}>
-                            <input
-                                type="tekst"
-                                id="input-city"
-                                name="searchcity"
-                                value={state.searchcity}
-                                onChange={handleChange}
-                                placeholder=" search city in France"/>
+
+                            <label htmlFor="department" className="column">
+                                <span> Department:</span>
+                                <select name="department"
+                                        id="department"
+                                        value={state.department}
+                                        onChange={handleChange}>
+                                    <option value="FR"> France </option>
+                                    {departments.length > 0 &&
+                                        departments.map((department) => {
+                                            return <option value={department.ID}> {department.EnglishName}
+                                            </option>
+                                        })
+                                    }
+                                </select>
+                            </label>
+                            <label htmlFor="city">
+                                <input
+                                    type="tekst"
+                                    id="input-city"
+                                    name="searchcity"
+                                    value={state.searchcity}
+                                    onChange={handleChange}
+                                    placeholder=" search city in France"/>
+                            </label>
 
                         </form>
 

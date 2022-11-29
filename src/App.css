@@ -149,6 +149,14 @@ main {
     background-size: cover;
 }
 
+.impression13 {
+    background: url('./assets/images/impression13.jpg');
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 .icon-logo {
     width: 105px;
     height: 70px;
@@ -239,6 +247,10 @@ main {
     justify-content: center;
 }
 
+.top-card {
+    border-color: var(--eggshell);
+
+}
 
 button {
     color: white;
@@ -289,6 +301,11 @@ button:disabled {
 .moved {
     width: 100%;
 }
+
+.marked  {
+    fill: white;
+}
+
 
 footer {
     display: flex;

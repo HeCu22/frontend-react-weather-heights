@@ -1,0 +1,876 @@
+[
+    {
+        "ID": "01",
+        "LocalizedName": "Ain",
+        "EnglishName": "Ain",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "02",
+        "LocalizedName": "Aisne",
+        "EnglishName": "Aisne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "03",
+        "LocalizedName": "Allier",
+        "EnglishName": "Allier",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "04",
+        "LocalizedName": "Alpes-de-Haute-Provence",
+        "EnglishName": "Alpes-de-Haute-Provence",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "05",
+        "LocalizedName": "Hautes-Alpes",
+        "EnglishName": "Hautes-Alpes",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "06",
+        "LocalizedName": "Alpes-Maritimes",
+        "EnglishName": "Alpes-Maritimes",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "07",
+        "LocalizedName": "Ardèche",
+        "EnglishName": "Ardèche",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "08",
+        "LocalizedName": "Ardennes",
+        "EnglishName": "Ardennes",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "09",
+        "LocalizedName": "Ariège",
+        "EnglishName": "Ariège",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "10",
+        "LocalizedName": "Aube",
+        "EnglishName": "Aube",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "11",
+        "LocalizedName": "Aude",
+        "EnglishName": "Aude",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "12",
+        "LocalizedName": "Aveyron",
+        "EnglishName": "Aveyron",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "13",
+        "LocalizedName": "Bouches-du-Rhône",
+        "EnglishName": "Bouches-du-Rhône",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "14",
+        "LocalizedName": "Calvados",
+        "EnglishName": "Calvados",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "15",
+        "LocalizedName": "Cantal",
+        "EnglishName": "Cantal",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "16",
+        "LocalizedName": "Charente",
+        "EnglishName": "Charente",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "17",
+        "LocalizedName": "Charente-Maritime",
+        "EnglishName": "Charente-Maritime",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "18",
+        "LocalizedName": "Cher",
+        "EnglishName": "Cher",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "19",
+        "LocalizedName": "Corrèze",
+        "EnglishName": "Corrèze",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "21",
+        "LocalizedName": "Côte-d'Or",
+        "EnglishName": "Côte-d'Or",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "22",
+        "LocalizedName": "Côtes-d'Armor",
+        "EnglishName": "Côtes-d'Armor",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "23",
+        "LocalizedName": "Creuse",
+        "EnglishName": "Creuse",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "24",
+        "LocalizedName": "Dordogne",
+        "EnglishName": "Dordogne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "25",
+        "LocalizedName": "Doubs",
+        "EnglishName": "Doubs",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "26",
+        "LocalizedName": "Drôme",
+        "EnglishName": "Drôme",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "27",
+        "LocalizedName": "Eure",
+        "EnglishName": "Eure",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "28",
+        "LocalizedName": "Eure-et-Loir",
+        "EnglishName": "Eure-et-Loir",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "29",
+        "LocalizedName": "Finistère",
+        "EnglishName": "Finistère",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "2A",
+        "LocalizedName": "Corse-du-Sud",
+        "EnglishName": "Corse-du-Sud",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "2B",
+        "LocalizedName": "Haute-Corse",
+        "EnglishName": "Haute-Corse",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "30",
+        "LocalizedName": "Gard",
+        "EnglishName": "Gard",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "31",
+        "LocalizedName": "Haute-Garonne",
+        "EnglishName": "Haute-Garonne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "32",
+        "LocalizedName": "Gers",
+        "EnglishName": "Gers",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "33",
+        "LocalizedName": "Gironde",
+        "EnglishName": "Gironde",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "34",
+        "LocalizedName": "Hérault",
+        "EnglishName": "Hérault",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "35",
+        "LocalizedName": "Ille-et-Vilaine",
+        "EnglishName": "Ille-et-Vilaine",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "36",
+        "LocalizedName": "Indre",
+        "EnglishName": "Indre",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "37",
+        "LocalizedName": "Indre-et-Loire",
+        "EnglishName": "Indre-et-Loire",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "38",
+        "LocalizedName": "Isère",
+        "EnglishName": "Isère",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "39",
+        "LocalizedName": "Jura",
+        "EnglishName": "Jura",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "40",
+        "LocalizedName": "Landes",
+        "EnglishName": "Landes",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "41",
+        "LocalizedName": "Loir-et-Cher",
+        "EnglishName": "Loir-et-Cher",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "42",
+        "LocalizedName": "Loire",
+        "EnglishName": "Loire",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "43",
+        "LocalizedName": "Haute-Loire",
+        "EnglishName": "Haute-Loire",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "44",
+        "LocalizedName": "Loire-Atlantique",
+        "EnglishName": "Loire-Atlantique",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "45",
+        "LocalizedName": "Loiret",
+        "EnglishName": "Loiret",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "46",
+        "LocalizedName": "Lot",
+        "EnglishName": "Lot",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "47",
+        "LocalizedName": "Lot-et-Garonne",
+        "EnglishName": "Lot-et-Garonne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "48",
+        "LocalizedName": "Lozère",
+        "EnglishName": "Lozère",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "49",
+        "LocalizedName": "Maine-et-Loire",
+        "EnglishName": "Maine-et-Loire",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "50",
+        "LocalizedName": "Manche",
+        "EnglishName": "Manche",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "51",
+        "LocalizedName": "Marne",
+        "EnglishName": "Marne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "52",
+        "LocalizedName": "Haute-Marne",
+        "EnglishName": "Haute-Marne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "53",
+        "LocalizedName": "Mayenne",
+        "EnglishName": "Mayenne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "54",
+        "LocalizedName": "Meurthe-et-Moselle",
+        "EnglishName": "Meurthe-et-Moselle",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "55",
+        "LocalizedName": "Meuse",
+        "EnglishName": "Meuse",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "56",
+        "LocalizedName": "Morbihan",
+        "EnglishName": "Morbihan",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "57",
+        "LocalizedName": "Moselle",
+        "EnglishName": "Moselle",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "58",
+        "LocalizedName": "Nièvre",
+        "EnglishName": "Nièvre",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "59",
+        "LocalizedName": "Nord",
+        "EnglishName": "Nord",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "60",
+        "LocalizedName": "Oise",
+        "EnglishName": "Oise",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "61",
+        "LocalizedName": "Orne",
+        "EnglishName": "Orne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "62",
+        "LocalizedName": "Pas-de-Calais",
+        "EnglishName": "Pas-de-Calais",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "63",
+        "LocalizedName": "Puy-de-Dôme",
+        "EnglishName": "Puy-de-Dôme",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "64",
+        "LocalizedName": "Pyrénées-Atlantiques",
+        "EnglishName": "Pyrénées-Atlantiques",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "65",
+        "LocalizedName": "Hautes-Pyrénées",
+        "EnglishName": "Hautes-Pyrénées",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "66",
+        "LocalizedName": "Pyrénées-Orientales",
+        "EnglishName": "Pyrénées-Orientales",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "67",
+        "LocalizedName": "Bas-Rhin",
+        "EnglishName": "Bas-Rhin",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "68",
+        "LocalizedName": "Haut-Rhin",
+        "EnglishName": "Haut-Rhin",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "69",
+        "LocalizedName": "Rhône",
+        "EnglishName": "Rhône",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "70",
+        "LocalizedName": "Haute-Saône",
+        "EnglishName": "Haute-Saône",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "71",
+        "LocalizedName": "Saône-et-Loire",
+        "EnglishName": "Saône-et-Loire",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "72",
+        "LocalizedName": "Sarthe",
+        "EnglishName": "Sarthe",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "73",
+        "LocalizedName": "Savoie",
+        "EnglishName": "Savoie",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "74",
+        "LocalizedName": "Haute-Savoie",
+        "EnglishName": "Haute-Savoie",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "75",
+        "LocalizedName": "Ville de Paris",
+        "EnglishName": "Ville de Paris",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "76",
+        "LocalizedName": "Seine-Maritime",
+        "EnglishName": "Seine-Maritime",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "77",
+        "LocalizedName": "Seine-et-Marne",
+        "EnglishName": "Seine-et-Marne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "78",
+        "LocalizedName": "Yvelines",
+        "EnglishName": "Yvelines",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "79",
+        "LocalizedName": "Deux-Sèvres",
+        "EnglishName": "Deux-Sèvres",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "80",
+        "LocalizedName": "Somme",
+        "EnglishName": "Somme",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "81",
+        "LocalizedName": "Tarn",
+        "EnglishName": "Tarn",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "82",
+        "LocalizedName": "Tarn-et-Garonne",
+        "EnglishName": "Tarn-et-Garonne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "83",
+        "LocalizedName": "Var",
+        "EnglishName": "Var",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "84",
+        "LocalizedName": "Vaucluse",
+        "EnglishName": "Vaucluse",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "85",
+        "LocalizedName": "Vendée",
+        "EnglishName": "Vendée",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "86",
+        "LocalizedName": "Vienne",
+        "EnglishName": "Vienne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "87",
+        "LocalizedName": "Haute-Vienne",
+        "EnglishName": "Haute-Vienne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "88",
+        "LocalizedName": "Vosges",
+        "EnglishName": "Vosges",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "89",
+        "LocalizedName": "Yonne",
+        "EnglishName": "Yonne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "90",
+        "LocalizedName": "Territoire de Belfort",
+        "EnglishName": "Territoire de Belfort",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "91",
+        "LocalizedName": "Essonne",
+        "EnglishName": "Essonne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "92",
+        "LocalizedName": "Hauts-de-Seine",
+        "EnglishName": "Hauts-de-Seine",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "93",
+        "LocalizedName": "Seine-Saint-Denis",
+        "EnglishName": "Seine-Saint-Denis",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "94",
+        "LocalizedName": "Val-de-Marne",
+        "EnglishName": "Val-de-Marne",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "95",
+        "LocalizedName": "Val-d'Oise",
+        "EnglishName": "Val-d'Oise",
+        "Level": 1,
+        "LocalizedType": "Department",
+        "EnglishType": "Department",
+        "CountryID": "fr"
+    },
+    {
+        "ID": "CP",
+        "LocalizedName": "Clipperton Island",
+        "EnglishName": "Clipperton Island",
+        "Level": 1,
+        "LocalizedType": "Overseas Territory Of France",
+        "EnglishType": "Overseas Territory Of France",
+        "CountryID": "fr"
+    }
+
+]
