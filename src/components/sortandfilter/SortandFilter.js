@@ -8,14 +8,16 @@ import {LocContext} from "../../context/LocContext";
 import SortedList from "../sortedlist/SortedList";
 
 
-function Compare({mylocations, tempmin, tempmax}) {
+function SortandFilter({mylocations, tempmin, tempmax}) {
 
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [tempResult, setTempResult] = useState(null);
     const [result, setResult] = useState(null);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
+    const [lines, setLines] = useState(null);
     const [cities, setCities] = useState("");
+    const [count, setCount] = useState(false);
 
 
     console.log('compare', mylocations);
@@ -35,17 +37,18 @@ function Compare({mylocations, tempmin, tempmax}) {
     useEffect(() => {
         console.log('useeffect');
 
-        async function fetchTemp(locationKey, locationCity, index, tempResult, setTempResult, cities, setCities) {
+        async function fetchTemp(locationKey, locationCity, index, tempResult, setTempResult, cities, setCities, result, setResult, lines, setLines) {
             console.log('fetchTemp', locationKey, index);
             toggleLoading(true);
             toggleError(false);
             try {
-                // const {data: [databack]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
-              const {data: {main}} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${locationKey}&lang=fr&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
-                console.log('response', main);
-                temp[index] = main.temp_max;
-                // console.log('data', (databack));
-                // temp[index] = databack.Temperature.Metric.Value
+                const {data: [databack]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
+                // const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q={locationCity},FR&limit=5&appid=71ad9bd7fd90f6e8a85aed2d949febfc`);
+                // const {data: {main}} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${locationKey}&lang=fr&appid=71ad9bd7fd90f6e8a85aed2d949febfc&units=metric`);
+                // console.log('response', main);
+                // temp[index] = main.temp_max;
+                console.log('data', (databack));
+                temp[index] = databack.Temperature.Metric.Value
                 citylist[index] = locationCity;
                 console.log('temp', temp);
                 setTempResult(temp);
@@ -78,8 +81,9 @@ function Compare({mylocations, tempmin, tempmax}) {
             for (let index = 0; index < 10; index++) {
                 if (index < mylocations.length) {
                     console.log('index', index);
-                    fetchTemp(mylocations[index].key, mylocations[index].city, index, tempResult, setTempResult, cities, setCities);
+                    fetchTemp(mylocations[index].key, mylocations[index].city, index, tempResult, setTempResult, cities, setCities, result, setResult, lines, setLines);
                 }
+                setCount(true);
             }
         }
 
@@ -99,28 +103,18 @@ function Compare({mylocations, tempmin, tempmax}) {
                 <p>Air quality</p>
 
             </div>
-            {(tempResult && Object.keys(tempResult).length > 0) &&
+            {(tempResult && tempResult.length > 0) &&
                 <>
-                    {tempResult.map((record, index) => {
-                        const currentDay = new Date();
-                        const currentMoment = currentDay.getTime();
-                        const recordkey = cities[index].concat(currentMoment);
-                        {console.log('rec', recordkey)}
-
-                        return (
-                            <div key={recordkey}>
-                                <div className="compare-grid">
-                                    <p> {cities[index]} 0/ {record}</p>
-                                </div>
-                            </div>
-                        )
-
-                            ;
-                    })}
-                        </>
-                    }
+                    <SortedList
+                        key={cities}
+                        templist={tempResult}
+                        citylist={cities}
+                        count={count}
+                    />
                 </>
-                );
             }
+        </>
+    );
+}
 
-            export default Compare;
+export default Compare;
