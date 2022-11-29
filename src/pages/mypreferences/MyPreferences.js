@@ -5,12 +5,12 @@ import Mainnav from "../../components/mainnav/Mainnav";
 import {Link} from "react-router-dom";
 import './MyPreferences.css';
 import Compare from "../../components/compare/Compare";
+import GridSlider from "../../components/gridslider/GridSlider";
+
 
 function MyPreferences(props) {
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const {favLocations, setFavLocFunction} = useContext(LocContext);
-
-    const [currConditions, setCurrConditions] = useState(null);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const [performCompare, setPerformCompare] = useState(false);
@@ -52,15 +52,15 @@ function MyPreferences(props) {
                         <li>
                             <button
                                 type="button"
-                                onClick={compare}
+                                onClick={() => {setPerformCompare(!performCompare)}}
                             >
                                 Compare
                             </button>
                         </li>
                     }
-                    <li> Overview</li>
+                    <GridSlider/>
                     {isAuthenticated &&
-                        <li><Link to="/"> Grid </Link></li>
+                        <li><Link to="/"> Top List </Link></li>
                     }
                 </ul>
             </Mainnav>
@@ -106,14 +106,14 @@ function MyPreferences(props) {
                         </div>
                         {performCompare &&
                             <div className="tile">
-                                    {favLocations.length > 0 &&
-                                        <Compare
-                                            key={favLocations}
-                                            mylocations={favLocations}
-                                            tempmin={state.tempmin}
-                                            tempmax={state.tempmax}
-                                        />
-                                    }
+                                {favLocations.length > 0 &&
+                                    <Compare
+                                        key={favLocations.length}
+                                        mylocations={favLocations}
+                                        tempmin={state.tempmin}
+                                        tempmax={state.tempmax}
+                                    />
+                                }
                             </div>
                         }
                     </div>
