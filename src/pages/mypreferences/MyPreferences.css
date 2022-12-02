@@ -46,3 +46,18 @@ button {
 
     padding: 8px 60px 8px 60px;
 }
+
+.row {
+    position: relative;
+}
+
+#rain-sort, #wind-sort {
+    position: absolute;
+    right: 50px;
+
+}
+
+#rain-mm, #wind-kmh {
+    position: absolute;
+    left: 200px;
+}

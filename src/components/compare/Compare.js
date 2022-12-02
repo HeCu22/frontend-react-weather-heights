@@ -17,17 +17,9 @@ function Compare({mylocations, tempmin, tempmax}) {
     const [loading, toggleLoading] = useState(false);
     const [cities, setCities] = useState("");
 
-
     console.log('compare', mylocations);
 
-    // testing purposes
-    // const conditions = test.map((record) => {
-    //         return ({Temp: record.Temperature.Metric.Value});
-    //     }
-    // );
-    // const compareResultTest = conditions.map((condition, index) => {
-    //     return ({city: mylocations[index], tempmax: condition.Temp, tempmin: 0});
-    // });
+
     let temp = [];
     let citylist = [];
 
@@ -35,15 +27,16 @@ function Compare({mylocations, tempmin, tempmax}) {
     useEffect(() => {
         console.log('useeffect');
 
+
         async function fetchTemp(locationKey, locationCity, index, tempResult, setTempResult, cities, setCities) {
             console.log('fetchTemp', locationKey, index);
             toggleLoading(true);
             toggleError(false);
             try {
                 // const {data: [databack]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
-              const {data: {main}} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${locationKey}&lang=fr&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
-                console.log('response', main);
-                temp[index] = main.temp_max;
+                const {data: {main}} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${locationKey}&lang=fr&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
+                  console.log('response', main);
+                  temp[index] = main.temp_max;
                 // console.log('data', (databack));
                 // temp[index] = databack.Temperature.Metric.Value
                 citylist[index] = locationCity;
@@ -51,16 +44,7 @@ function Compare({mylocations, tempmin, tempmax}) {
                 setTempResult(temp);
                 setCities(citylist);
 
-                // for testing purposes
-                // console.log('test', test[index]);
-                // temp[index] = test[0].Temperature.Metric.Value;
-                // const temp2 = [10.5, 20, 15, 13, 18, 21, 18, 15, 5, 9]; /* for testing */
-                // temp[index] = temp2[index]; /* for testing */
 
-
-                // const result2 = object.sort((a, b) => b.tempmax - a.tempmax);
-                // console.log('sort', result2);
-                // setLines(result2);
                 toggleLoading(false);
 
             } catch (e) {
@@ -72,7 +56,7 @@ function Compare({mylocations, tempmin, tempmax}) {
         }
 
         toggleLoading(false);
-
+        console.log('mylocations', mylocations.length);
         if (mylocations.length > 0) {
 
             for (let index = 0; index < 10; index++) {
@@ -89,7 +73,14 @@ function Compare({mylocations, tempmin, tempmax}) {
 
     return (
         <>
-            {console.log('temp', tempResult, 'city', cities)}
+
+            {error &&
+                <span>  Something went wrong fetching the data  </span>
+            }
+            {loading && <span>Loading...</span>}
+
+            {console.log('temp', tempResult, 'city', cities, 'mylocations', mylocations)}
+
             <div className="compare-header">
                 <h5>Comparison</h5>
                 <p>Min/Max °C</p>
@@ -99,28 +90,24 @@ function Compare({mylocations, tempmin, tempmax}) {
                 <p>Air quality</p>
 
             </div>
-            {(tempResult && Object.keys(tempResult).length > 0) &&
+
+            {(tempResult && tempResult.length > 0 && Object.keys(tempResult).length > 0) &&
                 <>
-                    {tempResult.map((record, index) => {
-                        const currentDay = new Date();
-                        const currentMoment = currentDay.getTime();
-                        const recordkey = cities[index].concat(currentMoment);
-                        {console.log('rec', recordkey)}
+                    {console.log(tempResult.length, Object.keys(tempResult).length, mylocations.length)}
 
-                        return (
-                            <div key={recordkey}>
-                                <div className="compare-grid">
-                                    <p> {cities[index]} 0/ {record}</p>
-                                </div>
-                            </div>
-                        )
+                    <SortedList
+                        templist={tempResult}
+                        citylist={cities}
+                        tempmin={tempmin}
+                        tempmax={tempmax}
+                        />
 
-                            ;
-                    })}
-                        </>
-                    }
+
+
                 </>
-                );
             }
+        </>
+    );
+}
 
-            export default Compare;
+export default Compare;

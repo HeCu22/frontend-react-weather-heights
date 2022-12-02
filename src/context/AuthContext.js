@@ -2,11 +2,12 @@ import React, {createContext, useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import isTokenValid from "../helpers/isTokenValid";
 
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}) {
-    const [auth,setAuth] = useState({
+    const [auth, setAuth] = useState({
         isAuth: false,
         user: null,
         status: 'pending',
@@ -19,13 +20,13 @@ function AuthContextProvider({children}) {
         console.log(token);
 
 
-        if (token) {
+        if (token && isTokenValid(token)) {
             // is het nog geldig ?
             // token decoderen
             const decodedToken = jwtDecode(token);
             console.log('decoded token', decodedToken);
 
-            getUserdetails(token,decodedToken.sub);
+            getUserdetails(token, decodedToken.sub);
 
         } else {
             // anders state leeg!
@@ -39,14 +40,25 @@ function AuthContextProvider({children}) {
 
     const history = useHistory();
 
-    async function getUserdetails(token,id) {
+    async function checkHeroku() {
         try {
-            const {data} = await axios.get(`http://localhost:3000/600/users/${id}`,
+            const response = await axios.get("https://frontend-educational-backend.herokuapp.com/api/test/all");
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function getUserdetails(token, id) {
+        try {
+
+            // const {data} = await axios.get(`http://localhost:3000/600/users/${id}`,
+            const {data} = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user',
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    }}
+                        "Authorization": `Bearer ${token}`,
+                    }
+                }
             );
             console.log('get', data);
 
@@ -68,8 +80,14 @@ function AuthContextProvider({children}) {
 
     }
 
+    function checkheroku(token) {
+        checkHeroku();
+    }
+
 
     function login(token) {
+
+
         console.log('token', token);
         // token opslaan in local storage
         localStorage.setItem('weatherheightsToken', token);
@@ -77,7 +95,7 @@ function AuthContextProvider({children}) {
         const decodedToken = jwtDecode(token);
         console.log('decoded token', decodedToken);
         // nieuwe data opvragen van gebruiker
-        getUserdetails(token,decodedToken.sub);
+        getUserdetails(token, decodedToken.sub);
         // loggen
         console.log('Gebruiker is ingelogd!');
         // redirect
@@ -85,32 +103,33 @@ function AuthContextProvider({children}) {
     }
 
 
-       function logout() {
-           // local storage leegmaken en state leegmaken
-           localStorage.clear();
-           setAuth({
-               ...auth,
-               isAuth: false,
-               user: null,
-           });
-           // loggen
-           console.log('user is uitgelogd');
-           // redirect
-           history.push('/');
+    function logout() {
+        // local storage leegmaken en state leegmaken
+        localStorage.clear();
+        setAuth({
+            ...auth,
+            isAuth: false,
+            user: null,
+        });
+        // loggen
+        console.log('user is uitgelogd');
+        // redirect
+        history.push('/');
     }
 
 
     const contextData = {
         isAuthenticated: auth.isAuth,
         userDetails: auth.user,
-        email: auth.user,
+        user: auth.user,
+        checkHerokuFunction: checkheroku,
         loginFunction: login,
         logoutFunction: logout,
     };
 
     return (
         <AuthContext.Provider value={contextData}>
-            {auth.status === 'done'? children : <p>Loading...</p>}
+            {auth.status === 'done' ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     );
 }

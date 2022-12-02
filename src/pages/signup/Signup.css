@@ -33,3 +33,20 @@
     padding: 50px;
 
 }
+
+
+.sign-button {
+     background: #3E2F36;
+}
+
+
+.sign-button:disabled {
+    background: lightgrey;
+}
+
+.sign-button:disabled:hover::after {
+    font-weight: 300;
+    font-size: 16px;
+    content: "...check username and password are at least six chars and email contains @";
+    transition: all .4s ease-in-out;
+}

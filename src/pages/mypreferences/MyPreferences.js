@@ -17,8 +17,11 @@ function MyPreferences(props) {
     const [state, setState] = useState({
         tempmin: 20,
         tempmax: 25,
+        tempsort: true,
         rainmm: 0,
+        rainsort: true,
         windkmh: 3,
+        windsort: true,
     })
 
     function onFormSubmit(e) {
@@ -29,20 +32,20 @@ function MyPreferences(props) {
     }
 
     function handleChange(e) {
-        e.preventDefault()
-        const value = e.target.value;
-        setState({...state, [e.target.name]: value});
+        const value =
+            e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        setState({...state, [e.target.name]: value})
+        setPerformCompare(false);
     }
 
-    function compare(e) {
-        e.preventDefault()
-        setPerformCompare(true);
-
-    }
 
     return (
         <>
             {console.log('compare', performCompare)}
+            {error &&
+                <span>  Something went wrong fetching the data  </span>
+            }
+            {loading && <span>Loading...</span>}
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -52,7 +55,9 @@ function MyPreferences(props) {
                         <li>
                             <button
                                 type="button"
-                                onClick={() => {setPerformCompare(!performCompare)}}
+                                onClick={() => {
+                                    setPerformCompare(true)
+                                }}
                             >
                                 Compare
                             </button>
@@ -87,17 +92,61 @@ function MyPreferences(props) {
                                             name="temp-max"
                                             value={state.tempmax}
                                             onChange={handleChange}/>
+                                        <input type="checkbox"
+                                               className=""
+                                               id="temp-sort"
+                                               name="tempsort"
+                                               checked={state.tempsort}
+                                               onChange={handleChange}
+                                        />
 
                                     </label>
                                     <p>Sun (UV):</p>
                                     <p>Sun hours: </p>
-                                    <p>Wind km/h: </p>
-                                    <p>Wind gusts: </p>
-                                    <p>Rain mm: </p>
-                                    <h5>More</h5>
-                                    <p>Realfeal (°C):</p>
-                                    <p>Air quality:</p>
-                                    <p>Visibility:</p>
+
+                                        <label htmlFor="wind-kmh" className="row">
+                                            <span>Wind km/h::</span>
+                                            <input
+                                                type="number"
+                                                id="wind-kmh"
+                                                name="windkmh"
+                                                value={state.windkmh}
+                                                onChange={handleChange}/>
+                                            <input type="checkbox"
+                                                   className=""
+                                                   id="wind-sort"
+                                                   name="windsort"
+                                                   checked={state.windsort}
+                                                   onChange={handleChange}
+                                            />
+                                        </label>
+
+                                        <p>Wind gusts: </p>
+
+
+                                            <label htmlFor="rain-kmh" className="row">
+                                                <span>Rain mm: </span>
+                                                <input
+                                                    type="number"
+                                                    id="rain-mm"
+                                                    name="rainmm"
+                                                    value={state.rainmm}
+                                                    onChange={handleChange}/>
+
+
+                                    <input type="checkbox"
+                                           className=""
+                                           id="rain-sort"
+                                           name="rainsort"
+                                           checked={state.rainsort}
+                                           onChange={handleChange}
+                                    />
+                                            </label>
+
+                                        <h5>More</h5>
+                                        <p>Realfeal (°C):</p>
+                                        <p>Air quality:</p>
+                                        <p>Visibility:</p>
 
                                 </form>
 
@@ -106,7 +155,7 @@ function MyPreferences(props) {
                         </div>
                         {performCompare &&
                             <div className="tile">
-                                {favLocations.length > 0 &&
+                                {Object.keys(favLocations).length > 0 &&
                                     <Compare
                                         key={favLocations.length}
                                         mylocations={favLocations}
@@ -120,7 +169,7 @@ function MyPreferences(props) {
                 </div>
             </main>
         </>
-    );
+);
 }
 
 export default MyPreferences;

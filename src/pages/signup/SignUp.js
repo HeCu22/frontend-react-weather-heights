@@ -5,10 +5,11 @@ import {AuthContext} from '../../context/AuthContext';
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signup.css';
 import Mainnav from "../../components/mainnav/Mainnav";
+import Button from "../../components/button/Button";
 
 
 function SignUp() {
-    const {loginFunction} = useContext(AuthContext);
+    const {checkHerokuFunction} = useContext(AuthContext);
 
     // state voor functionaliteit
     const [error, toggleError] = useState(false);
@@ -21,30 +22,34 @@ function SignUp() {
     })
 
     async function handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
+        checkHerokuFunction();
         toggleError(false);
         toggleLoading(true);
 
         console.log(formState);
         try {
-            axios.post(`http://localhost:3000/register`,
+            await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
                 {
-                    email: formState.inputEmail,
-                    password: formState.inputPw,
-                    username: formState.inputUser,
-                }
-            )
+                    "username": "piet556",
+                    "email": "pieterson@novi.nl",
+                    "password": "123456",
+                    "role": ["user"]
+                });
 
         } catch (e) {
             toggleError(true);
-
+            console.log('error', e.response);
             console.error(e);
+
+
         }
         toggleLoading(false);
     }
 
     function handleChange(evt) {
         evt.preventDefault()
+        checkHerokuFunction();
         const value = evt.target.value;
         setFormState({...formState, [evt.target.name]: value});
 
@@ -53,71 +58,75 @@ function SignUp() {
 
     return (
         <>
-        <Mainnav>
-            <ul className="outer-row">
-                <li> France</li>
-                <li> Weather Heights</li>
-            </ul>
-        </Mainnav>
+            <Mainnav>
+                <ul className="outer-row">
+                    <li> France</li>
+                    <li> Weather Heights</li>
+                </ul>
+            </Mainnav>
 
-        <main className="outer-container empty-header-background">
-            <div className="inner-container">
-                <div className="mid">
+            <main className="outer-container empty-header-background">
+                <div className="inner-container">
+                    <div className="mid">
                         <h1>Register</h1>
-                    <form className="formSpace" onSubmit={handleSubmit}>
-                        <legend>
-                            <label htmlFor="input-email">
-                                <span>Email adres:</span>
+                        <form className="formSpace" onSubmit={handleSubmit}>
+                            {error &&
+                                <span> Request failed. Please check username is already registered..  </span>
+                            }
+                            <legend>
+                                <label htmlFor="input-email">
+                                    <span>Email adres:</span>
 
-                                <input type="tekst"
-                                       id="input-email"
-                                       name="inputEmail"
-                                       value={formState.inputEmail}
-                                       onChange={handleChange}
-                                />
-                            </label>
-                            <label htmlFor="input-user">
-                                <span>Username:</span>
+                                    <input type="tekst"
+                                           id="input-email"
+                                           name="inputEmail"
+                                           value={formState.inputEmail}
+                                           onChange={handleChange}
+                                    />
+                                </label>
+                                <label htmlFor="input-user">
+                                    <span>Username:</span>
 
-                                <input type="tekst"
-                                       id="input-user"
-                                       name="inputUser"
-                                       value={formState.inputUser}
-                                       onChange={handleChange}/>
+                                    <input type="tekst"
+                                           id="input-user"
+                                           name="inputUser"
+                                           value={formState.inputUser}
+                                           onChange={handleChange}/>
 
-                            </label>
-                            <br></br>
-                            <label htmlFor="input-pw">
-                                <span>Password:</span>
-                                <input type="tekst"
-                                       id="input-pw"
-                                       name="inputPw"
-                                       value={formState.inputPw}
-                                      onChange={handleChange}/>
+                                </label>
+                                <br></br>
+                                <label htmlFor="input-pw">
+                                    <span>Password:</span>
+                                    <input type="tekst"
+                                           id="input-pw"
+                                           name="inputPw"
+                                           value={formState.inputPw}
+                                           onChange={handleChange}/>
 
-                            </label>
-                        </legend>
-
-
-                    <button
-
-                        type="submit"
-                        disabled={(formState.inputUser.length > 0 && formState.inputPw.length > 0 && formState.inputEmail.length > 0) === false ? true : false}
-                    >
-                        Registreer
-                    </button>
-                </form>
-                <p>Heb je al een account? Je kunt je <Link to="/signin">hier</Link> inloggen.</p>
-            </div>
-
-        </div>
+                                </label>
+                            </legend>
 
 
-        </main>
+                            <Button
+                                fieldClass="sign-button"
+                                type="submit"
+                                isDisabled={(formState.inputUser.length > 5 && formState.inputPw.length > 5 && formState.inputEmail.includes("@")) === false ? true : false}
+                            clickHandler={handleSubmit}
+                            >
+                                Signup
+                            </Button>
+                        </form>
+                        <p>Already have an account? You can signin <Link to="/signin">here</Link> to login.</p>
+                    </div>
 
-</>
-)
-    ;
+                </div>
+
+
+            </main>
+
+        </>
+    )
+        ;
 }
 
 export default SignUp;

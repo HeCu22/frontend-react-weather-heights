@@ -5,49 +5,52 @@ import {AuthContext} from '../../context/AuthContext';
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signin.css';
 import Mainnav from "../../components/mainnav/Mainnav";
+import Button from "../../components/button/Button";
 
 function SignIn() {
     const [error, toggleError] = useState(false);
-    const {loginFunction} = useContext(AuthContext);
+    const {loginFunction, checkHerokuFunction} = useContext(AuthContext);
 
     const [formState, setFormState] = useState({
-        inputEmail: "",
         inputPw: "",
+        inputUser: "",
     })
 
     const source = axios.CancelToken.source();
     // mocht onze pagina ge-unmount worden voor we klaar zijn met data ophalen, aborten we het request
     useEffect(() => {
         console.log('cleanup');
+        checkHerokuFunction();
         return function cleanup() {
             source.cancel();
         }
     }, []);
 
     async function handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
+        checkHerokuFunction();
         toggleError(false);
         console.log({formState});
         try {
-            const {data: {accessToken}} = await axios.post(`http://localhost:3000/login`,
+            const {data: {accessToken}} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin',
                 {
-                    email: formState.inputEmail,
-                    password: formState.inputPw,
-                },
-                { cancelToken: source.token,
-                }
-            );
+                    "username": formState.inputUser,
+                    "password": formState.inputPw,
+                });
+            console.log('accessToken', accessToken);
             loginFunction(accessToken);
         } catch (e) {
 
             console.error(e);
             toggleError(true);
+
         }
 
     }
 
     function handleChange(evt) {
         evt.preventDefault()
+        checkHerokuFunction();
         const value = evt.target.value;
         setFormState({...formState, [evt.target.name]: value});
     }
@@ -68,14 +71,17 @@ function SignIn() {
                     <div className="mid">
                         <h1>Sign In</h1>
                         <form className="formSpace" onSubmit={handleSubmit}>
+                            {error &&
+                                <span>  Usercode or Password failed. Please try again...  </span>
+                            }
                             <legend>
                                 <label htmlFor="input-user">
-                                    <span> user email:</span>
+                                    <span> user code:</span>
 
                                     <input type="tekst"
                                            id="input-user"
-                                           name="inputEmail"
-                                           value={formState.inputEmail}
+                                           name="inputUser"
+                                           value={formState.inputUser}
                                            onChange={handleChange}/>
 
                                 </label>
@@ -92,10 +98,14 @@ function SignIn() {
                                 </label>
                             </legend>
 
-                            <button type="submit"
-                                    disabled={(formState.inputEmail.length > 0 && formState.inputPw.length > 0) === false ? true : false}>
-                                Inloggen
-                            </button>
+                            <Button
+                                fieldClass="signin-button"
+                                type="submit"
+                                isDisabled={(formState.inputUser.length > 5 && formState.inputPw.length > 5) === false ? true : false}
+                                clickHandler={handleSubmit}
+                            >
+                                Login
+                            </Button>
 
                         </form>
                         <p>Still no account? <Link to="/signup">Register</Link> first</p>
