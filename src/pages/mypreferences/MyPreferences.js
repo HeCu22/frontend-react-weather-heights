@@ -26,9 +26,8 @@ function MyPreferences(props) {
 
     function onFormSubmit(e) {
         e.preventDefault();
-        setState(state.tempmin);
-        setState(state.tempmax);
 
+setPerformCompare(false);
     }
 
     function handleChange(e) {
@@ -78,7 +77,7 @@ function MyPreferences(props) {
                             <div className="">
                                 <h5>General</h5>
                                 <form id="compare-values" className="" onSubmit={onFormSubmit}>
-                                    <label htmlFor="tempmin" className="row">
+                                    <label htmlFor="temp" className="row">
                                         <span>Temperature (°C):</span>
                                         <input
                                             type="number"
@@ -89,7 +88,7 @@ function MyPreferences(props) {
                                         <input
                                             type="number"
                                             id="temp-max"
-                                            name="temp-max"
+                                            name="tempmax"
                                             value={state.tempmax}
                                             onChange={handleChange}/>
                                         <input type="checkbox"
@@ -157,7 +156,7 @@ function MyPreferences(props) {
                             <div className="tile">
                                 {Object.keys(favLocations).length > 0 &&
                                     <Compare
-                                        key={favLocations.length}
+                                        key={favLocations.toString()}
                                         mylocations={favLocations}
                                         tempmin={state.tempmin}
                                         tempmax={state.tempmax}

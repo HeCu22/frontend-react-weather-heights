@@ -99,9 +99,9 @@ function Article({  fieldClass,
                         {locationKey &&
 
                             <>
-                                {console.log('A')}
 
                                 <LocMarker
+                                    key={locationKey}
                                     checked={checked}
                                     toggleChecked={toggleChecked}
                                     marked={marked}
@@ -114,9 +114,9 @@ function Article({  fieldClass,
 
                         {(!locationKey && location) &&
                             <>
-                                {console.log('B')}
 
                                 <LocMarker
+                                    key={locationKey}
                                     checked={checked}
                                     toggleChecked={toggleChecked}
                                     marked={marked}
@@ -131,12 +131,12 @@ function Article({  fieldClass,
                     <>
                         {location &&
                             <>
-                                {console.log('C')}
 
                                 <h2><Link
                                     to={`/details/${location.EnglishName},${department}`}> {location.EnglishName} </Link>
                                     {location &&
                                         <LocMarker
+                                            key={location.Key}
                                             checked={checked}
                                             toggleChecked={toggleChecked}
                                             marked={marked}

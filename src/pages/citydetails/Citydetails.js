@@ -84,6 +84,7 @@ function Citydetails(props) {
                                     <h2>{city}
                                         {location &&
                                             <LocMarker
+                                                key={location.Key}
                                                 checked={checked}
                                                 toggleChecked={toggleChecked}
                                                 marked={marked}

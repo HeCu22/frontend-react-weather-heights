@@ -87,6 +87,7 @@ function Departments(props) {
                                     <div className="outer-row">
                                         <div>
                                             <Article
+                                                key={regioncapital.key}
                                                 fieldClass="top-card"
                                                 pictureClass="mid-picture-span"
                                                 tag={region.parent}

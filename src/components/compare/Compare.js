@@ -68,7 +68,7 @@ function Compare({mylocations, tempmin, tempmax}) {
         }
 
 
-    }, []);
+    }, [tempmin, tempmax]);
 
 
     return (

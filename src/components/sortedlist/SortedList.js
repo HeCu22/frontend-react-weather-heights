@@ -18,7 +18,7 @@ function SortedList({templist, citylist, tempmin, tempmax}) {
         setToplist(result);
         console.log('array', result);
 
-    }, []);
+    }, [tempmin,tempmax]);
 
     return (
         <>
