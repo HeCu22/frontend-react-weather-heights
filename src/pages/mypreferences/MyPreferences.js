@@ -25,9 +25,9 @@ function MyPreferences(props) {
     })
 
     function onFormSubmit(e) {
-        e.preventDefault();
-
-setPerformCompare(false);
+        e.preventDefault()
+        setState({...state});
+        setPerformCompare(false);
     }
 
     function handleChange(e) {
@@ -38,9 +38,10 @@ setPerformCompare(false);
     }
 
 
+
     return (
         <>
-            {console.log('compare', performCompare)}
+            {/*{console.log('compare', performCompare)}*/}
             {error &&
                 <span>  Something went wrong fetching the data  </span>
             }
@@ -103,49 +104,60 @@ setPerformCompare(false);
                                     <p>Sun (UV):</p>
                                     <p>Sun hours: </p>
 
-                                        <label htmlFor="wind-kmh" className="row">
-                                            <span>Wind km/h::</span>
-                                            <input
-                                                type="number"
-                                                id="wind-kmh"
-                                                name="windkmh"
-                                                value={state.windkmh}
-                                                onChange={handleChange}/>
-                                            <input type="checkbox"
-                                                   className=""
-                                                   id="wind-sort"
-                                                   name="windsort"
-                                                   checked={state.windsort}
-                                                   onChange={handleChange}
-                                            />
-                                        </label>
-
-                                        <p>Wind gusts: </p>
+                                    <label htmlFor="wind-kmh" className="row">
+                                        <span>Wind km/h:</span>
+                                        <input
+                                            type="number"
+                                            id="wind-kmh"
+                                            name="windkmh"
+                                            value={state.windkmh}
+                                            onChange={handleChange}/>
 
 
-                                            <label htmlFor="rain-kmh" className="row">
-                                                <span>Rain mm: </span>
-                                                <input
-                                                    type="number"
-                                                    id="rain-mm"
-                                                    name="rainmm"
-                                                    value={state.rainmm}
-                                                    onChange={handleChange}/>
+
+                                        <input type="checkbox"
+                                               className=""
+                                               id="wind-sort"
+                                               name="windsort"
+                                               checked={state.windsort}
+                                               onChange={handleChange}
+                                        />
+                                        <span id="added-text">
+                                            max
+                                        </span>
+
+                                    </label>
+
+                                    <p>Wind gusts: </p>
 
 
-                                    <input type="checkbox"
-                                           className=""
-                                           id="rain-sort"
-                                           name="rainsort"
-                                           checked={state.rainsort}
-                                           onChange={handleChange}
-                                    />
-                                            </label>
+                                    <label htmlFor="rain-kmh" className="row">
+                                        <span>Rain mm: </span>
+                                        <input
+                                            type="number"
+                                            id="rain-mm"
+                                            name="rainmm"
+                                            value={state.rainmm}
+                                            onChange={handleChange}/>
 
-                                        <h5>More</h5>
-                                        <p>Realfeal (°C):</p>
-                                        <p>Air quality:</p>
-                                        <p>Visibility:</p>
+
+                                        <input type="checkbox"
+                                               className=""
+                                               id="rain-sort"
+                                               name="rainsort"
+                                               checked={state.rainsort}
+                                               onChange={handleChange}
+                                        />
+                                        <span id="added-text">
+                                            max
+                                        </span>
+
+                                    </label>
+
+                                    <h5>More</h5>
+                                    <p>Realfeal (°C):</p>
+                                    <p>Air quality:</p>
+                                    <p>Visibility:</p>
 
                                 </form>
 
@@ -158,8 +170,8 @@ setPerformCompare(false);
                                     <Compare
                                         key={favLocations.toString()}
                                         mylocations={favLocations}
-                                        tempmin={state.tempmin}
-                                        tempmax={state.tempmax}
+                                        state={state}
+
                                     />
                                 }
                             </div>
@@ -168,7 +180,7 @@ setPerformCompare(false);
                 </div>
             </main>
         </>
-);
+    );
 }
 
 export default MyPreferences;

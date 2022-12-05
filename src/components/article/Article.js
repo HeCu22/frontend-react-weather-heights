@@ -88,8 +88,11 @@ function Article({  fieldClass,
     return (
         <>
 
-            {/*{console.log('render', (currConditions), (location))}*/}
+            {console.log('render', (currConditions), (location))}
             <article className={fieldClass}>
+                {error &&
+                    <span>  Something went wrong fetching the data  </span>
+                }
 
                 {loading && <span>Loading...</span>}
                 <span className="tag">{tag}</span>

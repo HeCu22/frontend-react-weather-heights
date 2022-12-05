@@ -12,6 +12,7 @@ function AuthContextProvider({children}) {
         user: null,
         status: 'pending',
     });
+    const [error, toggleError] = useState(false);
 
     useEffect(() => {
         console.log('de contextAuth is zojuist opnieuw opgestart')
@@ -41,14 +42,17 @@ function AuthContextProvider({children}) {
     const history = useHistory();
 
     async function checkHeroku() {
+        toggleError(false);
         try {
             const response = await axios.get("https://frontend-educational-backend.herokuapp.com/api/test/all");
         } catch (e) {
             console.error(e);
+            toggleError(true);
         }
     }
 
     async function getUserdetails(token, id) {
+        toggleError(false);
         try {
 
             // const {data} = await axios.get(`http://localhost:3000/600/users/${id}`,
@@ -74,14 +78,18 @@ function AuthContextProvider({children}) {
             })
 
         } catch (e) {
-
+            toggleError(true);
             console.error(e);
         }
 
     }
 
     function checkheroku(token) {
-        checkHeroku();
+        checkHeroku()
+        console.log('heroku');
+        if (error) {
+            console.log(error)}
+
     }
 
 

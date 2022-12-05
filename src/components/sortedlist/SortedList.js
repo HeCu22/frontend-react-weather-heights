@@ -1,29 +1,68 @@
 import React, {useEffect, useState} from 'react';
 import './SortedList.css';
 
-function SortedList({templist, citylist, tempmin, tempmax}) {
+function SortedList({templist, windlist, rainlist, citylist, state}) {
     const [topList, setToplist] = useState(null);
-    console.log('propS', templist, citylist, tempmin, tempmax);
+
+    const currentDay = new Date();
+    console.log('Sorted List', currentDay);
+    console.log('propS', templist, citylist, state);
+
+
+    const arrayList = templist.map((record, index) => {
+        return ({temp: record, city: citylist[index], wind: windlist[index], rain: rainlist[index]});
+    })
+    console.log('arraylist', arrayList);
+
+
+    function filter(list) {
+        const filter = list.filter((record) => {
+            return record.temp > state.tempmin && record.temp < state.tempmax && record.wind < state.windkmh && record.rain < state.rainmm;
+        })
+
+        const currentDay = new Date();
+        console.log('Filter', currentDay);
+        console.log('filter', filter)
+        return filter;
+    }
+
+    function sort(list) {
+        const result = list.sort((a, b) => a.tempmax - b.tempmax)
+        const currentDay = new Date();
+        console.log('sort', currentDay);
+        console.log('sort result', result);
+        return result;
+    }
+
 
     useEffect(() => {
+        console.log('useeffect sort mount');
+        const resultfilter = filter(arrayList);
+        setToplist(resultfilter);
 
+        if ((state.tempsort)) {
+            const result = sort(resultfilter);
+            setToplist(result)
+        }
 
-        const arrayList = templist.map((record, index) => {
-            return ({temp: record, city: citylist[index]});
-        });
-        const resultfilter = arrayList.filter((record) => {
-            return record.temp > tempmin && record.temp < tempmax;
-        })
-        const result = resultfilter.sort((a, b) => a.tempmax - b.tempmax);
-        setToplist(result);
-        console.log('array', result);
+    }, []);
 
-    }, [tempmin,tempmax]);
+    // useEffect(() => {
+    //     console.log('useeffect sort update');
+    //     const resultfilter = filter(arrayList);
+    //     setToplist(resultfilter);
+    //
+    //     if ((state.tempsort)) {
+    //         const result = sort(resultfilter);
+    //         setToplist(result)
+    //     }
+    //
+    // }, [(state)]);
 
     return (
         <>
 
-            {topList && topList.map((record, index) => {
+            {topList && Object.keys(topList).length > 0 && topList.map((record, index) => {
 
                 const currentDay = new Date();
                 const currentMoment = currentDay.getTime();
@@ -31,7 +70,7 @@ function SortedList({templist, citylist, tempmin, tempmax}) {
                 return (
                     <div className="compare-grid" key={recordkey}>
 
-                        <p> {record.city} 0/ {record.temp} </p>
+                        <p> {record.city} 0/ {record.temp} {record.rain} {record.wind}</p>
                     </div>
                 )
             })

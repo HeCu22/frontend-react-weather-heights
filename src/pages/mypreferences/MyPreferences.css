@@ -53,11 +53,18 @@ button {
 
 #rain-sort, #wind-sort {
     position: absolute;
-    right: 50px;
+    right: 62px;
 
 }
 
 #rain-mm, #wind-kmh {
     position: absolute;
     left: 200px;
+
+}
+
+#added-text {
+    position: absolute;
+    right: 220px;
+    font-size: 16px;
 }

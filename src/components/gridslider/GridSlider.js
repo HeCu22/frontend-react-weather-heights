@@ -10,19 +10,19 @@ function GridSlider(props) {
             </p>
 
             <span className="switch-wrapper">
-        <input
-            type="checkbox"
-            className="switch"
-            id="grid-system"
-            checked={!checked}
-            onChange={() => toggleChecked(!checked)}
-        />
+            <input
+               type="checkbox"
+               className="switch"
+               id="grid-system"
+               checked={!checked}
+               onChange={() => toggleChecked(!checked)}
+            />
 
-        <label
-            htmlFor="grid-system"
-            className="switch-btn"
-        />
-      </span>
+            <label
+               htmlFor="grid-system"
+               className="switch-btn"
+            />
+            </span>
 
             <p className="switch-label">
                 Grid
