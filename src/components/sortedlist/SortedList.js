@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './SortedList.css';
-import iconMapperOW from "../../helpers/iconMapperOW";
+import iconMapper from "../../helpers/iconMapper";
 
 
 function SortedList({lines, state, counter, setCounter}) {
@@ -93,8 +93,20 @@ function SortedList({lines, state, counter, setCounter}) {
 
                 return (
                     <div className="compare-grid" key={recordline.key}>
-
-                        <p> {recordline.city} {iconMapperOW(recordline.icon)} {recordline.tempmin} / {recordline.temp} {recordline.rain} {recordline.winddirection} {recordline.wind} {recordline.description}</p>
+                        <div className="compare-sub-grid">
+                            <p> {recordline.city} </p>
+                            <p className="pictures"><span
+                                className="small-span"> {iconMapper(recordline.icon)} </span>
+                            </p>
+                            <p className="small-text"> {recordline.description}</p>
+                        </div>
+                        <div className="compare-sub-grid">
+                            <p> {recordline.tempmin} / {recordline.temp} </p>
+                            <p> {recordline.rain} </p>
+                            <p> {recordline.winddirection} {recordline.wind} </p>
+                            <p> {recordline.sunhrs}</p>
+                            <p> {recordline.airqual} </p>
+                        </div>
                     </div>
                 )
             })

@@ -32,39 +32,42 @@ function Compare({mylocations, state, counter, setCounter}) {
 
 
                         // const {data: [databack]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
-                        // const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
-                        const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${mylocations[indexI].key}&lang=en&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
-
-
-
-                        // lines[indexI] = ({
-                        //     key: mylocations[indexI].key,
-                        //     city: mylocations[indexI].city,
-                        //     temp: data.DailyForecasts[0].Temperature.Maximum.Value,
-                        //     rain: data.DailyForecasts[0].Day.Rain.Value,
-                        //     wind: data.DailyForecasts[0].Day.Wind.Speed.Value,
-                        //     sunhrs: data.DailyForecasts[0].HoursOfSun,
-                        //     airqual: data.DailyForecasts[0].AirAndPollen[0].Category
-                        // })
-
-                        let rain = 0;
-
-                        if ((data.rain)) {
-                            rain = data.rain[indexI];
-                        }
+                        const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${mylocations[indexI].key}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
+                        // const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${mylocations[indexI].key}&lang=en&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
 
 
                         lines[indexI] = ({
                             key: mylocations[indexI].key,
                             city: mylocations[indexI].city,
-                            temp: data.main.temp_max,
-                            tempmin: data.main.temp_min,
-                            rain: rain,
-                            wind: data.wind.speed,
-                            winddirection: data.wind.deg,
-                            description: data.weather[0].description,
-icon: data.weather[0].icon
+                            icon: data.DailyForecasts[0].Day.Icon,
+                            description: data.DailyForecasts[0].Day.IconPhrase,
+                            tempmin: data.DailyForecasts[0].Temperature.Minimum.Value,
+                            temp: data.DailyForecasts[0].Temperature.Maximum.Value,
+                            rain: data.DailyForecasts[0].Day.Rain.Value,
+                            winddirection: data.DailyForecasts[0].Day.Wind.Direction.English,
+                            wind: data.DailyForecasts[0].Day.Wind.Speed.Value,
+                            sunhrs: data.DailyForecasts[0].HoursOfSun,
+                            airqual: data.DailyForecasts[0].AirAndPollen[0].Category
                         })
+
+                        // let rain = 0;
+                        //
+                        // if ((data.rain)) {
+                        //     rain = data.rain[indexI];
+                        // }
+                        //
+                        //
+                        // lines[indexI] = ({
+                        //     key: mylocations[indexI].key,
+                        //     city: mylocations[indexI].city,
+                        //     temp: data.main.temp_max,
+                        //     tempmin: data.main.temp_min,
+                        //     rain: rain,
+                        //     wind: data.wind.speed,
+                        //     winddirection: data.wind.deg,
+                        //     description: data.weather[0].description,
+                        //     icon: data.weather[0].icon
+                        // })
 
                         console.log('lines', lines);
 
@@ -126,11 +129,14 @@ icon: data.weather[0].icon
 
             <div className="compare-header">
                 <h5>Comparison</h5>
-                <p>Min/Max °C</p>
-                <p>Rain mm</p>
-                <p>Wind km/h</p>
-                <p>Sun hrs UV</p>
-                <p>Air quality</p>
+                    <div className="compare-sub-header">
+                        {/*<p>ForecastToday</p>*/}
+                        <p><span>Min/Max °C</span></p>
+                        <p>Rain mm</p>
+                        <p>Wind km/h</p>
+                        <p>Sun hrs UV</p>
+                        <p>Air quality</p>
+                    </div>
 
             </div>
 
@@ -155,7 +161,7 @@ icon: data.weather[0].icon
                 </>
             }
         </>
-    );
+);
 }
 
 export default Compare;
