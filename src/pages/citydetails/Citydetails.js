@@ -50,9 +50,9 @@ function Citydetails(props) {
 
 
                 if (!forecastData && location) {
-                    // fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
+                    fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
                     toggleLoading(false);
-                    setForecastData(tsforecast[0]);
+                    // setForecastData(tsforecast[0]);
                 }
             }
 
@@ -221,8 +221,7 @@ function Citydetails(props) {
                                         forecastData.DailyForecasts.map((forecastday) => {
                                             return <div className="forecastline" key={forecastday.Date}>
                                                 <p>{makeDay(forecastday.EpochDate)}</p>
-                                                <p className="pictures"><span
-                                                    className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
+                                                <p className="pictures"><span className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
                                                 </p>
                                                 <p className="small-text">{forecastday.Day.IconPhrase}</p>
                                                 <p>{forecastday.Temperature.Minimum.Value}/{forecastday.Temperature.Maximum.Value}</p>

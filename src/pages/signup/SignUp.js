@@ -14,6 +14,7 @@ function SignUp() {
     // state voor functionaliteit
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
+    const [message,setMessage] = useState("");
 
     const [formState, setFormState] = useState({
         inputUser: "",
@@ -26,16 +27,17 @@ function SignUp() {
         checkHerokuFunction();
         toggleError(false);
         toggleLoading(true);
-
+setMessage("");
         console.log(formState);
         try {
             await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
                 {
-                    "username": "piet556",
-                    "email": "pieterson@novi.nl",
-                    "password": "123456",
+                    "username": formState.inputUser,
+                    "email": formState.inputEmail,
+                    "password": formState.inputPw,
                     "role": ["user"]
                 });
+            setMessage("User successfully registered")
 
         } catch (e) {
             toggleError(true);
@@ -71,7 +73,10 @@ function SignUp() {
                         <h1>Register</h1>
                         <form className="formSpace" onSubmit={handleSubmit}>
                             {error &&
-                                <span> Request failed. Please check username is already registered..  </span>
+                                <span className="signal"> Request failed. Please check username is already registered..  </span>
+                            }
+                            {message &&
+                                <span className="signal"> {message}  </span>
                             }
                             <legend>
                                 <label htmlFor="input-email">

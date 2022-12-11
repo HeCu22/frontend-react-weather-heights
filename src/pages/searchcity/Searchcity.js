@@ -16,8 +16,7 @@ function Searchcity(props) {
 
     function onFormSubmit(e) {
         e.preventDefault();
-        setState(state.searchcity);
-        setState(state.department);
+        setState({...state});
         history.push(`/details/${state.searchcity},${state.department}`);
     }
 
@@ -41,16 +40,17 @@ function Searchcity(props) {
                     <div className="mid-nav">
                         <form className="outer-row" onSubmit={onFormSubmit}>
 
-                            <label htmlFor="department" className="column">
+                            <label htmlFor="department-id" className="column">
                                 <span> Department:</span>
-                                <select name="department"
-                                        id="department"
+                                <select
+                                        id="department-id"
+                                        name="department"
                                         value={state.department}
                                         onChange={handleChange}>
                                     <option value="FR"> France </option>
                                     {departments.length > 0 &&
                                         departments.map((department) => {
-                                            return <option value={department.ID}> {department.EnglishName}
+                                            return <option key={department.ID} value={department.ID}> {department.EnglishName}
                                             </option>
                                         })
                                     }

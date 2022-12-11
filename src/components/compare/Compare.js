@@ -8,44 +8,80 @@ import {LocContext} from "../../context/LocContext";
 import SortedList from "../sortedlist/SortedList";
 
 
-function Compare({mylocations, state}) {
+function Compare({mylocations, state, counter, setCounter}) {
 
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [tempResult, setTempResult] = useState(null);
-    const [windResult, setWindResult] = useState(null);
-    const [rainResult, setRainResult] = useState(null);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [cities, setCities] = useState("");
-
-    // console.log('compare', mylocations, tempmax,tempmin,tempsort);
 
     const lengthA = mylocations.length;
-    const temp = new Array(lengthA);
-    const rain = new Array(lengthA);
-    const wind = new Array(lengthA);
-    const citylist = new Array(lengthA)
 
-    async function fetchTemp(locationKey, locationCity, indexF) {
-        // console.log('fetchTemp', locationKey, indexF);
+    let lines = [{}];
+
+    async function fetchTemp() {
+        // console.log('fetchTemp');
         toggleLoading(true);
         toggleError(false);
         try {
-            // const {data: [databack]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
-            const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${locationKey}&lang=fr&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
-            console.log('response', data);
-            temp[indexF] = data.main.temp_max;
-            wind[indexF] = data.wind.speed;
-           if ((data.rain)) {data.rain[indexF] = 0} else {rain[indexF]=0;}
-            // temp[indexF] = databack.Temperature.Metric.Value
-           // rain[indexF] = databack.PrecipitationSummary.Precipitation.Metric.Value
-            // wind[indexF] = databack.Wind.Speed.Metric.Value
-            // // console.log('data', (databack));
-            citylist[indexF] = locationCity;
-            console.log('temp', temp, wind, rain);
+            if (mylocations.length > 0) {
 
-            console.log('fetchTemp', locationKey, indexF);
+                for (let indexI = 0; indexI < lengthA; indexI++) {
+                    if (indexI < lengthA) {
+                        console.log('index', indexI, mylocations[indexI].key);
 
+
+                        // const {data: [databack]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
+                        // const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
+                        const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${mylocations[indexI].key}&lang=en&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
+
+
+
+                        // lines[indexI] = ({
+                        //     key: mylocations[indexI].key,
+                        //     city: mylocations[indexI].city,
+                        //     temp: data.DailyForecasts[0].Temperature.Maximum.Value,
+                        //     rain: data.DailyForecasts[0].Day.Rain.Value,
+                        //     wind: data.DailyForecasts[0].Day.Wind.Speed.Value,
+                        //     sunhrs: data.DailyForecasts[0].HoursOfSun,
+                        //     airqual: data.DailyForecasts[0].AirAndPollen[0].Category
+                        // })
+
+                        let rain = 0;
+
+                        if ((data.rain)) {
+                            rain = data.rain[indexI];
+                        }
+
+
+                        lines[indexI] = ({
+                            key: mylocations[indexI].key,
+                            city: mylocations[indexI].city,
+                            temp: data.main.temp_max,
+                            tempmin: data.main.temp_min,
+                            rain: rain,
+                            wind: data.wind.speed,
+                            winddirection: data.wind.deg,
+                            description: data.weather[0].description,
+icon: data.weather[0].icon
+                        })
+
+                        console.log('lines', lines);
+
+                        console.log('data', (data));
+
+                        // console.log('temp', temp, wind, rain);
+
+
+                        console.log('fetchTemp', mylocations[indexI].city, indexI);
+                    }
+                }
+                if (lines && !tempResult) {
+                    console.log('set')
+                    setTempResult(lines);
+                }
+
+            }
 
             toggleLoading(false);
 
@@ -57,28 +93,25 @@ function Compare({mylocations, state}) {
         }
     }
 
+
     useEffect(() => {
-         console.log('useeffect');
+        console.log('🍌 Ik ben voor de eerste keer gemount in compare');
 
         toggleLoading(false);
-        // console.log('mylocations', mylocations.length);
-        if (mylocations.length > 0) {
+        lines = [{}];
 
-            for (let indexI = 0; indexI < lengthA; indexI++) {
-                if (indexI < lengthA) {
-                    console.log('index', indexI);
-                    fetchTemp(mylocations[indexI].key, mylocations[indexI].city, indexI);
-                }
+        console.log('mylocations', mylocations.length);
+        if (mylocations.length > 0) {
+            fetchTemp();
+            if (lines && !tempResult) {
+                console.log('set')
+                setTempResult(lines);
             }
-            setTempResult(temp);
-            setWindResult((wind));
-            setRainResult((rain));
-            setCities(citylist);
 
         }
 
 
-    }, [state]);
+    }, []);
 
 
     return (
@@ -89,7 +122,7 @@ function Compare({mylocations, state}) {
             }
             {loading && <span>Loading...</span>}
 
-            {console.log('temp', tempResult, 'city', cities, 'mylocations', lengthA)}
+            {console.log('temp', tempResult, 'mylocations', lengthA)}
 
             <div className="compare-header">
                 <h5>Comparison</h5>
@@ -106,11 +139,15 @@ function Compare({mylocations, state}) {
                     {console.log(tempResult.length, Object.keys(tempResult).length, mylocations.length)}
 
                     <SortedList
-                        templist={tempResult}
-                        windlist={windResult}
-                        rainlist={rainResult}
-                        citylist={cities}
+                        key={tempResult.key}
+                        lines={tempResult}
+                        // templist={tempResult}
+                        // windlist={windResult}
+                        // rainlist={rainResult}
+                        // citylist={cities}
                         state={state}
+                        counter={counter}
+                        setCounter={setCounter}
 
                     />
 

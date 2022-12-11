@@ -1,76 +1,100 @@
 import React, {useEffect, useState} from 'react';
 import './SortedList.css';
+import iconMapperOW from "../../helpers/iconMapperOW";
 
-function SortedList({templist, windlist, rainlist, citylist, state}) {
+
+function SortedList({lines, state, counter, setCounter}) {
     const [topList, setToplist] = useState(null);
 
     const currentDay = new Date();
     console.log('Sorted List', currentDay);
-    console.log('propS', templist, citylist, state);
+    console.log('props sorted list', lines, state);
 
 
-    const arrayList = templist.map((record, index) => {
-        return ({temp: record, city: citylist[index], wind: windlist[index], rain: rainlist[index]});
-    })
+    const arrayList = lines;
+
     console.log('arraylist', arrayList);
+    console.log('state', state);
 
 
     function filter(list) {
+        console.log('list', list);
         const filter = list.filter((record) => {
-            return record.temp > state.tempmin && record.temp < state.tempmax && record.wind < state.windkmh && record.rain < state.rainmm;
+            console.log('record', record);
+            return record.temp > state.tempmin && record.temp < state.tempmax && record.wind <= state.windkmh;  /* && record.rain <= state.rainmm; */
         })
-
-        const currentDay = new Date();
-        console.log('Filter', currentDay);
-        console.log('filter', filter)
+        console.log('filter', filter);
         return filter;
     }
 
     function sort(list) {
         const result = list.sort((a, b) => a.tempmax - b.tempmax)
-        const currentDay = new Date();
-        console.log('sort', currentDay);
-        console.log('sort result', result);
-        return result;
+
+
+        const sortall = result.sort((a, b) => {
+            if (state.tempsort) {
+                if (a.temp > b.temp) {
+                    return -1;
+                }
+                if (a.temp < b.temp) {
+                    return 1;
+                }
+            }
+
+            // temp mut be equal
+            if (state.rainsort) {
+                if (a.rain > b.rain) {
+                    return -1;
+                }
+                if (a.rain < b.rain) {
+                    return 1;
+                }
+            }
+
+            // rain must be equal
+            if (state.windsort) {
+                if (a.wind > b.wind) {
+                    return -1;
+                }
+                if (a.wind < b.wind) {
+                    return 1;
+                }
+            }
+
+            // wind must be equal
+            return 0;
+
+        });
+
+        return sortall;
+
     }
 
 
     useEffect(() => {
-        console.log('useeffect sort mount');
+        console.log('♻️ Ik ben geupdate in SortedList');
+        if (counter > 6) {
+            console.log('🍓 Ik ben hoger dan 6!');
+        }
+
         const resultfilter = filter(arrayList);
         setToplist(resultfilter);
 
-        if ((state.tempsort)) {
-            const result = sort(resultfilter);
-            setToplist(result)
-        }
+        const resultsort = sort(resultfilter);
+        setToplist(resultsort);
 
-    }, []);
 
-    // useEffect(() => {
-    //     console.log('useeffect sort update');
-    //     const resultfilter = filter(arrayList);
-    //     setToplist(resultfilter);
-    //
-    //     if ((state.tempsort)) {
-    //         const result = sort(resultfilter);
-    //         setToplist(result)
-    //     }
-    //
-    // }, [(state)]);
+    }, [counter, state]);
 
     return (
         <>
 
-            {topList && Object.keys(topList).length > 0 && topList.map((record, index) => {
+            {topList && Object.keys(topList).length > 0 && topList.map((recordline, index) => {
 
-                const currentDay = new Date();
-                const currentMoment = currentDay.getTime();
-                const recordkey = record.city.concat(currentMoment);
                 return (
-                    <div className="compare-grid" key={recordkey}>
+                    <div className="compare-grid" key={recordline.key}>
 
-                        <p> {record.city} 0/ {record.temp} {record.rain} {record.wind}</p>
+                        <p> {recordline.city} {iconMapperOW(recordline.icon)} {recordline.tempmin} / {recordline.temp} {recordline.rain} {recordline.winddirection} {recordline.wind} {recordline.description}</p>
                     </div>
                 )
             })

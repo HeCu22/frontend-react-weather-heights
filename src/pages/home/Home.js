@@ -87,7 +87,7 @@ function Home() {
 
                                 {regions.length > 0 && regions.map((region, index) => {
 
-                                    if (index < 4) {
+                                    if (index < regions.length) {
                                         return <Article key={region.code}
                                                         fieldClass="card"
                                                         pictureClass="small-picture-span"

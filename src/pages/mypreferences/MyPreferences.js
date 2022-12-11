@@ -1,10 +1,11 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import {LocContext} from "../../context/LocContext";
 import Mainnav from "../../components/mainnav/Mainnav";
 import {Link} from "react-router-dom";
 import './MyPreferences.css';
-import Compare from "../../components/compare/Compare";
+import Compare from "../../components/compare/Compare"
+import CounterResult from "../../components/CounterResult";
 import GridSlider from "../../components/gridslider/GridSlider";
 
 
@@ -13,7 +14,9 @@ function MyPreferences(props) {
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [performCompare, setPerformCompare] = useState(false);
+    const [performCompare, setPerformCompare] = useState(false)
+    const [counter, setCounter] = useState(0);
+
     const [state, setState] = useState({
         tempmin: 20,
         tempmax: 25,
@@ -28,6 +31,7 @@ function MyPreferences(props) {
         e.preventDefault()
         setState({...state});
         setPerformCompare(false);
+
     }
 
     function handleChange(e) {
@@ -35,17 +39,41 @@ function MyPreferences(props) {
             e.target.type === "checkbox" ? e.target.checked : e.target.value;
         setState({...state, [e.target.name]: value})
         setPerformCompare(false);
+
     }
 
+    function compare() {
+        {
+            setCounter(counter + 1);
+        console.log(counter);
+            setPerformCompare(true);
+        }
 
+    }
+
+    useEffect( () => {
+        console.log('🍌 Ik ben voor de eerste keer gemount in myPreferences');
+
+    }, []);
+
+    useEffect( () => {
+
+        console.log('♻️ Ik ben geupdate in myPreferences');
+
+    }, [counter]);
 
     return (
         <>
-            {/*{console.log('compare', performCompare)}*/}
+
+
+            {counter < 4 && <CounterResult amount={counter}/>}
             {error &&
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
+            {counter > 6 && <p>Meer dan 6!!!!!</p>}
+
+
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -55,9 +83,8 @@ function MyPreferences(props) {
                         <li>
                             <button
                                 type="button"
-                                onClick={() => {
-                                    setPerformCompare(true)
-                                }}
+
+                                onClick={compare}
                             >
                                 Compare
                             </button>
@@ -168,7 +195,7 @@ function MyPreferences(props) {
                             <div className="tile">
                                 {Object.keys(favLocations).length > 0 &&
                                     <Compare
-                                        key={favLocations.toString()}
+                                        key={(new Date())}
                                         mylocations={favLocations}
                                         state={state}
 
@@ -179,6 +206,8 @@ function MyPreferences(props) {
                     </div>
                 </div>
             </main>
+
+            {console.log('Ik ben gerenderd')}
         </>
     );
 }

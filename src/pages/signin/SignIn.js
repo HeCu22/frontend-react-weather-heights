@@ -72,7 +72,7 @@ function SignIn() {
                         <h1>Sign In</h1>
                         <form className="formSpace" onSubmit={handleSubmit}>
                             {error &&
-                                <span>  Usercode or Password failed. Please try again...  </span>
+                                <span className="signal">  Usercode or Password failed. Please try again...  </span>
                             }
                             <legend>
                                 <label htmlFor="input-user">

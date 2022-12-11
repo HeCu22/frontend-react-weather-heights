@@ -5,7 +5,6 @@ import {ReactComponent as SunClouds} from "../assets/icons/weather-icon6.svg";
 import {ReactComponent as Clouds} from "../assets/icons/weather-icon7.svg";
 import {ReactComponent as Rain} from "../assets/icons/weather-icon18.svg";
 import {ReactComponent as Showers} from "../assets/icons/weather-icon12.svg";
-
 import {ReactComponent as Clear} from "../assets/icons/weather-icon33.svg";
 
 
@@ -33,7 +32,6 @@ function iconMapper(iconCode) {
         case 13:
         case 14:
         case 17:
-
         case 39:
         case 40:
         case 41:
@@ -43,9 +41,8 @@ function iconMapper(iconCode) {
         case 15:
         case 29:
             return <Rain/>;
-
         default:
-            return <Clouds/>
+            return <Clouds/>;
     }
 }
 

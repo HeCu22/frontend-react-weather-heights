@@ -27,10 +27,12 @@ function AuthContextProvider({children}) {
             const decodedToken = jwtDecode(token);
             console.log('decoded token', decodedToken);
 
-            getUserdetails(token, decodedToken.sub);
+            getUserdetails(token, decodedToken.sub)
+
 
         } else {
             // anders state leeg!
+            console.log('invalid token')
             setAuth({
                 ...auth,
                 status: 'done',
@@ -78,17 +80,24 @@ function AuthContextProvider({children}) {
             })
 
         } catch (e) {
+            console.log('error userdata of', id);
             toggleError(true);
             console.error(e);
         }
 
     }
 
+    if (error) {
+        logout()
+    }    /* when get user details results in error although the token is valid */
+
+
     function checkheroku(token) {
         checkHeroku()
         console.log('heroku');
         if (error) {
-            console.log(error)}
+            console.log('error', error)
+        }
 
     }
 
