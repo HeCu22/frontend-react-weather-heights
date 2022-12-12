@@ -102,8 +102,8 @@ function SortedList({lines, state, counter, setCounter}) {
                         </div>
                         <div className="compare-sub-grid">
                             <p> {recordline.tempmin} / {recordline.temp} </p>
-                            <p> {recordline.rain} </p>
-                            <p> {recordline.winddirection} {recordline.wind} </p>
+                            <p> {recordline.rain.toFixed(1)} </p>
+                            <p> {recordline.winddirection} {recordline.wind}/{recordline.windgust}</p>
                             <p> {recordline.sunhrs}</p>
                             <p> {recordline.airqual} </p>
                         </div>

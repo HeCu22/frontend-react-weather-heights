@@ -156,7 +156,7 @@ function Article({  fieldClass,
                 }
                 {location &&
                     <h3><span
-                        className="small-text"> {location.GeoPosition.Latitude} / {location.GeoPosition.Longitude} </span>
+                        className="small-text"> {location.GeoPosition.Latitude.toFixed(2)} / {location.GeoPosition.Longitude.toFixed(2)} </span>
                     </h3>
                 }
                 {currConditions &&

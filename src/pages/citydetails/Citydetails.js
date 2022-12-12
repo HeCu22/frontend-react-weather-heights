@@ -17,6 +17,7 @@ import LocMarker from "../../components/locmarker/LocMarker";
 
 function Citydetails(props) {
     const {city} = useParams();
+    const words = city.split(',');
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
     const [more, toggleMore] = useState(false);
@@ -32,10 +33,10 @@ function Citydetails(props) {
     useEffect(() => {
 
         if (!location) {
-                // fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
-                toggleLoading(false);
-                setBackground("outer-container impression01");
-                setLocation(tslocation[0]);
+            fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
+            toggleLoading(false);
+            setBackground("outer-container impression01");
+            // setLocation(tslocation[0]);
         }
 
     }, []);
@@ -58,7 +59,7 @@ function Citydetails(props) {
 
         }
 
-    }, [more,location]);
+    }, [more, location]);
 
 
     return (
@@ -81,7 +82,7 @@ function Citydetails(props) {
                             {location &&
                                 <>
                                     <h1>Weather Heights France {location.AdministrativeArea.EnglishName}</h1>
-                                    <h2>{city}
+                                    <h2>{city.split(',')[0]}
                                         {location &&
                                             <LocMarker
                                                 key={location.Key}
@@ -96,13 +97,13 @@ function Citydetails(props) {
 
                                     </h2>
                                     <p><span
-                                        className="small-text"> Coordinates: {location.GeoPosition.Latitude} / {location.GeoPosition.Longitude} </span>
+                                        className="small-text"> Coordinates: {location.GeoPosition.Latitude.toFixed(2)} / {location.GeoPosition.Longitude.toFixed(2)} </span>
                                     </p>
                                 </>
                             }
 
                             <Button fieldClass="header-button"
-                                    clickHandler={ () => toggleMore(!more) }
+                                    clickHandler={() => toggleMore(!more)}
                                     isDisabled={false}> See more <Goto className="search-icon"/></Button>
 
                             <div className='row'>
@@ -138,38 +139,46 @@ function Citydetails(props) {
                 <div className="inner-container">
                     <div className="outer-row">
                         <div className="tile">
-
+                            {error &&
+                                <span>  Something went wrong fetching the data  </span>
+                            }
+                            {loading && <span>Loading...</span>}
+                            <p>Currently</p>
                             <div className="currentconditions">
-                                {error &&
-                                    <span>  Something went wrong fetching the data  </span>
-                                }
-                                {loading && <span>Loading...</span>}
-                                <h5>Currently</h5>
+
                                 {currConditions &&
-                                    <>
-                                        <p> Sun (UV): {currConditions.UVIndex} {currConditions.UVIndexText}
+                                    <div>
+                                        <h5>General</h5>
+                                        <p>
+                                            <span> Sun (UV): {currConditions.UVIndex} {currConditions.UVIndexText}
+                                            </span>
+                                            <span>   Visibility: {currConditions.Visibility.Metric.Value} {currConditions.Visibility.Metric.Unit}
+                                            </span>
+                                            <span>   Wind
+                                                gusts: {currConditions.WindGust.Speed.Metric.Value} {currConditions.WindGust.Speed.Metric.Unit}</span>
                                         </p>
-                                        <p> Visibility: {currConditions.Visibility.Metric.Value} {currConditions.Visibility.Metric.Unit}
-                                        </p>
-                                        <p> Wind
-                                            gusts: {currConditions.WindGust.Speed.Metric.Value} {currConditions.WindGust.Speed.Metric.Unit}</p>
-                                    </>
+                                    </div>
                                 }
                             </div>
                             {currConditions &&
                                 <>
                                     <div className="currentconditions">
-                                        <p> Cloudcover: {currConditions.CloudCover} %</p>
-                                        <p> Shade
-                                            feel: <span>{currConditions.RealFeelTemperatureShade.Metric.Value} </span> °{currConditions.RealFeelTemperature.Metric.Unit}
-                                        </p>
-                                        <p> Pressure: <span>{currConditions.PressureTendency.LocalizedText} </span>
-                                        </p>
-                                        <p>
-                                            {currConditions.Pressure.Metric.Value} {currConditions.Pressure.Metric.Unit} </p>
+                                        <div>
+                                            <p>
+                                                <span> Cloudcover: {currConditions.CloudCover} %</span>
+                                                <span> Shade feel: </span>
+                                                <span>{currConditions.RealFeelTemperatureShade.Metric.Value} °{currConditions.RealFeelTemperature.Metric.Unit}
+                                                </span>
+                                                <span> Pressure: {currConditions.PressureTendency.LocalizedText} </span>
+
+                                                <span> {currConditions.Pressure.Metric.Value} {currConditions.Pressure.Metric.Unit} </span>
+                                            </p>
+                                            <h5>Precipitation</h5>
+                                        </div>
                                     </div>
-                                    <br></br>
+
                                     <div className="row">
+
                                         <div className="rain">
 
                                             <p> Rain precipitation 1
@@ -206,12 +215,13 @@ function Citydetails(props) {
                             {loading && <span>Loading...</span>}
                             <div className="forecast-header">
                                 <h5>Forecast</h5>
-                                <p>Min/Max °C</p>
-                                <p>Rain mm</p>
-                                <p>Wind km/h</p>
-                                <p>Sun hrs UV</p>
-                                <p>Air quality</p>
-
+                                <div className="forecast-sub-header">
+                                    <p>Min/Max °C</p>
+                                    <p>Rain mm</p>
+                                    <p>Wind km/h</p>
+                                    <p>Sun hrs</p>
+                                    <p>Air quality</p>
+                                </div>
                             </div>
 
                             {forecastData &&
@@ -219,16 +229,22 @@ function Citydetails(props) {
                                     {forecastData.DailyForecasts.length > 0 &&
 
                                         forecastData.DailyForecasts.map((forecastday) => {
-                                            return <div className="forecastline" key={forecastday.Date}>
-                                                <p>{makeDay(forecastday.EpochDate)}</p>
-                                                <p className="pictures"><span className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
-                                                </p>
-                                                <p className="small-text">{forecastday.Day.IconPhrase}</p>
-                                                <p>{forecastday.Temperature.Minimum.Value}/{forecastday.Temperature.Maximum.Value}</p>
-                                                <p>{forecastday.Day.Rain.Value}</p>
-                                                <p>{forecastday.Day.Wind.Direction.English} {forecastday.Day.Wind.Speed.Value}/{forecastday.Day.WindGust.Speed.Value}</p>
-                                                <p>{forecastday.HoursOfSun} {forecastday.AirAndPollen[5].Category} </p>
-                                                <p>{forecastday.AirAndPollen[0].Category}</p>
+                                            return <div className="forecast-line" key={forecastday.Date}>
+                                                <div className="forecast-sub-line">
+                                                    <p>{makeDay(forecastday.EpochDate)}</p>
+                                                    <p className="pictures"><span
+                                                        className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
+                                                    </p>
+                                                    <p className="small-text">{forecastday.Day.IconPhrase}</p>
+                                                </div>
+                                                <div className="forecast-sub-line">
+                                                    <p>{forecastday.Temperature.Minimum.Value}/{forecastday.Temperature.Maximum.Value}</p>
+                                                    <p>{forecastday.Day.Rain.Value.toFixed(1)}</p>
+                                                    <p>{forecastday.Day.Wind.Direction.English} {forecastday.Day.Wind.Speed.Value}/{forecastday.Day.WindGust.Speed.Value}</p>
+                                                    <p>{forecastday.HoursOfSun} {forecastday.AirAndPollen[5].Category} </p>
+                                                    <p>{forecastday.AirAndPollen[0].Category}</p>
+                                                </div>
+
                                             </div>
 
                                         })

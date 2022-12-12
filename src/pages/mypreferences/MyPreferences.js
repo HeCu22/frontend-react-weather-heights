@@ -16,6 +16,7 @@ function MyPreferences(props) {
     const [loading, toggleLoading] = useState(false);
     const [performCompare, setPerformCompare] = useState(false)
     const [counter, setCounter] = useState(0);
+    const [lineSave, setLinesSave] = useState([{}]);
 
     const [state, setState] = useState({
         tempmin: 20,
@@ -45,18 +46,18 @@ function MyPreferences(props) {
     function compare() {
         {
             setCounter(counter + 1);
-        console.log(counter);
+            console.log(counter);
             setPerformCompare(true);
         }
 
     }
 
-    useEffect( () => {
+    useEffect(() => {
         console.log('🍌 Ik ben voor de eerste keer gemount in myPreferences');
 
     }, []);
 
-    useEffect( () => {
+    useEffect(() => {
 
         console.log('♻️ Ik ben geupdate in myPreferences');
 
@@ -99,12 +100,12 @@ function MyPreferences(props) {
 
             <main className="outer-container main-background">
                 <div className="inner-container">
-                    <div className="tiles">
+                    <div className="outer-row">
                         <div className="tile">
                             <p>MyPreferences</p>
-                            <div className="">
-                                <h5>General</h5>
-                                <form id="compare-values" className="" onSubmit={onFormSubmit}>
+                            <div className="compare-values">
+                                <form id="compare-values" onSubmit={onFormSubmit}>
+                                    <h5>General</h5>
                                     <label htmlFor="temp" className="row">
                                         <span>Temperature (°C):</span>
                                         <input
@@ -128,11 +129,11 @@ function MyPreferences(props) {
                                         />
 
                                     </label>
-                                    <p>Sun (UV):</p>
+
                                     <p>Sun hours: </p>
 
                                     <label htmlFor="wind-kmh" className="row">
-                                        <span>Wind km/h:</span>
+                                        <span>Wind km per hour:</span>
                                         <input
                                             type="number"
                                             id="wind-kmh"
@@ -140,7 +141,9 @@ function MyPreferences(props) {
                                             value={state.windkmh}
                                             onChange={handleChange}/>
 
-
+                                        <span id="added-text">
+                                            max
+                                        </span>
 
                                         <input type="checkbox"
                                                className=""
@@ -149,17 +152,15 @@ function MyPreferences(props) {
                                                checked={state.windsort}
                                                onChange={handleChange}
                                         />
-                                        <span id="added-text">
-                                            max
-                                        </span>
+
 
                                     </label>
 
                                     <p>Wind gusts: </p>
 
 
-                                    <label htmlFor="rain-kmh" className="row">
-                                        <span>Rain mm: </span>
+                                    <label htmlFor="rain-mm" className="row">
+                                        <span>Rain mm per day : </span>
                                         <input
                                             type="number"
                                             id="rain-mm"
@@ -167,6 +168,9 @@ function MyPreferences(props) {
                                             value={state.rainmm}
                                             onChange={handleChange}/>
 
+                                        <span id="added-text">
+                                            max
+                                        </span>
 
                                         <input type="checkbox"
                                                className=""
@@ -175,16 +179,14 @@ function MyPreferences(props) {
                                                checked={state.rainsort}
                                                onChange={handleChange}
                                         />
-                                        <span id="added-text">
-                                            max
-                                        </span>
+
 
                                     </label>
-
-                                    <h5>More</h5>
-                                    <p>Realfeal (°C):</p>
-                                    <p>Air quality:</p>
-                                    <p>Visibility:</p>
+                                    <br/>
+                                        <h5>More</h5>
+                                        <p>Realfeal (°C):</p>
+                                        <p>Air quality:</p>
+                                        <p>Visibility:</p>
 
                                 </form>
 
@@ -198,6 +200,10 @@ function MyPreferences(props) {
                                         key={(new Date())}
                                         mylocations={favLocations}
                                         state={state}
+                                        linesSave={lineSave}
+                                        setLinesSave={setLinesSave}
+                                        counter={counter}
+                                        setCounter={setCounter}
 
                                     />
                                 }
@@ -207,9 +213,9 @@ function MyPreferences(props) {
                 </div>
             </main>
 
-            {console.log('Ik ben gerenderd')}
+            {console.log('Ik ben gerenderd', lineSave)}
         </>
-    );
+);
 }
 
 export default MyPreferences;

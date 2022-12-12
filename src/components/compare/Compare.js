@@ -2,13 +2,12 @@ import React, {useState, useEffect, useContext} from "react";
 
 import './Compare.css';
 import test from "../../data/compare.json";
-import iconMapper from "../../helpers/iconMapper";
 import axios from "axios";
 import {LocContext} from "../../context/LocContext";
 import SortedList from "../sortedlist/SortedList";
 
 
-function Compare({mylocations, state, counter, setCounter}) {
+function Compare({mylocations, state, linesSave, setLinesSave, counter, setCounter}) {
 
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [tempResult, setTempResult] = useState(null);
@@ -17,10 +16,9 @@ function Compare({mylocations, state, counter, setCounter}) {
 
     const lengthA = mylocations.length;
 
-    let lines = [{}];
 
     async function fetchTemp() {
-        // console.log('fetchTemp');
+
         toggleLoading(true);
         toggleError(false);
         try {
@@ -30,13 +28,11 @@ function Compare({mylocations, state, counter, setCounter}) {
                     if (indexI < lengthA) {
                         console.log('index', indexI, mylocations[indexI].key);
 
-
-                        // const {data: [databack]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
                         const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${mylocations[indexI].key}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
                         // const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${mylocations[indexI].key}&lang=en&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
 
 
-                        lines[indexI] = ({
+                        linesSave[indexI] = ({
                             key: mylocations[indexI].key,
                             city: mylocations[indexI].city,
                             icon: data.DailyForecasts[0].Day.Icon,
@@ -46,6 +42,7 @@ function Compare({mylocations, state, counter, setCounter}) {
                             rain: data.DailyForecasts[0].Day.Rain.Value,
                             winddirection: data.DailyForecasts[0].Day.Wind.Direction.English,
                             wind: data.DailyForecasts[0].Day.Wind.Speed.Value,
+                            windgust: data.DailyForecasts[0].Day.WindGust.Speed.Value,
                             sunhrs: data.DailyForecasts[0].HoursOfSun,
                             airqual: data.DailyForecasts[0].AirAndPollen[0].Category
                         })
@@ -69,19 +66,17 @@ function Compare({mylocations, state, counter, setCounter}) {
                         //     icon: data.weather[0].icon
                         // })
 
-                        console.log('lines', lines);
+                        console.log('linesSave', linesSave);
 
                         console.log('data', (data));
 
-                        // console.log('temp', temp, wind, rain);
 
-
-                        console.log('fetchTemp', mylocations[indexI].city, indexI);
                     }
                 }
-                if (lines && !tempResult) {
+                if (linesSave && !tempResult) {
                     console.log('set')
-                    setTempResult(lines);
+                    setTempResult(linesSave);
+
                 }
 
             }
@@ -99,21 +94,24 @@ function Compare({mylocations, state, counter, setCounter}) {
 
     useEffect(() => {
         console.log('🍌 Ik ben voor de eerste keer gemount in compare');
+        if (counter === 1) {
+            toggleLoading(false);
 
-        toggleLoading(false);
-        lines = [{}];
 
-        console.log('mylocations', mylocations.length);
-        if (mylocations.length > 0) {
-            fetchTemp();
-            if (lines && !tempResult) {
-                console.log('set')
-                setTempResult(lines);
+            console.log('mylocations', mylocations.length);
+            if (mylocations.length > 0) {
+                fetchTemp();
+                if (linesSave && !tempResult) {
+                    console.log('set')
+                    setTempResult(linesSave);
+                    setLinesSave(linesSave);
+                }
+
             }
 
-        }
-
-
+        } else {
+            setTempResult(linesSave)
+        };
     }, []);
 
 
@@ -129,14 +127,14 @@ function Compare({mylocations, state, counter, setCounter}) {
 
             <div className="compare-header">
                 <h5>Comparison</h5>
-                    <div className="compare-sub-header">
-                        {/*<p>ForecastToday</p>*/}
-                        <p><span>Min/Max °C</span></p>
-                        <p>Rain mm</p>
-                        <p>Wind km/h</p>
-                        <p>Sun hrs UV</p>
-                        <p>Air quality</p>
-                    </div>
+                <div className="compare-sub-header">
+                    {/*<p>ForecastToday</p>*/}
+                    <p><span>Min/Max °C</span></p>
+                    <p>Rain mm</p>
+                    <p>Wind km/h</p>
+                    <p>Sun hrs</p>
+                    <p>Air quality</p>
+                </div>
 
             </div>
 
@@ -147,10 +145,6 @@ function Compare({mylocations, state, counter, setCounter}) {
                     <SortedList
                         key={tempResult.key}
                         lines={tempResult}
-                        // templist={tempResult}
-                        // windlist={windResult}
-                        // rainlist={rainResult}
-                        // citylist={cities}
                         state={state}
                         counter={counter}
                         setCounter={setCounter}
@@ -161,7 +155,7 @@ function Compare({mylocations, state, counter, setCounter}) {
                 </>
             }
         </>
-);
+    );
 }
 
 export default Compare;
