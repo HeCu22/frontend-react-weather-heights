@@ -3,9 +3,13 @@
     flex-direction: column;
 }
 
+.header-content {
+    flex-basis: 615px;
+}
+
 .tile {
-    flex-basis: 650px;
-    flex-grow: 0;
+    flex-basis: 350px;
+    flex-grow: 0.4;
     flex-shrink: 1;
     display: flex;
     flex-direction: column;
@@ -13,32 +17,59 @@
     background-color: var(--main-tile);
     border: 1px solid var(--bordertile);
     border-radius: 8px;
-    margin: 10px 0;
+    padding-left: 50px;
 }
 
-.currentconditions, .forecast-line {
+.currentconditions, .forecast-line, .tiles {
     width: 100%;
     flex-basis: 16px;
     flex-grow: 0;
     flex-shrink: 1;
     display: flex;
     flex-direction: row;
-    padding: 0 50px;
+    padding: 0 10px;
     font-size: 14px;
+    margin: 0 10px;
 }
 
-.forecast-sub-line {
+.tiles {
+    flex-wrap: wrap;
+    margin: 0;
+    gap: 2px;
+}
+
+.row-wrap {
     display: flex;
-    gap: 15px;
-    flex-basis: 250px;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.forecast-line {
+    display: flex;
+    gap: 2px;
+    flex-basis: 12px;
     flex-grow: 0;
     flex-shrink: 1;
+    margin: 8px 0;
 }
 
-.rain {
+.wind, .rain, .temp, .sun, .air {
+    max-width: 100px;
+    flex-basis: 50px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+
+.precipitation {
     flex-direction: column;
     justify-content: space-around;
-    padding-left: 76px;
+    padding-left: 20px;
     font-size: 14px;
 }
 
@@ -47,10 +78,10 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+
     background-color: white;
-    gap: 15px;
-    padding: 0 50px;
+    gap: 5px;
+    padding: 0 10px;
     font-size: 12px;
 }
 
@@ -74,7 +105,7 @@ h3, h4 {
 }
 
 .pictures {
-    flex-basis: 50px;
+    flex-basis: 38px;
     flex-grow: 0;
     flex-shrink: 1;
     display: flex;
@@ -84,7 +115,7 @@ h3, h4 {
 
 .small-span {
     height: 30px;
-    flex-basis: 50px;
+    flex-basis: 38px;
     flex-grow: 0;
     flex-shrink: 1;
     /*background-color: gold;*/
@@ -97,6 +128,6 @@ h3, h4 {
 
 svg {
     max-width: 75px;
-    min-width: 45px;
+    min-width: 38px;
     max-height: 45px;
 }

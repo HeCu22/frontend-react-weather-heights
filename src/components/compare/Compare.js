@@ -78,17 +78,13 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                     setTempResult(linesSave);
 
                 }
-
             }
-
-            toggleLoading(false);
-
         } catch (e) {
             toggleError(true);
             console.error(e);
-            toggleLoading(false);
 
         }
+        toggleLoading(false);
     }
 
 

@@ -18,6 +18,7 @@ async function fetchLocationCity(city, location, setLocation, error, toggleError
         toggleError(true);
 
     }
+    toggleLoading(false);
 }
 
 export default fetchLocationCity;

@@ -12,6 +12,7 @@ function Mainnav({children}) {
 
     return (
         <div className="outer-container main-nav-background">
+            <div className="inner-container">
             <div className="outer-row">
                 <div className="left-nav">
                         <span className="max">
@@ -31,7 +32,7 @@ function Mainnav({children}) {
 
                 </div>
             </div>
-
+            </div>
         </div>
     );
 };

@@ -31,32 +31,24 @@ function Citydetails(props) {
 
 
     useEffect(() => {
-
         if (!location) {
             fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
-            toggleLoading(false);
             setBackground("outer-container impression01");
             // setLocation(tslocation[0]);
         }
-
     }, []);
 
     useEffect(() => {
 
         if (!currConditions && location) {
             if (more) {
-                // fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
-                toggleLoading(false);
-                setCurrConditions(test[0]);
-
-
+                fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
+                // setCurrConditions(test[0]);
                 if (!forecastData && location) {
                     fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
-                    toggleLoading(false);
                     // setForecastData(tsforecast[0]);
                 }
             }
-
         }
 
     }, [more, location]);
@@ -68,6 +60,7 @@ function Citydetails(props) {
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
+
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -77,7 +70,7 @@ function Citydetails(props) {
             </Mainnav>
             <main className={background}>
                 <div className="inner-container">
-                    <div className="mid">
+                    <div className="outer-row">
                         <div className="header-content">
                             {location &&
                                 <>
@@ -123,7 +116,7 @@ function Citydetails(props) {
                                             <h4>
                                                 <span>{currConditions.Wind.Direction.English} </span> {currConditions.Wind.Speed.Metric.Value} {currConditions.Wind.Speed.Metric.Unit}
                                             </h4>
-                                            <h4>{currConditions.PrecipitationSummary.Past6Hours.Metric.Value} {currConditions.PrecipitationSummary.Past6Hours.Metric.Unit} </h4>
+                                            <h4>{currConditions.PrecipitationSummary.Precipitation.Metric.Value} {currConditions.PrecipitationSummary.Precipitation.Metric.Unit} </h4>
                                         </div>
 
                                     </>
@@ -137,26 +130,28 @@ function Citydetails(props) {
             </main>
             <main className="outer-container main-background">
                 <div className="inner-container">
-                    <div className="outer-row">
+                    <div className="tiles">
                         <div className="tile">
                             {error &&
                                 <span>  Something went wrong fetching the data  </span>
                             }
                             {loading && <span>Loading...</span>}
-                            <p>Currently</p>
+
                             <div className="currentconditions">
 
                                 {currConditions &&
-                                    <div>
+                                    <div className="column">
+                                        <h3>Currently</h3>
+                                        <br/>
                                         <h5>General</h5>
-                                        <p>
-                                            <span> Sun (UV): {currConditions.UVIndex} {currConditions.UVIndexText}
-                                            </span>
-                                            <span>   Visibility: {currConditions.Visibility.Metric.Value} {currConditions.Visibility.Metric.Unit}
-                                            </span>
-                                            <span>   Wind
-                                                gusts: {currConditions.WindGust.Speed.Metric.Value} {currConditions.WindGust.Speed.Metric.Unit}</span>
-                                        </p>
+                                        <div className="row-wrap">
+                                            <p> Sun (UV): {currConditions.UVIndexText} </p>
+                                            <p> Visibility: {currConditions.Visibility.Metric.Value} {currConditions.Visibility.Metric.Unit}
+                                            </p>
+                                            <p> Wind-gusts: {currConditions.WindGust.Speed.Metric.Value} {currConditions.WindGust.Speed.Metric.Unit}</p>
+
+                                        </div>
+
                                     </div>
                                 }
                             </div>
@@ -164,46 +159,49 @@ function Citydetails(props) {
                                 <>
                                     <div className="currentconditions">
                                         <div>
-                                            <p>
-                                                <span> Cloudcover: {currConditions.CloudCover} %</span>
-                                                <span> Shade feel: </span>
-                                                <span>{currConditions.RealFeelTemperatureShade.Metric.Value} °{currConditions.RealFeelTemperature.Metric.Unit}
-                                                </span>
-                                                <span> Pressure: {currConditions.PressureTendency.LocalizedText} </span>
-
-                                                <span> {currConditions.Pressure.Metric.Value} {currConditions.Pressure.Metric.Unit} </span>
-                                            </p>
+                                            <div className="row-wrap">
+                                                <p> Cloudcover: {currConditions.CloudCover} %</p>
+                                                <p> Shade
+                                                    feel: {currConditions.RealFeelTemperatureShade.Metric.Value} °{currConditions.RealFeelTemperature.Metric.Unit}
+                                                </p>
+                                                <p> Pressure {currConditions.PressureTendency.LocalizedText} {currConditions.Pressure.Metric.Value} {currConditions.Pressure.Metric.Unit} </p>
+                                            </div>
+                                            <br/>
                                             <h5>Precipitation</h5>
                                         </div>
                                     </div>
 
-                                    <div className="row">
+                                    <div className="row-wrap">
 
-                                        <div className="rain">
+                                        <div className="precipitation small-text">
 
-                                            <p> Rain precipitation 1
+                                            <p> Past 1
                                                 hour: {currConditions.Precip1hr.Metric.Value} {currConditions.Precip1hr.Metric.Unit} </p>
-                                            <p> Rain past
-                                                hour
-                                                : {currConditions.PrecipitationSummary.PastHour.Metric.Value} {currConditions.PrecipitationSummary.PastHour.Metric.Unit} </p>
-                                            <p> Rain past 3
-                                                hours: {currConditions.PrecipitationSummary.Past3Hours.Metric.Value} {currConditions.PrecipitationSummary.Past3Hours.Metric.Unit} </p>
+                                            <p> Past 6
+                                                hours
+                                                : {currConditions.PrecipitationSummary.Past6Hours.Metric.Value} {currConditions.PrecipitationSummary.Past6Hours.Metric.Unit} </p>
+                                            <p> Past 12
+                                                hours
+                                                : {currConditions.PrecipitationSummary.Past12Hours.Metric.Value} {currConditions.PrecipitationSummary.Past12Hours.Metric.Unit} </p>
+                                            <p> Past 24
+                                                hours
+                                                : {currConditions.PrecipitationSummary.Past24Hours.Metric.Value} {currConditions.PrecipitationSummary.Past24Hours.Metric.Unit} </p>
+                                        </div>
 
-                                            <p> Rain past 6
-                                                hours: {currConditions.PrecipitationSummary.Past6Hours.Metric.Value} {currConditions.PrecipitationSummary.Past6Hours.Metric.Unit} </p>
-                                            <p> Rain past 9
-                                                hours: {currConditions.PrecipitationSummary.Past9Hours.Metric.Value} {currConditions.PrecipitationSummary.Past9Hours.Metric.Unit} </p>
-                                            <p> Rain past 12
-                                                hours: {currConditions.PrecipitationSummary.Past12Hours.Metric.Value} {currConditions.PrecipitationSummary.Past12Hours.Metric.Unit} </p>
+                                        <div className="precipitation">
+                                            {forecastData &&
+                                                <>
+                                                    {(forecastData.DailyForecasts.length > 0 && forecastData.DailyForecasts[0].Day.HasPrecipitation) ? <>
+                                                            <h3> Forecasted for today: </h3>
+                                                            <h4> {forecastData.DailyForecasts[0].Day.PrecipitationIntensity} {forecastData.DailyForecasts[0].Day.PrecipitationType},
+                                                            </h4>
+                                                            <p>   probability: {forecastData.DailyForecasts[0].Day.PrecipitationProbability} %</p>
+                                                            <p></p>
+                                                        </>
+                                                        : <p> Forecasted for today: 0 mm</p>}
+                                                </>}
                                         </div>
-                                        <div className="rain">
-                                            <p> Rain past 12
-                                                hours: {currConditions.PrecipitationSummary.Past12Hours.Metric.Value} {currConditions.PrecipitationSummary.Past12Hours.Metric.Unit} </p>
-                                            <p> Rain past 18
-                                                hours: {currConditions.PrecipitationSummary.Past18Hours.Metric.Value} {currConditions.PrecipitationSummary.Past18Hours.Metric.Unit} </p>
-                                            <p> Rain past 24
-                                                hours: {currConditions.PrecipitationSummary.Past24Hours.Metric.Value} {currConditions.PrecipitationSummary.Past24Hours.Metric.Unit} </p>
-                                        </div>
+
                                     </div>
                                 </>
                             }
@@ -215,13 +213,12 @@ function Citydetails(props) {
                             {loading && <span>Loading...</span>}
                             <div className="forecast-header">
                                 <h5>Forecast</h5>
-                                <div className="forecast-sub-header">
-                                    <p>Min/Max °C</p>
-                                    <p>Rain mm</p>
-                                    <p>Wind km/h</p>
-                                    <p>Sun hrs</p>
-                                    <p>Air quality</p>
-                                </div>
+                                <span className="temp">Min/Max °C</span>
+                                <span className="rain">Rain/Snow mm</span>
+                                <span className="wind">Wind km/h</span>
+                                <span className="sun">Sun UV hrs</span>
+                                <span className="air">Air quality</span>
+                                <p> </p>
                             </div>
 
                             {forecastData &&
@@ -230,20 +227,34 @@ function Citydetails(props) {
 
                                         forecastData.DailyForecasts.map((forecastday) => {
                                             return <div className="forecast-line" key={forecastday.Date}>
-                                                <div className="forecast-sub-line">
+                                                <div className="air">
                                                     <p>{makeDay(forecastday.EpochDate)}</p>
                                                     <p className="pictures"><span
                                                         className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
                                                     </p>
                                                     <p className="small-text">{forecastday.Day.IconPhrase}</p>
                                                 </div>
-                                                <div className="forecast-sub-line">
-                                                    <p>{forecastday.Temperature.Minimum.Value}/{forecastday.Temperature.Maximum.Value}</p>
-                                                    <p>{forecastday.Day.Rain.Value.toFixed(1)}</p>
-                                                    <p>{forecastday.Day.Wind.Direction.English} {forecastday.Day.Wind.Speed.Value}/{forecastday.Day.WindGust.Speed.Value}</p>
-                                                    <p>{forecastday.HoursOfSun} {forecastday.AirAndPollen[5].Category} </p>
-                                                    <p>{forecastday.AirAndPollen[0].Category}</p>
+
+                                                <div className="temp">
+                                                    <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(1)}</span>
                                                 </div>
+                                                <div className="rain">
+                                                    <p>{forecastday.Day.Rain.Value.toFixed(0)}/{forecastday.Day.Snow.Value.toFixed(0)}</p>
+                                                </div>
+
+                                                <div className="wind">
+                                                    <span> {forecastday.Day.Wind.Direction.English}
+                                                        {forecastday.Day.Wind.Speed.Value.toFixed(0)}/{forecastday.Day.WindGust.Speed.Value.toFixed(0)}</span>
+                                                </div>
+                                                {/*<div className="forecast-sub-line">*/}
+                                                    <div className="sun">
+                                                        <p>{forecastday.HoursOfSun} </p>
+                                                        <p> {forecastday.AirAndPollen[5].Category} </p>
+                                                    </div>
+                                                    <div className="air">
+                                                        <span>{forecastday.AirAndPollen[0].Category}</span>
+                                                    </div>
+                                                {/*</div>*/}
 
                                             </div>
 
