@@ -30,10 +30,11 @@
     --main-header: #E7CEBA;
     --button-find: #E9A372;
     --offwhite: #e5e4cf;
-    --button-go: #3E2F36l;
+    --button-go: #3E2F36;
     --bordertile: #20ACE9;
     --main-body: #f5f5f5;
     --main-tile: #ffffff;
+    --signal: #BC4C2A;
 
 }
 
@@ -60,6 +61,7 @@ main {
     width: 100%;
     flex-direction: row;
     justify-content: center;
+    /*background-color: greenyellow;*/
 }
 
 /* De buitenste container is altijd de volledige schermbreedte. Het is een flexbox container die zijn inhoud altijd netjes horizontaal centreert */
@@ -93,7 +95,7 @@ main {
 }
 
 .main-background {
-    background: var(--main-body);
+    background-color: var(--main-body);
 
 }
 
@@ -105,6 +107,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /*background-color: var(--main-header);*/
 }
 
 /* Top Nav  */
@@ -119,6 +122,7 @@ main {
 .top-nav-menu {
     display: flex;
     height: 30px;
+
 }
 
 
@@ -215,7 +219,10 @@ main {
     flex-grow: 0.8;
     flex-shrink: 1;
     margin-bottom: 10px;
-    color: #e5e4cf;
+    color: var(--offwhite);
+    display: flex;
+    flex-direction: column;
+    text-shadow: 1px 1px 2px black;
 }
 
 .header-content p {
@@ -275,6 +282,7 @@ button {
 }
 
 
+
 button:hover {
     background-color: #BC4C2A;
     color: white;
@@ -304,6 +312,11 @@ button:disabled {
 
 .marked  {
     fill: white;
+}
+
+.signal {
+    color: var(--signal);
+    font-weight: bold;
 }
 
 

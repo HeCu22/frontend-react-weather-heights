@@ -1,13 +1,12 @@
 import React from "react";
-import {ReactComponent as Sun} from "../assets/icons/weather-icon1.svg";
-import {ReactComponent as SunCloud} from "../assets/icons/weather-icon3.svg";
-import {ReactComponent as SunClouds} from "../assets/icons/weather-icon6.svg";
-import {ReactComponent as Clouds} from "../assets/icons/weather-icon7.svg";
-import {ReactComponent as Rain} from "../assets/icons/weather-icon18.svg";
-import {ReactComponent as Showers} from "../assets/icons/weather-icon12.svg";
-
-import {ReactComponent as Clear} from "../assets/icons/weather-icon33.svg";
-
+import {ReactComponent as Sun} from "../assets/icons/sun.svg";
+import {ReactComponent as SunCloud} from "../assets/icons/sunsmallcloud.svg";
+import {ReactComponent as SunClouds} from "../assets/icons/sunbehindcloud.svg";
+import {ReactComponent as Clouds} from "../assets/icons/clouds.svg";
+import {ReactComponent as Rain} from "../assets/icons/rain.svg";
+import {ReactComponent as Showers} from "../assets/icons/sun-rain.svg";
+import {ReactComponent as Clear} from "../assets/icons/clear.svg";
+import {ReactComponent as Snow} from "../assets/icons/snow.svg";
 
 function iconMapper(iconCode) {
     switch (iconCode) {
@@ -24,6 +23,8 @@ function iconMapper(iconCode) {
         case 21:
         case 30:
             return <SunCloud/>;
+        case 22:
+            return <Snow/>
         case 4:
         case 6:
         case 20:
@@ -33,7 +34,6 @@ function iconMapper(iconCode) {
         case 13:
         case 14:
         case 17:
-
         case 39:
         case 40:
         case 41:
@@ -43,9 +43,8 @@ function iconMapper(iconCode) {
         case 15:
         case 29:
             return <Rain/>;
-
         default:
-            return <Clouds/>
+            return <Clouds/>;
     }
 }
 

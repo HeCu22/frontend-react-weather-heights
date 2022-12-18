@@ -1,48 +1,82 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import {LocContext} from "../../context/LocContext";
 import Mainnav from "../../components/mainnav/Mainnav";
 import {Link} from "react-router-dom";
 import './MyPreferences.css';
-import Compare from "../../components/compare/Compare";
+import Compare from "../../components/compare/Compare"
+import CounterResult from "../../components/CounterResult";
 import GridSlider from "../../components/gridslider/GridSlider";
+import {ReactComponent as Sort} from "../../assets/icons/adjust-v.svg";
+import {ReactComponent as Filter} from "../../assets/icons/adjust-h.svg";
 
 
 function MyPreferences(props) {
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const {favLocations, setFavLocFunction} = useContext(LocContext);
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
-    const [performCompare, setPerformCompare] = useState(false);
+    const [performCompare, setPerformCompare] = useState(false)
+    const [counter, setCounter] = useState(0);
+    const [lineSave, setLinesSave] = useState([{}]);
+
     const [state, setState] = useState({
         tempmin: 20,
         tempmax: 25,
+        tempsort: true,
         rainmm: 0,
+        rainsort: true,
         windkmh: 3,
+        windsort: true,
     })
 
     function onFormSubmit(e) {
-        e.preventDefault();
-        setState(state.tempmin);
-        setState(state.tempmax);
+        e.preventDefault()
+        setState({...state});
+        setPerformCompare(false);
 
     }
 
     function handleChange(e) {
-        e.preventDefault()
-        const value = e.target.value;
-        setState({...state, [e.target.name]: value});
-    }
-
-    function compare(e) {
-        e.preventDefault()
-        setPerformCompare(true);
+        const value =
+            e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        setState({...state, [e.target.name]: value})
+        setPerformCompare(false);
 
     }
+
+    function compare() {
+        {
+            setCounter(counter + 1);
+            console.log(counter);
+            setPerformCompare(true);
+        }
+
+    }
+
+    useEffect(() => {
+        console.log('🍌 Ik ben voor de eerste keer gemount in myPreferences');
+
+    }, []);
+
+    useEffect(() => {
+
+        console.log('♻️ Ik ben geupdate in myPreferences');
+
+    }, [counter]);
 
     return (
         <>
-            {console.log('compare', performCompare)}
+
+
+            {/*{counter < 4 && <CounterResult amount={counter}/>}*/}
+            {error &&
+                <span>  Something went wrong fetching the data  </span>
+            }
+            {loading && <span>Loading...</span>}
+            {counter > 6 && <p>Meer dan 6!!!!!</p>}
+
+
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -52,7 +86,8 @@ function MyPreferences(props) {
                         <li>
                             <button
                                 type="button"
-                                onClick={() => {setPerformCompare(!performCompare)}}
+
+                                onClick={compare}
                             >
                                 Compare
                             </button>
@@ -65,15 +100,16 @@ function MyPreferences(props) {
                 </ul>
             </Mainnav>
 
-            <main className="outer-container main-background">
+            <main className="outer-container">
                 <div className="inner-container">
                     <div className="tiles">
                         <div className="tile">
                             <p>MyPreferences</p>
-                            <div className="">
-                                <h5>General</h5>
-                                <form id="compare-values" className="" onSubmit={onFormSubmit}>
-                                    <label htmlFor="tempmin" className="row">
+                            <div className="compare-values">
+                                <form id="compare-values" onSubmit={onFormSubmit}>
+                                    <h5>Selection <span className="filter"> <Filter/> </span> <span className="sort"><Sort/> </span></h5>
+
+                                    <label htmlFor="temp" className="row">
                                         <span>Temperature (°C):</span>
                                         <input
                                             type="number"
@@ -84,20 +120,77 @@ function MyPreferences(props) {
                                         <input
                                             type="number"
                                             id="temp-max"
-                                            name="temp-max"
+                                            name="tempmax"
                                             value={state.tempmax}
                                             onChange={handleChange}/>
+                                        <input type="checkbox"
+                                               className=""
+                                               id="temp-sort"
+                                               name="tempsort"
+                                               checked={state.tempsort}
+                                               onChange={handleChange}
+                                        />
 
                                     </label>
-                                    <p>Sun (UV):</p>
+
                                     <p>Sun hours: </p>
-                                    <p>Wind km/h: </p>
+
+                                    <label htmlFor="wind-kmh" className="row">
+                                        <span>Wind km per hour:</span>
+                                        <input
+                                            type="number"
+                                            id="wind-kmh"
+                                            name="windkmh"
+                                            value={state.windkmh}
+                                            onChange={handleChange}/>
+
+                                        <span id="added-text">
+                                            max
+                                        </span>
+
+                                        <input type="checkbox"
+                                               className=""
+                                               id="wind-sort"
+                                               name="windsort"
+                                               checked={state.windsort}
+                                               onChange={handleChange}
+                                        />
+
+
+                                    </label>
+
                                     <p>Wind gusts: </p>
-                                    <p>Rain mm: </p>
-                                    <h5>More</h5>
-                                    <p>Realfeal (°C):</p>
-                                    <p>Air quality:</p>
-                                    <p>Visibility:</p>
+
+
+                                    <label htmlFor="rain-mm" className="row">
+                                        <span>Rain mm per day : </span>
+                                        <input
+                                            type="number"
+                                            id="rain-mm"
+                                            name="rainmm"
+                                            value={state.rainmm}
+                                            onChange={handleChange}/>
+
+                                        <span id="added-text">
+                                            max
+                                        </span>
+
+                                        <input type="checkbox"
+                                               className=""
+                                               id="rain-sort"
+                                               name="rainsort"
+                                               checked={state.rainsort}
+                                               onChange={handleChange}
+                                        />
+
+
+                                    </label>
+                                    <br></br>
+                                    <br></br>
+                                        <h4>More aspects in overview</h4>
+                                        <p>Realfeal (°C):</p>
+                                        <p>Air quality:</p>
+                                        <p>Visibility:</p>
 
                                 </form>
 
@@ -106,12 +199,16 @@ function MyPreferences(props) {
                         </div>
                         {performCompare &&
                             <div className="tile">
-                                {favLocations.length > 0 &&
+                                {Object.keys(favLocations).length > 0 &&
                                     <Compare
-                                        key={favLocations.length}
+                                        key={(new Date())}
                                         mylocations={favLocations}
-                                        tempmin={state.tempmin}
-                                        tempmax={state.tempmax}
+                                        state={state}
+                                        linesSave={lineSave}
+                                        setLinesSave={setLinesSave}
+                                        counter={counter}
+                                        setCounter={setCounter}
+
                                     />
                                 }
                             </div>
@@ -119,8 +216,10 @@ function MyPreferences(props) {
                     </div>
                 </div>
             </main>
+
+            {console.log('Ik ben gerenderd', lineSave)}
         </>
-    );
+);
 }
 
 export default MyPreferences;

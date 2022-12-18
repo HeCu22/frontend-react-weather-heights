@@ -18,7 +18,7 @@ function Topnav(props) {
                                 {isAuthenticated ?
                                     <>
 
-                                    <li><Link to="/mypreferences">myPreferences</Link></li>
+                                    <li><Link to="/mypreferences">myPref</Link></li>
                                     <li><Link to="/profile">Profile</Link></li>
                                     <li><button
                                         type="button"

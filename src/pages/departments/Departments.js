@@ -28,7 +28,7 @@ function Departments(props) {
     const [more, toggleMore] = useState(false);
     const [marked, setMarked] = useState("white");
     const [checked, toggleChecked] = useState(false);
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
 
     const string = "".concat("FR-", department);
@@ -87,6 +87,7 @@ function Departments(props) {
                                     <div className="outer-row">
                                         <div>
                                             <Article
+                                                key={regioncapital.key}
                                                 fieldClass="top-card"
                                                 pictureClass="mid-picture-span"
                                                 tag={region.parent}

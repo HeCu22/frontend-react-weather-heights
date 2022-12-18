@@ -42,6 +42,21 @@
 
 p a {
     color: var(--bordertile);
-
     text-decoration: none;
+}
+
+.signin-button {
+    background: #3E2F36;
+}
+
+
+.signin-button:disabled {
+    background: lightgrey;
+}
+
+.signin-button:disabled:hover::after {
+    font-weight: 300;
+    font-size: 16px;
+    content: "...check username and password are at least six chars";
+    transition: all .4s ease-in-out;
 }

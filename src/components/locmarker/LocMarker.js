@@ -7,20 +7,20 @@ function LocMarker({checked, toggleChecked, marked, setMarked, locationKey, city
 
     const {favLocations, setFavLocFunction} = useContext(LocContext);
 
-    console.log('props', (cityName), (checked), (marked), (locationKey), (favLocations));
 
-    // if (favLocations && favLocations[0].key === locationKey) {
-    if (favLocations.find((found) => {
-        return found.key === locationKey;
-    })) {
-        toggleChecked(true);
-        setMarked("var(--bordertile)");
+    console.log('prop', checked, marked, locationKey, cityName);
+    if (favLocations) {
+        const lookupLoc = favLocations.find((found) => {
+            return found.key === `${locationKey}`;
+        });
 
-    } else {
-        toggleChecked(false);
-        setMarked("white");
+        if (lookupLoc) {
+            console.log('found', true);
+            toggleChecked(true);
+            setMarked("var(--bordertile)");
+        }
     }
-
+    console.log('prop2', checked, marked);
 
     function toggleMarkOnClick(e) {
         if (checked) {
@@ -31,19 +31,23 @@ function LocMarker({checked, toggleChecked, marked, setMarked, locationKey, city
         } else {
             setMarked("var(--bordertile)");
             console.log('push', favLocations);
-            // obj.push({key: locationKey, city: ""})
-            favLocations.push({key: locationKey, city: cityName});
+            if (Object.keys(favLocations).length > 0 && !favLocations[0].key) {
+                favLocations[0] = ({key: locationKey, city: cityName})
+            } else {
+                favLocations.push({key: locationKey, city: cityName})
+            }
+
             setFavLocFunction(favLocations);
         }
         ;
-
-        toggleChecked(!checked)
+        toggleChecked(!checked);
 
     }
 
 
     return (
         <>
+            {console.log('check', checked)}
 
             <span className="star-wrapper">
                 <input type="checkbox"
@@ -52,7 +56,8 @@ function LocMarker({checked, toggleChecked, marked, setMarked, locationKey, city
                        checked={checked}
                        onChange={toggleMarkOnClick}
                 />
-                                        </span>
+            </span>
+
             <Favorite fill={marked}/>
         </>
     );

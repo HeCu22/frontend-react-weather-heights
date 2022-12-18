@@ -3,10 +3,16 @@
     flex-direction: column;
 }
 
-.tile {
-    /*height: 500px;*/
-    flex-basis: 650px;
-    flex-grow: 0;
+.header-background {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.tile, .tilefirst {
+    flex-basis: 300px;
+    flex-grow: 0.4;
     flex-shrink: 1;
     display: flex;
     flex-direction: column;
@@ -14,26 +20,62 @@
     background-color: var(--main-tile);
     border: 1px solid var(--bordertile);
     border-radius: 8px;
-    margin: 10px 0;
+    padding-left: 2px;
 }
 
-.currentconditions, .forecastline {
+
+
+.currentconditions, .forecast-line, .tiles {
     width: 100%;
     flex-basis: 16px;
     flex-grow: 0;
     flex-shrink: 1;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 0 50px;
+    padding: 0 10px;
     font-size: 14px;
-
+    margin: 0 10px;
 }
 
-.rain {
+.tiles, .forecast-line {
+    flex-wrap: wrap;
+    margin: 0;
+    gap: 2px;
+}
+
+.row-wrap {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.forecast-line {
+
+    margin: 8px 0;
+}
+
+.item, .blank {
+    max-width: 100px;
+    flex-basis: 50px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+.blank {
+    flex-basis: 30px;
+    padding: 0
+}
+
+
+.precipitation {
     flex-direction: column;
     justify-content: space-around;
-    padding-left: 76px;
+    padding-left: 20px;
     font-size: 14px;
 }
 
@@ -42,16 +84,29 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+
     background-color: white;
-    gap: 15px;
-    padding: 0 50px;
+    gap: 5px;
+    padding: 0 10px;
     font-size: 12px;
 }
 
+.forecast-sub-header, .forecast-sub-line {
+    display: flex;
+    gap: 15px;
+    padding: 0 0 0 50px;
+    flex-basis: 40px;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
 
-.forecast-header, currentconditions h5 {
-    font-size: 14px;
+.forecast-sub-header {
+    font-size: 12px;
+
+}
+
+h5 {
+    font-size: 16px;
 }
 
 h3, h4 {
@@ -64,7 +119,7 @@ h3, h4 {
 }
 
 .pictures {
-    flex-basis: 50px;
+    flex-basis: 38px;
     flex-grow: 0;
     flex-shrink: 1;
     display: flex;
@@ -74,7 +129,7 @@ h3, h4 {
 
 .small-span {
     height: 30px;
-    flex-basis: 50px;
+    flex-basis: 38px;
     flex-grow: 0;
     flex-shrink: 1;
     /*background-color: gold;*/
@@ -87,4 +142,6 @@ h3, h4 {
 
 svg {
     max-width: 75px;
-    max-height: 45px;}
+    min-width: 38px;
+    max-height: 45px;
+}

@@ -26,7 +26,7 @@ function Article({  fieldClass,
     const [location, setLocation] = useState(null);
     const [marked, setMarked] = useState("white");
     const [checked, toggleChecked] = useState(false);
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
     const [currConditions, setCurrConditions] = useState(null);
     console.log('article props', tag,
@@ -42,24 +42,24 @@ function Article({  fieldClass,
         if (locationKey) {
             console.log('locationKey', locationKey);
             if (more) {
-                // fetchLocationData(locationKey, location, setLocation, error, toggleError, loading, toggleLoading);
+                // fetchLocationData(locationKey, location, setLocation, error, setError, loading, toggleLoading);
                 setLocation(tslocation[1]);
-                toggleLoading(false);
+
             }
         } else {
             if (!location && city) {
                 if (more) {
                     // fetchLocationCity(city.concat(',', department), location, setLocation, error, toggleError, loading, toggleLoading);
                     setLocation(tslocation[0]);
-                    toggleLoading(false);
+
                 }
 
             } else {
                 if (!location && !city) {
                     if (more) {
-                        // fetchLocationPC(department, location, setLocation, error, toggleError, loading, toggleLoading);
+                        // fetchLocationPC(department, location, setLocation, error, setError, loading, toggleLoading);
                         setLocation(tslocation[0]);
-                        toggleLoading(false);
+
                     }
                 }
             }
@@ -70,15 +70,15 @@ function Article({  fieldClass,
     useEffect(() => {
         console.log('useeffect update more', location, currConditions);
         if (more && !location && city) {
-                // fetchLocationCity(city.concat(',', department), location, setLocation, error, toggleError, loading, toggleLoading);
+                // fetchLocationCity(city.concat(',', department), location, setLocation, error, setError, loading, toggleLoading);
                 setLocation(tslocation[0]);
-                toggleLoading(false);
+
             }
         if (more && !currConditions && location) {
-            // fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
+            // fetchConditions((location.Key), currConditions, setCurrConditions, error, setError, loading, toggleLoading);
             console.log('Loc more');
             setCurrConditions(test[0]);
-            toggleLoading(false);
+
 
         }
 
@@ -88,8 +88,11 @@ function Article({  fieldClass,
     return (
         <>
 
-            {/*{console.log('render', (currConditions), (location))}*/}
+            {console.log('render', (currConditions), (location))}
             <article className={fieldClass}>
+                {error &&
+                    <span>  Something went wrong fetching the data  </span>
+                }
 
                 {loading && <span>Loading...</span>}
                 <span className="tag">{tag}</span>
@@ -99,9 +102,9 @@ function Article({  fieldClass,
                         {locationKey &&
 
                             <>
-                                {console.log('A')}
 
                                 <LocMarker
+                                    key={locationKey}
                                     checked={checked}
                                     toggleChecked={toggleChecked}
                                     marked={marked}
@@ -114,9 +117,9 @@ function Article({  fieldClass,
 
                         {(!locationKey && location) &&
                             <>
-                                {console.log('B')}
 
                                 <LocMarker
+                                    key={locationKey}
                                     checked={checked}
                                     toggleChecked={toggleChecked}
                                     marked={marked}
@@ -131,12 +134,12 @@ function Article({  fieldClass,
                     <>
                         {location &&
                             <>
-                                {console.log('C')}
 
                                 <h2><Link
                                     to={`/details/${location.EnglishName},${department}`}> {location.EnglishName} </Link>
                                     {location &&
                                         <LocMarker
+                                            key={location.Key}
                                             checked={checked}
                                             toggleChecked={toggleChecked}
                                             marked={marked}
@@ -153,7 +156,7 @@ function Article({  fieldClass,
                 }
                 {location &&
                     <h3><span
-                        className="small-text"> {location.GeoPosition.Latitude} / {location.GeoPosition.Longitude} </span>
+                        className="small-text"> {location.GeoPosition.Latitude.toFixed(2)} / {location.GeoPosition.Longitude.toFixed(2)} </span>
                     </h3>
                 }
                 {currConditions &&
