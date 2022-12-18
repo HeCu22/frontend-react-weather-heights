@@ -4,6 +4,8 @@ import {Link, useHistory} from "react-router-dom";
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import Button from "../../components/button/Button";
 import departments from "../../data/adminarea.json";
+import france from "../../assets/images/overzichtskaart_Franse_Departementen.png";
+
 
 
 function Searchcity(props) {
@@ -43,14 +45,15 @@ function Searchcity(props) {
                             <label htmlFor="department-id" className="column">
                                 <span> Department:</span>
                                 <select
-                                        id="department-id"
-                                        name="department"
-                                        value={state.department}
-                                        onChange={handleChange}>
-                                    <option value="FR"> France </option>
+                                    id="department-id"
+                                    name="department"
+                                    value={state.department}
+                                    onChange={handleChange}>
+                                    <option value="FR"> France</option>
                                     {departments.length > 0 &&
                                         departments.map((department) => {
-                                            return <option key={department.ID} value={department.ID}> {department.EnglishName}
+                                            return <option key={department.ID}
+                                                           value={department.ID}> {department.ID} {department.EnglishName}
                                             </option>
                                         })
                                     }
@@ -75,12 +78,19 @@ function Searchcity(props) {
                 <div className="inner-container">
                     <div className="mid">
                         <div className="header-content">
-                            <h1></h1>
+                            <h1>French departments</h1>
+                            <div className="pictures">
+                    <span className="">
+                        <img className="small-picture-img" src={france} alt="french departments"/>;
+
+                    </span>
+
+
+                            </div>
 
                         </div>
 
                     </div>
-
                 </div>
 
 

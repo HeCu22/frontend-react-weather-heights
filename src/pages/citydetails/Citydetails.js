@@ -97,7 +97,8 @@ function Citydetails(props) {
 
                             <Button fieldClass="header-button"
                                     clickHandler={() => toggleMore(!more)}
-                                    isDisabled={false}> See more <Goto className="search-icon"/></Button>
+                                    isDisabled={more}> See more <Goto className="go-icon"/>
+                            </Button>
 
                             <div className='row'>
                                 {currConditions &&

@@ -47,3 +47,15 @@ h2 {
     height: unset;
     font-size: 18px;
 }
+
+.cards-button:hover {
+    background-color: var(--main-tile);
+    color: white;
+
+}
+
+.cards-button:hover:after {
+    color: var(--signal);
+    content: "Warning!... twice as much data calls will be made..";
+    /*transition: all .4s ease-in-out;*/
+}

@@ -11,8 +11,7 @@ import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
 import {AuthContext} from "../../context/AuthContext";
 
-import tslocation from '../../data/tslocation.json';
-import test from '../../data/test.json';
+
 import './Departments.css';
 import Mainnav from "../../components/mainnav/Mainnav";
 import {Link, useParams} from "react-router-dom";
@@ -114,7 +113,7 @@ function Departments(props) {
                                 <div className="cards-mid-content">
                                     <Button fieldClass="cards-button"
                                             clickHandler={() => toggleMore(!more)}
-                                            isDisabled={false}> see also current weather of capitals below... </Button>
+                                            isDisabled={false}> see weather of {regionDepartments.length} capitals ... </Button>
                                 </div>
                                 <span><Back/> <Forward/></span>
                             </div>

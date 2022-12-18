@@ -294,8 +294,9 @@ button:hover {
 
 button:disabled {
     cursor: not-allowed;
-    border-color: #D08169;
-    color: gray;
+    background-color: transparent;
+    /*border-color: #D08169;*/
+    color: transparent;
 }
 
 .max {

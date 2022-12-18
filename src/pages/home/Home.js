@@ -76,7 +76,7 @@ function Home() {
                         <div className="cards-mid-content">
                             <Button fieldClass="cards-button"
                                     clickHandler={() => toggleMore(!more)}
-                                    isDisabled={false}> see also current weather of capitals below... </Button>
+                                    isDisabled={false}> see weather of {regions.length} capitals ... </Button>
                         </div>
                         <span><Back/> <Forward/></span>
                     </div>
@@ -87,7 +87,7 @@ function Home() {
 
                                 {regions.length > 0 && regions.map((region, index) => {
 
-                                    if (index < regions.length) {
+                                    if (index < regions.length && region.name !== region.regionname) {
                                         return <Article key={region.code}
                                                         fieldClass="card"
                                                         pictureClass="small-picture-span"

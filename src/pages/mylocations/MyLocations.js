@@ -48,9 +48,10 @@ function MyLocations(props) {
                     <div className="cards">
                         <p>MyLocations</p>
                         <div className="cards-mid-content">
-                            <Button fieldClass="cards-button"
+                            {favLocations.length > 0 &&
+                                <Button fieldClass="cards-button"
                                     clickHandler={() => toggleMore(!more)}
-                                    isDisabled={false}> see also current weather of capitals below... </Button>
+                                    isDisabled={false}> see weather of cities below... </Button> }
                         </div>
                         <span><Back/> <Forward/></span>
                     </div>

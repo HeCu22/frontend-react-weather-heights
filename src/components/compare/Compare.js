@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from "react";
 
 import './Compare.css';
-import test from "../../data/compare.json";
 import axios from "axios";
 import {LocContext} from "../../context/LocContext";
 import SortedList from "../sortedlist/SortedList";
@@ -28,7 +27,10 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                     if (indexI < lengthA) {
                         console.log('index', indexI, mylocations[indexI].key);
 
+                        // when accuwaeather api is used
                         const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${mylocations[indexI].key}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
+
+                        // for test purpose, when openwaeather api is used
                         // const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${mylocations[indexI].key}&lang=en&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
 
 
@@ -46,14 +48,12 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                             sunhrs: data.DailyForecasts[0].HoursOfSun,
                             airqual: data.DailyForecasts[0].AirAndPollen[0].Category
                         })
-
-                        // let rain = 0;
                         //
+                        // for test purpose, when openwaeather api is used
+                        // let rain = 0;
                         // if ((data.rain)) {
                         //     rain = data.rain[indexI];
                         // }
-                        //
-                        //
                         // lines[indexI] = ({
                         //     key: mylocations[indexI].key,
                         //     city: mylocations[indexI].city,
@@ -123,9 +123,9 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
             {console.log('temp', tempResult, 'mylocations', lengthA)}
 
             <div className="compare-header">
-                <h5>Comparison</h5>
+                <h1>Top locations</h1>
                 <div className="compare-sub-header">
-                    <p>ForecastToday</p>
+                    <p>Forecasted Today</p>
 
                 </div>
 
