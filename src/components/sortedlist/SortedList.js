@@ -93,6 +93,7 @@ function SortedList({lines, state, counter, setCounter}) {
 
                 return (
                     <div className="compare-grid" key={recordline.key}>
+
                         <div className="compare-sub-grid">
                             <p> {recordline.city} </p>
                             <p className="pictures"><span
@@ -100,12 +101,24 @@ function SortedList({lines, state, counter, setCounter}) {
                             </p>
                             <p className="small-text"> {recordline.description}</p>
                         </div>
-                        <div className="compare-sub-grid">
-                            <p> {recordline.tempmin} / {recordline.temp} </p>
-                            <p> {recordline.rain.toFixed(1)} </p>
-                            <p> {recordline.winddirection} {recordline.wind}/{recordline.windgust}</p>
-                            <p> {recordline.sunhrs}</p>
-                            <p> {recordline.airqual} </p>
+                        <div className="column">
+                            <div className="compare-sub-header">
+                                <p><span>Min/Max °C</span></p>
+                                <p>Rain mm</p>
+                                <p>Wind km/h</p>
+                                <p>Sun hrs</p>
+                                <p>Air quality</p>
+                            </div>
+                            <div className="compare-sub-grid">
+
+                                <p> <span className="temp">{recordline.tempmin} / {recordline.temp} </span></p>
+                                <p className="rain"> {recordline.rain.toFixed(1)} </p>
+                                <p> {recordline.winddirection} {recordline.wind}/{recordline.windgust}</p>
+                                <p> {recordline.sunhrs}</p>
+                                <p> {recordline.airqual}
+                                </p>
+
+                            </div>
                         </div>
                     </div>
                 )

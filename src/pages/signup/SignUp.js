@@ -12,50 +12,49 @@ function SignUp() {
     const {checkHerokuFunction} = useContext(AuthContext);
 
     // state voor functionaliteit
-    const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [message,setMessage] = useState("");
+    const [message, setMessage] = useState("");
+    const [error, setError] = useState('');
+
 
     const [formState, setFormState] = useState({
         inputUser: "",
         inputPw: "",
         inputEmail: "",
+        inputExtra: "",
     })
 
     async function handleSubmit(e) {
         e.preventDefault()
         checkHerokuFunction();
-        toggleError(false);
+
         toggleLoading(true);
-setMessage("");
-        console.log(formState);
+        setMessage("");
+        console.log('state',formState);
+        setError('');
         try {
             await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
                 {
                     "username": formState.inputUser,
                     "email": formState.inputEmail,
                     "password": formState.inputPw,
-                    "role": ["user"]
+                    "info": formState.inputExtra,
+                    "roles": ["user"],
                 });
             setMessage("User successfully registered")
 
         } catch (e) {
-            toggleError(true);
-            console.log('error', e.response);
+
             console.error(e);
-
-
+            setError(e.response.status);
+            console.log('error', e.response.status);
         }
         toggleLoading(false);
     }
 
     function handleChange(evt) {
-        evt.preventDefault()
-        checkHerokuFunction();
         const value = evt.target.value;
         setFormState({...formState, [evt.target.name]: value});
-
-
     }
 
     return (
@@ -73,7 +72,8 @@ setMessage("");
                         <h1>Register</h1>
                         <form className="formSpace" onSubmit={handleSubmit}>
                             {error &&
-                                <span className="signal"> Request failed. Please check username is already registered..  </span>
+                                <span
+                                    className="signal"> Request failed. Please check username is already registered..  </span>
                             }
                             {message &&
                                 <span className="signal"> {message}  </span>
@@ -109,6 +109,16 @@ setMessage("");
                                            onChange={handleChange}/>
 
                                 </label>
+                                <br></br>
+                                <label htmlFor="input-extra">
+                                    <span>Extra information:</span>
+                                    <input type="tekst"
+                                           id="input-extra"
+                                           name="inputExtra"
+                                           value={formState.inputExtra}
+                                           onChange={handleChange}/>
+
+                                </label>
                             </legend>
 
 
@@ -116,7 +126,7 @@ setMessage("");
                                 fieldClass="sign-button"
                                 type="submit"
                                 isDisabled={(formState.inputUser.length > 5 && formState.inputPw.length > 5 && formState.inputEmail.includes("@")) === false ? true : false}
-                            clickHandler={handleSubmit}
+                                clickHandler={handleSubmit}
                             >
                                 Signup
                             </Button>

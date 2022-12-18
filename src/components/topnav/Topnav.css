@@ -5,7 +5,13 @@ a {
 
 .top-nav-menu button {
     border: none;
+    height: 68px;
+    border-radius: 0;
+    line-height: 30px;
+    padding-left: 0;
 }
+
+
 
 button:hover {
     background-color: #BC4C2A;

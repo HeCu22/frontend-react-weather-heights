@@ -3,7 +3,7 @@
     background-size: cover;
 }
 
-#input-user, #input-pw, #input-email {
+#input-user, #input-pw, #input-email, #input-extra {
     background: var(--main-body);
     width: 100%;
     /*padding: 0 10px;*/

@@ -11,7 +11,7 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [tempResult, setTempResult] = useState(null);
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
 
     const lengthA = mylocations.length;
@@ -20,7 +20,7 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
     async function fetchTemp() {
 
         toggleLoading(true);
-        toggleError(false);
+        setError('');
         try {
             if (mylocations.length > 0) {
 
@@ -80,8 +80,9 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                 }
             }
         } catch (e) {
-            toggleError(true);
+
             console.error(e);
+            setError(e.message);
 
         }
         toggleLoading(false);
@@ -124,12 +125,8 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
             <div className="compare-header">
                 <h5>Comparison</h5>
                 <div className="compare-sub-header">
-                    {/*<p>ForecastToday</p>*/}
-                    <p><span>Min/Max °C</span></p>
-                    <p>Rain mm</p>
-                    <p>Wind km/h</p>
-                    <p>Sun hrs</p>
-                    <p>Air quality</p>
+                    <p>ForecastToday</p>
+
                 </div>
 
             </div>

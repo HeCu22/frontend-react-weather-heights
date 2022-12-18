@@ -12,7 +12,8 @@ function AuthContextProvider({children}) {
         user: null,
         status: 'pending',
     });
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState('');
+
 
     useEffect(() => {
         console.log('de contextAuth is zojuist opnieuw opgestart')
@@ -43,21 +44,24 @@ function AuthContextProvider({children}) {
 
     const history = useHistory();
 
+    // check api bereikbaar
     async function checkHeroku() {
-        toggleError(false);
+        setError('');
         try {
             const response = await axios.get("https://frontend-educational-backend.herokuapp.com/api/test/all");
+            // console.log(response.data);
         } catch (e) {
             console.error(e);
-            toggleError(true);
+            setError(e.response.status);
+            console.log('error checkheroku', e.response);
         }
     }
 
     async function getUserdetails(token, id) {
-        toggleError(false);
+        setError('');
         try {
 
-            // const {data} = await axios.get(`http://localhost:3000/600/users/${id}`,
+
             const {data} = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user',
                 {
                     headers: {
@@ -67,6 +71,19 @@ function AuthContextProvider({children}) {
                 }
             );
             console.log('get', data);
+            if (data.roles.find((role) => {
+                return role.name === "ROLE_ADMIN";
+            })) {
+                const overview = await axios.get('https://frontend-educational-backend.herokuapp.com/api/admin/all',
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        }
+                    }
+                );
+                console.log('get all', overview);
+            }
 
             // zet de opgehaalde gebruikersdata in state
             setAuth({
@@ -76,13 +93,15 @@ function AuthContextProvider({children}) {
                 user: {
                     username: data.username,
                     email: data.email,
+                    roles: data.roles,
+                    info: data.info,
                 },
             })
 
         } catch (e) {
-            console.log('error userdata of', id);
-            toggleError(true);
-            console.error(e);
+            console.error(e)
+            setError(e.response.status);
+            console.log('error userdata of', id, e.response);
         }
 
     }
@@ -137,7 +156,6 @@ function AuthContextProvider({children}) {
 
     const contextData = {
         isAuthenticated: auth.isAuth,
-        userDetails: auth.user,
         user: auth.user,
         checkHerokuFunction: checkheroku,
         loginFunction: login,

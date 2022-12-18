@@ -25,14 +25,14 @@ function Citydetails(props) {
     const [forecastData, setForecastData] = useState(null)
     const [marked, setMarked] = useState("white");
     const [checked, toggleChecked] = useState(false);
-    const [error, toggleError] = useState(false);
-    const [errorFc, toggleErrorFc] = useState(false);
-    const [loading, toggleLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [errorFc, setErrorFc] = useState("");
+    const [loading, toggleLoading] = useState(true);
 
 
     useEffect(() => {
         if (!location) {
-            fetchLocationCity((city), location, setLocation, error, toggleError, loading, toggleLoading);
+            fetchLocationCity((city), location, setLocation, error, setError, loading, toggleLoading);
             setBackground("outer-container impression01");
             // setLocation(tslocation[0]);
         }
@@ -42,10 +42,10 @@ function Citydetails(props) {
 
         if (!currConditions && location) {
             if (more) {
-                fetchConditions((location.Key), currConditions, setCurrConditions, error, toggleError, loading, toggleLoading);
+                fetchConditions((location.Key), currConditions, setCurrConditions, error, setError, loading, toggleLoading);
                 // setCurrConditions(test[0]);
                 if (!forecastData && location) {
-                    fetchForecast((location.Key), forecastData, setForecastData, errorFc, toggleErrorFc, loading, toggleLoading);
+                    fetchForecast((location.Key), forecastData, setForecastData, errorFc, setErrorFc, loading, toggleLoading);
                     // setForecastData(tsforecast[0]);
                 }
             }
@@ -195,7 +195,7 @@ function Citydetails(props) {
                                                             <h3> Forecasted for today: </h3>
                                                             <h4> {forecastData.DailyForecasts[0].Day.PrecipitationIntensity} {forecastData.DailyForecasts[0].Day.PrecipitationType},
                                                             </h4>
-                                                            <p>   probability: {forecastData.DailyForecasts[0].Day.PrecipitationProbability} %</p>
+                                                            <p> probability: {forecastData.DailyForecasts[0].Day.PrecipitationProbability} %</p>
                                                             <p></p>
                                                         </>
                                                         : <p> Forecasted for today: 0 mm</p>}
@@ -213,12 +213,8 @@ function Citydetails(props) {
                             {loading && <span>Loading...</span>}
                             <div className="forecast-header">
                                 <h5>Forecast</h5>
-                                <span className="temp">Min/Max °C</span>
-                                <span className="rain">Rain/Snow mm</span>
-                                <span className="wind">Wind km/h</span>
-                                <span className="sun">Sun UV hrs</span>
-                                <span className="air">Air quality</span>
-                                <p> </p>
+
+                                <p></p>
                             </div>
 
                             {forecastData &&
@@ -227,34 +223,54 @@ function Citydetails(props) {
 
                                         forecastData.DailyForecasts.map((forecastday) => {
                                             return <div className="forecast-line" key={forecastday.Date}>
-                                                <div className="air">
-                                                    <p>{makeDay(forecastday.EpochDate)}</p>
-                                                    <p className="pictures"><span
-                                                        className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
-                                                    </p>
-                                                    <p className="small-text">{forecastday.Day.IconPhrase}</p>
+                                                <div className="forecast-sub-line">
+
+
+                                                    <div className="item">
+                                                        <p>{makeDay(forecastday.EpochDate)}</p>
+                                                        <p className="pictures"><span
+                                                            className="small-span"> {iconMapper(forecastday.Day.Icon)} </span>
+                                                        </p>
+                                                        <p className="small-text">{forecastday.Day.IconPhrase}</p>
+                                                    </div>
                                                 </div>
 
-                                                <div className="temp">
-                                                    <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(1)}</span>
-                                                </div>
-                                                <div className="rain">
-                                                    <p>{forecastday.Day.Rain.Value.toFixed(0)}/{forecastday.Day.Snow.Value.toFixed(0)}</p>
-                                                </div>
+                                                <div className="column">
 
-                                                <div className="wind">
+                                                    <div className="compare-sub-header">
+                                                        <span className="blank"></span>
+                                                        <span className="item">Min/Max °C</span>
+                                                        <span className="item">Rain/Snow mm</span>
+                                                        <span className="item">Wind km/h</span>
+                                                        <span className="item">Sun UV hrs</span>
+                                                        <span className="item">Air quality</span>
+
+                                                    </div>
+
+                                                    <div className="forecast-sub-line">
+
+
+                                                        <div className="item">
+                                                            <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(1)}</span>
+                                                        </div>
+                                                        <div className="item">
+                                                            <span>{forecastday.Day.Rain.Value.toFixed(0)}/{forecastday.Day.Snow.Value.toFixed(0)}</span>
+                                                        </div>
+
+                                                        <div className="item">
                                                     <span> {forecastday.Day.Wind.Direction.English}
                                                         {forecastday.Day.Wind.Speed.Value.toFixed(0)}/{forecastday.Day.WindGust.Speed.Value.toFixed(0)}</span>
+                                                        </div>
+
+                                                        <div className="item">
+                                                            <span>{forecastday.HoursOfSun} </span>
+                                                            <span> {forecastday.AirAndPollen[5].Category} </span>
+                                                        </div>
+                                                        <div className="item">
+                                                            <span>{forecastday.AirAndPollen[0].Category}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                {/*<div className="forecast-sub-line">*/}
-                                                    <div className="sun">
-                                                        <p>{forecastday.HoursOfSun} </p>
-                                                        <p> {forecastday.AirAndPollen[5].Category} </p>
-                                                    </div>
-                                                    <div className="air">
-                                                        <span>{forecastday.AirAndPollen[0].Category}</span>
-                                                    </div>
-                                                {/*</div>*/}
 
                                             </div>
 

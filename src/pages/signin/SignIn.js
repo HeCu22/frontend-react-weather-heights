@@ -8,8 +8,10 @@ import Mainnav from "../../components/mainnav/Mainnav";
 import Button from "../../components/button/Button";
 
 function SignIn() {
-    const [error, toggleError] = useState(false);
+
     const {loginFunction, checkHerokuFunction} = useContext(AuthContext);
+    const [error, setError] = useState('');
+
 
     const [formState, setFormState] = useState({
         inputPw: "",
@@ -17,7 +19,7 @@ function SignIn() {
     })
 
     const source = axios.CancelToken.source();
-    // mocht onze pagina ge-unmount worden voor we klaar zijn met data ophalen, aborten we het request
+    // mocht pagina ge-unmount worden voor klaar met data ophalen, abort request
     useEffect(() => {
         console.log('cleanup');
         checkHerokuFunction();
@@ -28,22 +30,28 @@ function SignIn() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        console.log('formsubmit', {formState});
         checkHerokuFunction();
-        toggleError(false);
-        console.log({formState});
-        try {
-            const {data: {accessToken}} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin',
-                {
-                    "username": formState.inputUser,
-                    "password": formState.inputPw,
-                });
-            console.log('accessToken', accessToken);
-            loginFunction(accessToken);
-        } catch (e) {
+        if (error) {
+            console.log('error check heroku', error)
+        } else {
+            setError('');
+            console.log('formsubmit', {formState});
+            try {
+                const {data: {accessToken}} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin',
+                    {
+                        "username": formState.inputUser,
+                        "password": formState.inputPw,
+                    });
+                console.log('accessToken', accessToken);
+                loginFunction(accessToken);
+            } catch (e) {
 
-            console.error(e);
-            toggleError(true);
+                console.error(e);
+                setError(e.response.status);
+                console.log('error login', e.response);
 
+            }
         }
 
     }

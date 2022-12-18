@@ -17,7 +17,7 @@ function MyLocations(props) {
     const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [more, toggleMore] = useState(false);
-    const [error, toggleError] = useState(false);
+    const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
 
     return (

@@ -3,12 +3,15 @@
     flex-direction: column;
 }
 
-.header-content {
-    flex-basis: 615px;
+.header-background {
+    display: flex;
+    flex-direction: row;
 }
 
-.tile {
-    flex-basis: 350px;
+
+
+.tile, .tilefirst {
+    flex-basis: 300px;
     flex-grow: 0.4;
     flex-shrink: 1;
     display: flex;
@@ -17,8 +20,10 @@
     background-color: var(--main-tile);
     border: 1px solid var(--bordertile);
     border-radius: 8px;
-    padding-left: 50px;
+    padding-left: 2px;
 }
+
+
 
 .currentconditions, .forecast-line, .tiles {
     width: 100%;
@@ -32,7 +37,7 @@
     margin: 0 10px;
 }
 
-.tiles {
+.tiles, .forecast-line {
     flex-wrap: wrap;
     margin: 0;
     gap: 2px;
@@ -46,15 +51,11 @@
 }
 
 .forecast-line {
-    display: flex;
-    gap: 2px;
-    flex-basis: 12px;
-    flex-grow: 0;
-    flex-shrink: 1;
+
     margin: 8px 0;
 }
 
-.wind, .rain, .temp, .sun, .air {
+.item, .blank {
     max-width: 100px;
     flex-basis: 50px;
     flex-grow: 0;
@@ -63,6 +64,11 @@
     gap: 2px;
     justify-content: center;
     padding: 0 5px;
+}
+
+.blank {
+    flex-basis: 30px;
+    padding: 0
 }
 
 
@@ -85,10 +91,18 @@
     font-size: 12px;
 }
 
-.forecast-sub-header {
+.forecast-sub-header, .forecast-sub-line {
     display: flex;
     gap: 15px;
     padding: 0 0 0 50px;
+    flex-basis: 40px;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+.forecast-sub-header {
+    font-size: 12px;
+
 }
 
 h5 {
