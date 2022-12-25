@@ -4,7 +4,8 @@ import {LocContext} from "../../context/LocContext";
 import Mainnav from "../../components/mainnav/Mainnav";
 import {Link} from "react-router-dom";
 import './MyPreferences.css';
-import Compare from "../../components/compare/Compare"
+import Compare from "../../components/compare/Compare";
+import Grid from "../../components/grid/Grid";
 import CounterResult from "../../components/CounterResult";
 import GridSlider from "../../components/gridslider/GridSlider";
 import {ReactComponent as Sort} from "../../assets/icons/adjust-v.svg";
@@ -19,6 +20,8 @@ function MyPreferences(props) {
     const [performCompare, setPerformCompare] = useState(false)
     const [counter, setCounter] = useState(0);
     const [lineSave, setLinesSave] = useState([{}]);
+    const [gridOn, toggleGridOn] = useState(true);
+
 
     const [state, setState] = useState({
         tempmin: 20,
@@ -80,8 +83,9 @@ function MyPreferences(props) {
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
-                    <li><Link to="/"> Regions</Link></li>
-                    <li> MyPreferences</li>
+
+                    <li> myPreferences</li>
+                    <li> myLocations</li>
                     {isAuthenticated &&
                         <li>
                             <button
@@ -93,10 +97,9 @@ function MyPreferences(props) {
                             </button>
                         </li>
                     }
-                    <GridSlider/>
-                    {isAuthenticated &&
-                        <li><Link to="/"> Top List </Link></li>
-                    }
+                    <GridSlider
+                        gridOn={gridOn}
+                        link="/mylocations"/>
                 </ul>
             </Mainnav>
 
@@ -107,7 +110,8 @@ function MyPreferences(props) {
                             <p>MyPreferences</p>
                             <div className="compare-values">
                                 <form id="compare-values" onSubmit={onFormSubmit}>
-                                    <h5>Selection <span className="filter"> <Filter/> </span> <span className="sort"><Sort/> </span></h5>
+                                    <h5>Selection <span className="filter"> <Filter/> </span> <span
+                                        className="sort"><Sort/> </span></h5>
 
                                     <label htmlFor="temp" className="row">
                                         <span>Temperature (°C):</span>
@@ -187,17 +191,17 @@ function MyPreferences(props) {
                                     </label>
                                     <br></br>
                                     <br></br>
-                                        <h4>More aspects in overview</h4>
-                                        <p>Realfeal (°C):</p>
-                                        <p>Air quality:</p>
-                                        <p>Visibility:</p>
+                                    <h4>More aspects in overview</h4>
+                                    <p>Realfeal (°C):</p>
+                                    <p>Air quality:</p>
+                                    <p>Visibility:</p>
 
                                 </form>
 
 
                             </div>
                         </div>
-                        {performCompare &&
+                        {performCompare ?
                             <div className="tile">
                                 {Object.keys(favLocations).length > 0 &&
                                     <Compare
@@ -212,6 +216,14 @@ function MyPreferences(props) {
                                     />
                                 }
                             </div>
+                            :
+                            <div className="tile">
+                                {Object.keys(favLocations).length > 0 &&
+                                    <Grid
+                                        key={(new Date())}
+                                        mylocations={favLocations}
+                                    />}
+                            </div>
                         }
                     </div>
                 </div>
@@ -219,7 +231,7 @@ function MyPreferences(props) {
 
             {console.log('Ik ben gerenderd', lineSave)}
         </>
-);
+    );
 }
 
 export default MyPreferences;

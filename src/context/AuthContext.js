@@ -33,7 +33,7 @@ function AuthContextProvider({children}) {
 
         } else {
             // anders state leeg!
-            console.log('invalid token')
+            console.log('no or invalid token')
             setAuth({
                 ...auth,
                 status: 'done',
@@ -52,8 +52,8 @@ function AuthContextProvider({children}) {
             // console.log(response.data);
         } catch (e) {
             console.error(e);
-            setError(e.response.status);
-            console.log('error checkheroku', e.response);
+            setError(e.message);
+            console.log('error checkheroku', e.message);
         }
     }
 
@@ -100,8 +100,8 @@ function AuthContextProvider({children}) {
 
         } catch (e) {
             console.error(e)
-            setError(e.response.status);
-            console.log('error userdata of', id, e.response);
+            setError(e.message);
+            console.log('error userdata of', id, e.message);
         }
 
     }
@@ -112,8 +112,7 @@ function AuthContextProvider({children}) {
 
 
     function checkheroku(token) {
-        checkHeroku()
-        console.log('heroku');
+        checkHeroku();
         if (error) {
             console.log('error', error)
         }

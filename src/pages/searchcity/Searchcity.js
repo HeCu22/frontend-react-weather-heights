@@ -4,7 +4,7 @@ import {Link, useHistory} from "react-router-dom";
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import Button from "../../components/button/Button";
 import departments from "../../data/adminarea.json";
-import france from "../../assets/images/overzichtskaart_Franse_Departementen.png";
+import france from "../../assets/images/Départements_de_France_English.svg_.png";
 
 
 

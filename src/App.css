@@ -69,10 +69,11 @@ main {
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 6px;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .row {
     display: flex;
     flex-direction: row;
@@ -121,7 +122,8 @@ main {
 
 .top-nav-menu {
     display: flex;
-    height: 30px;
+    height: 25px;
+    margin-top: 5px;
 
 }
 
@@ -245,6 +247,8 @@ main {
 }
 
 .card {
+    padding-top: 8px;
+    width: 300px;
     height: 300px;
     flex-basis: 300px;
     flex-grow: 0;
@@ -256,7 +260,11 @@ main {
 
 .top-card {
     border-color: var(--eggshell);
+    font-size: 1.5em;
+}
 
+.top-card .weather-detail {
+    text-align: center;
 }
 
 button {
@@ -298,6 +306,46 @@ button:disabled {
     /*border-color: #D08169;*/
     color: transparent;
 }
+
+
+.cards-button {
+    width: fit-content;
+    background: transparent;
+    border-color: var(--bordertile);
+    margin-top: 5px;
+    padding: 10px 10px 10px 10px;
+    color: var(--bordertile);
+    line-height: unset;
+    height: unset;
+    font-size: 18px;
+}
+
+
+.cards-button:hover {
+    background-color: var(--main-tile);
+    color: white;
+
+}
+
+.cards-button:hover:after {
+    color: var(--signal);
+    content: "making data calls!";
+    /*transition: all .4s ease-in-out;*/
+}
+
+.go-button {
+    width: fit-content;
+    background: transparent;
+    border: none;
+    line-height: unset;
+    height: unset;
+    font-size: 18px;
+    padding: unset;
+}
+
+.go-button:hover {
+    background-color: initial}
+
 
 .max {
     height: 414px;

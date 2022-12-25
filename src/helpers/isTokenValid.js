@@ -8,7 +8,7 @@ function isTokenValid(jwtToken) {
     const nowInUnix = Math.round(now / 1000); // UNIX timestamp van het huidige moment
 
     // seconden over wanneer we "nu" aftrekken van de expiratiedatum ?
-console.log(expirationUnix, nowInUnix);
+console.log('istokenvalid', expirationUnix, nowInUnix);
     if (expirationUnix - nowInUnix > 0) {
         return true;   // token is nog valid
     } else

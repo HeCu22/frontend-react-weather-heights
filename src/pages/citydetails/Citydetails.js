@@ -56,9 +56,7 @@ function Citydetails(props) {
 
     return (
         <>
-            {error &&
-                <span>  Something went wrong fetching the data  </span>
-            }
+
             {loading && <span>Loading...</span>}
 
             <Mainnav>
@@ -131,11 +129,12 @@ function Citydetails(props) {
             </main>
             <main className="outer-container main-background">
                 <div className="inner-container">
+
+                    {(error !== '') &&
+                        <span className="signal">  {error}, Something went wrong fetching the data  </span>
+                    }
                     <div className="tiles">
                         <div className="tile">
-                            {error &&
-                                <span>  Something went wrong fetching the data  </span>
-                            }
                             {loading && <span>Loading...</span>}
 
                             <div className="currentconditions">
@@ -208,9 +207,6 @@ function Citydetails(props) {
                             }
                         </div>
                         <div className="tile">
-                            {errorFc &&
-                                <span>  Something went wrong fetching the data  </span>
-                            }
                             {loading && <span>Loading...</span>}
                             <div className="forecast-header">
                                 <h5>Forecast</h5>
@@ -252,7 +248,7 @@ function Citydetails(props) {
 
 
                                                         <div className="item">
-                                                            <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(1)}</span>
+                                                            <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(0)}</span>
                                                         </div>
                                                         <div className="item">
                                                             <span>{forecastday.Day.Rain.Value.toFixed(0)}/{forecastday.Day.Snow.Value.toFixed(0)}</span>

@@ -15,21 +15,60 @@ function Home() {
     const [more, toggleMore] = useState(false);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
+    const [start, setStart] = useState(0);
+    const [end, setEnd] = useState(4);
+    const [counter,setCounter] = useState(0);
 
     regions.sort((a, b) => a.regioncapital - b.regioncapital);
-    console.log('regions', regions);
+
+    // console.log('regions', regions)
+
+    function goForward() {
+        console.log('blader', start, end);
+        setStart(end)
+        toggleMore(false);
+        if (end > regions.length + 4) {
+            setEnd(regions.length);
+
+        } else {
+            setEnd(end + 4)
+        }
+        ;
+    }
+
+
+    function goBackward() {
+        console.log('bladerterug', start, end);
+        setEnd(start);
+        toggleMore(false);
+
+        if (start > 3 ) {
+            setStart(start - 4);
+
+        } else {
+            setStart(0);
+        }
+        ;
+    }
+
+    useEffect(() => {
+        console.log('🍌 Ik ben voor de eerste keer gemount in home');
+    }, []);
+
+    useEffect(() => {
+        console.log('♻️ Ik ben geupdate in home');
+    }, [more]);
+
 
     return (
         <>
 
-            {error &&
-                <span>  Something went wrong fetching the data  </span>
-            }
             {loading && <span>Loading...</span>}
+
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
-                    <li><Link to="/"> Regions</Link></li>
+                    <li> Regions</li>
                     <li><Link to="/departments/75"> Departments </Link></li>
                     {isAuthenticated &&
                         <li><Link to="/mylocations"> MyLocations </Link></li>
@@ -60,6 +99,9 @@ function Home() {
                                     department="75"
                                     departmentname="Ville de Paris"
                                     more={more}
+                                    error={error}
+                                    setError={setError}
+                                    counter={counter} setCounter={setCounter}
                                 />
 
 
@@ -73,22 +115,34 @@ function Home() {
                 <div className="inner-container">
                     <div className="cards">
                         <p>Regions</p>
-                        <div className="cards-mid-content">
-                            <Button fieldClass="cards-button"
-                                    clickHandler={() => toggleMore(!more)}
-                                    isDisabled={false}> see weather of {regions.length} capitals ... </Button>
+                        {(error !== '') &&
+                            <span className="signal">  {error} Something went wrong fetching the data  </span>
+                        }
+                            {end >= regions.length && <span className="signal">Last page</span>}
+                        <span>
+                            <Button fieldClass="go-button"
+                                    clickHandler={goBackward}
+                                    isDisabled={start === 0}> <Back/> </Button>
+                            <Button
+                                fieldClass="go-button"
+                                clickHandler={goForward}
+                                isDisabled={end >= regions.length}> <Forward/></Button></span>
+
                         </div>
-                        <span><Back/> <Forward/></span>
-                    </div>
+                    <Button fieldClass="cards-button"
+                                clickHandler={() => toggleMore(!more)}
+                                isDisabled={more}> see more... </Button>
+
                     <div className="outer-container main-background">
                         <div className="inner-container">
 
                             <div className="outer-row">
 
-                                {regions.length > 0 && regions.map((region, index) => {
 
-                                    if (index < regions.length && region.name !== region.regionname) {
-                                        return <Article key={region.code}
+                                {regions.length > 0 && regions.slice(start, end).map((region, index) => {
+                                    //maximaal 4 entries en sla hoofdstad regio over
+                                    if (index < 4 && region.name !== region.regionname) {
+                                        return <Article key={region.code.concat(more)}
                                                         fieldClass="card"
                                                         pictureClass="small-picture-span"
                                                         tag={region.code}
@@ -99,6 +153,9 @@ function Home() {
                                                         department={region.regioncapital}
                                                         departmentname={region.regionname}
                                                         more={more}
+                                                        error={error}
+                                                        setError={setError}
+                                                        counter={counter} setCounter={setCounter}
                                         />
                                     }
 

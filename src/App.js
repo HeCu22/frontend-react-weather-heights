@@ -21,20 +21,19 @@ function App() {
     <Topnav/>
 
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/search">
-         <Searchcity/>
-        </Route>
+
+
         <Route exact path="/details/:city">
           <Citydetails />
         </Route>
         <Route exact path="/details/">
           <Citydetails />
         </Route>
-        <Route exact path="/departments/:department">
+        <Route path="/departments/:department">
           <Departments/>
+        </Route>
+        <Route path="/search">
+          <Searchcity/>
         </Route>
         <Route path="/mylocations">
           <MyLocations />
@@ -45,11 +44,14 @@ function App() {
         <Route path="/profile">
           {isAuthenticated ? <Profile /> : <Redirect to="/" />}
         </Route>
-        <Route exact path="/signin">
+        <Route path="/signin">
           <SignIn/>
         </Route>
-        <Route exact path="/signup">
+        <Route path="/signup">
           <SignUp/>
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
 
       </Switch>

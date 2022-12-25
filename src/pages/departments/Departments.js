@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ReactComponent as Goto} from "../../assets/icons/go.svg";
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
@@ -29,7 +29,9 @@ function Departments(props) {
     const [checked, toggleChecked] = useState(false);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
-
+    const [start, setStart] = useState(0);
+    const [end, setEnd] = useState(4);
+    const [counter, setCounter] = useState(0);
     const string = "".concat("FR-", department);
     const region = departments.find((departfound) => {
             return departfound.code === string
@@ -52,24 +54,55 @@ function Departments(props) {
         return found.regioncapital === `${department}`
     })
 
+    function goForward() {
+        console.log('blader', start, end);
+        setStart(end)
+        toggleMore(false);
+        if (end > regionDepartments.length + 4) {
+            setEnd(regionDepartments.length);
+
+        } else {
+            setEnd(end + 4)
+        }
+        ;
+    }
+
+    function goBackward() {
+        console.log('bladerterug', start, end);
+        setEnd(start);
+
+        if (start > 3) {
+            setStart(start - 4);
+
+        } else {
+            setStart(0);
+        }
+        ;
+    }
+
+    useEffect(() => {
+        console.log('🍌 Ik ben voor de eerste keer gemount in departments');
+    }, []);
+
+    useEffect(() => {
+        console.log('♻️ Ik ben geupdate in departments');
+    }, [more]);
+
+
     return (
         <>
 
-            {error &&
-                <span>  Something went wrong fetching the data  </span>
-            }
+
             {loading && <span>Loading...</span>}
-            {!regioncapital ? <span>Capital of this department is not capital or region. Go back to previous page.</span>
+            {!regioncapital ?
+                <span>Capital of this department is not capital or region. Go back to previous page.</span>
                 :
                 <>
                     <Mainnav>
                         <ul className="outer-row">
                             <li> France</li>
                             <li><Link to="/"> Regions</Link></li>
-                            <li><Link to="/"> Departments </Link></li>
-                            {isAuthenticated &&
-                                <li><Link to="/"> MyLocations </Link></li>
-                            }
+                            <li> Departments</li>
                             <li><Link to="/"> Cities </Link></li>
 
                         </ul>
@@ -97,6 +130,9 @@ function Departments(props) {
                                                 department={department}
                                                 departmentname={adminDepartment.EnglishName}
                                                 more={more}
+                                                error={error}
+                                                setError={setError}
+                                                counter={counter} setCounter={setCounter}
                                             />
 
 
@@ -110,36 +146,50 @@ function Departments(props) {
                         <div className="inner-container">
                             <div className="cards">
                                 <p>Departments</p>
-                                <div className="cards-mid-content">
-                                    <Button fieldClass="cards-button"
-                                            clickHandler={() => toggleMore(!more)}
-                                            isDisabled={false}> see weather of {regionDepartments.length} capitals ... </Button>
-                                </div>
-                                <span><Back/> <Forward/></span>
+                                {(error !== '') &&
+                                    <span className="signal">  {error} Something went wrong fetching the data  </span>
+                                }
+                                {end >= regions.length && <span className="signal">Last page</span>}
+                                <span>
+                            <Button fieldClass="go-button"
+                                    clickHandler={goBackward}
+                                    isDisabled={start === 0}> <Back/> </Button>
+                            <Button
+                                fieldClass="go-button"
+                                clickHandler={goForward}
+                                isDisabled={end >= regions.length}> <Forward/></Button></span>
+
                             </div>
+                            <Button fieldClass="cards-button"
+                                    clickHandler={() => toggleMore(!more)}
+                                    isDisabled={more}> see more ... </Button>
                             <div className="outer-container main-background">
                                 <div className="inner-container">
 
                                     <div className="outer-row">
 
-                                        {regionDepartments.length > 0 && regionDepartments.map((regDep, index) => {
-
-                                            if (index < 99 && !regDep.code.includes((department))) {
+                                        {regionDepartments.length > 0 && regionDepartments.slice(start, end).map((regDep, index) => {
+                                            //maximaal 4 entries en sla hoofdstad departement over
+                                            if (index < 4 && !regDep.code.includes((department))) {
 
                                                 // ophalen hoofdstad van department
-                                                const departmentCapital = depcapitals.find((depname) => {
-                                                    return depname.departmentcode === regDep.code.slice(-2)
+                                                const departmentCapital = depcapitals.find((depcapital) => {
+                                                    return depcapital.departmentcode === regDep.code.slice(-2)
                                                 })
-                                                return <Article key={regDep.code}
+                                                console.log(departmentCapital.departmentcode, regDep.code, counter);
+                                                return <Article key={regDep.code.concat(more)}
                                                                 fieldClass="card"
                                                                 pictureClass="small-picture-span"
                                                                 tag={regDep.parent}
-                                                                imagecode={imConstruct(regDep.code.slice(-2))}
+                                                                imagecode={imConstruct(departmentCapital.departmentcode)}
                                                                 region={regDep.name}
                                                                 city={departmentCapital.capitalname}
-                                                                department={regDep.code.slice(-2)}
+                                                                department={departmentCapital.departmentcode}
                                                                 departmentname={regDep.name}
                                                                 more={more}
+                                                                error={error}
+                                                                setError={setError}
+                                                                counter={counter} setCounter={setCounter}
                                                 />
                                             }
                                         })}

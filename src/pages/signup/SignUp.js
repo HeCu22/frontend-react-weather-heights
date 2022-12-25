@@ -21,7 +21,6 @@ function SignUp() {
         inputUser: "",
         inputPw: "",
         inputEmail: "",
-        inputExtra: "",
     })
 
     async function handleSubmit(e) {
@@ -38,8 +37,7 @@ function SignUp() {
                     "username": formState.inputUser,
                     "email": formState.inputEmail,
                     "password": formState.inputPw,
-                    "info": formState.inputExtra,
-                    "roles": ["user"],
+                    "roles": ["user","admin"],
                 });
             setMessage("User successfully registered")
 
@@ -109,16 +107,7 @@ function SignUp() {
                                            onChange={handleChange}/>
 
                                 </label>
-                                <br></br>
-                                <label htmlFor="input-extra">
-                                    <span>Extra information:</span>
-                                    <input type="tekst"
-                                           id="input-extra"
-                                           name="inputExtra"
-                                           value={formState.inputExtra}
-                                           onChange={handleChange}/>
 
-                                </label>
                             </legend>
 
 
