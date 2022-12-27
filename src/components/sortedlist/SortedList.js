@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './SortedList.css';
 import iconMapper from "../../helpers/iconMapper";
+import {LocContext} from "../../context/LocContext";
 
 
 function SortedList({lines, state, counter, setCounter}) {
+    const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [topList, setToplist] = useState(null);
 
     const currentDay = new Date();
@@ -28,8 +30,8 @@ function SortedList({lines, state, counter, setCounter}) {
     }
 
     function sort(list) {
-        const result = list.sort((a, b) => a.tempmax - b.tempmax)
-
+        // const result = list.sort((a, b) => a.tempmax - b.tempmax)
+        const result = list;
 
         const sortall = result.sort((a, b) => {
             if (state.tempsort) {
@@ -41,7 +43,7 @@ function SortedList({lines, state, counter, setCounter}) {
                 }
             }
 
-            // temp mut be equal
+            // temp must be equal
             if (state.rainsort) {
                 if (a.rain > b.rain) {
                     return -1;
@@ -81,7 +83,12 @@ function SortedList({lines, state, counter, setCounter}) {
         setToplist(resultfilter);
 
         const resultsort = sort(resultfilter);
-        setToplist(resultsort);
+        setToplist(resultsort)
+        const newFavLoc = resultsort.map((newrec) => {
+            return ({key: newrec.key, city: newrec.city});
+        })
+        console.log('new', newFavLoc)
+        setFavLocFunction(newFavLoc);
 
 
     }, [counter, state]);
@@ -90,38 +97,40 @@ function SortedList({lines, state, counter, setCounter}) {
         <>
 
             {topList && Object.keys(topList).length > 0 && topList.map((recordline, index) => {
+                if (index < 5) {
+                    return (
 
-                return (
-                    <div className="compare-grid" key={recordline.key}>
+                        <div className="compare-grid" key={recordline.key}>
 
-                        <div className="compare-sub-grid">
-                            <p> {recordline.city} </p>
-                            <p className="pictures"><span
-                                className="small-span"> {iconMapper(recordline.icon)} </span>
-                            </p>
-                            <p className="small-text"> {recordline.description}</p>
-                        </div>
-                        <div className="column">
-                            <div className="compare-sub-header">
-                                <p><span>Min/Max °C</span></p>
-                                <p>Rain mm</p>
-                                <p>Wind km/h</p>
-                                <p>Sun hrs</p>
-                                <p>Air quality</p>
-                            </div>
                             <div className="compare-sub-grid">
-
-                                <p> <span className="temp">{recordline.tempmin} / {recordline.temp} </span></p>
-                                <p className="rain"> {recordline.rain.toFixed(1)} </p>
-                                <p> {recordline.winddirection} {recordline.wind}/{recordline.windgust}</p>
-                                <p> {recordline.sunhrs}</p>
-                                <p> {recordline.airqual}
+                                <p> {recordline.city} </p>
+                                <p className="pictures"><span
+                                    className="small-span"> {iconMapper(recordline.icon)} </span>
                                 </p>
+                                <p className="small-text"> {recordline.description}</p>
+                            </div>
+                            <div className="column">
+                                <div className="compare-sub-header">
+                                    <p><span>Min/Max °C</span></p>
+                                    <p>Rain mm</p>
+                                    <p>Wind km/h</p>
+                                    <p>Sun hrs</p>
+                                    <p>Air quality</p>
+                                </div>
+                                <div className="compare-sub-grid">
 
+                                    <p><span className="temp">{recordline.tempmin} / {recordline.temp} </span></p>
+                                    <p className="rain"> {recordline.rain.toFixed(1)} </p>
+                                    <p> {recordline.winddirection} {recordline.wind}/{recordline.windgust}</p>
+                                    <p> {recordline.sunhrs}</p>
+                                    <p> {recordline.airqual}
+                                    </p>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )
+                    )
+                }
             })
             }
         </>

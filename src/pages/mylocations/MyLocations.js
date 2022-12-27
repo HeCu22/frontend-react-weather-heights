@@ -64,8 +64,8 @@ function MyLocations(props) {
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
+                    < li> myPreferences </li>
                     < li> myLocations</li>
-
                     <GridSlider
                         gridOn={gridOn}
                         link="/mypreferences"/>

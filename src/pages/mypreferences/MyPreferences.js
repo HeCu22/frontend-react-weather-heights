@@ -77,7 +77,7 @@ function MyPreferences(props) {
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
-            {counter > 6 && <p>Meer dan 6!!!!!</p>}
+            {/*{counter > 6 && <p>Meer dan 6!!!!!</p>}*/}
 
 
             <Mainnav>

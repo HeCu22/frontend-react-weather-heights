@@ -25,6 +25,7 @@ function SignUp() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        setError('');
         checkHerokuFunction();
 
         toggleLoading(true);
@@ -48,6 +49,7 @@ function SignUp() {
             console.log('error', e.response.status);
         }
         toggleLoading(false);
+        setFormState({...formState, inputPw: ''});
     }
 
     function handleChange(evt) {
@@ -100,7 +102,7 @@ function SignUp() {
                                 <br></br>
                                 <label htmlFor="input-pw">
                                     <span>Password:</span>
-                                    <input type="tekst"
+                                    <input type="password"
                                            id="input-pw"
                                            name="inputPw"
                                            value={formState.inputPw}

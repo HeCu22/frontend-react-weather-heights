@@ -35,6 +35,7 @@ function Citydetails(props) {
             fetchLocationCity((city), location, setLocation, error, setError, loading, toggleLoading);
             setBackground("outer-container impression01");
             // setLocation(tslocation[0]);
+
         }
     }, []);
 
@@ -70,7 +71,7 @@ function Citydetails(props) {
                 <div className="inner-container">
                     <div className="outer-row">
                         <div className="header-content">
-                            {location &&
+                            {location ?
                                 <>
                                     <h1>Weather Heights France {location.AdministrativeArea.EnglishName}</h1>
                                     <h2>{city.split(',')[0]}
@@ -90,6 +91,10 @@ function Citydetails(props) {
                                     <p><span
                                         className="small-text"> Coordinates: {location.GeoPosition.Latitude.toFixed(2)} / {location.GeoPosition.Longitude.toFixed(2)} </span>
                                     </p>
+                                </>
+                                : <>
+                                <h1>Weather Heights  </h1>
+                                    <h2>{city.split(',')[0]} department {city.split(',')[1]}</h2>
                                 </>
                             }
 
@@ -247,23 +252,24 @@ function Citydetails(props) {
                                                     <div className="forecast-sub-line">
 
 
-                                                        <div className="item">
+                                                        <div className="forecast-item">
                                                             <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(0)}</span>
                                                         </div>
-                                                        <div className="item">
+                                                        <div className="forecast-item">
                                                             <span>{forecastday.Day.Rain.Value.toFixed(0)}/{forecastday.Day.Snow.Value.toFixed(0)}</span>
                                                         </div>
 
-                                                        <div className="item">
+                                                        <div className="forecast-item">
                                                     <span> {forecastday.Day.Wind.Direction.English}
                                                         {forecastday.Day.Wind.Speed.Value.toFixed(0)}/{forecastday.Day.WindGust.Speed.Value.toFixed(0)}</span>
                                                         </div>
 
-                                                        <div className="item">
-                                                            <span>{forecastday.HoursOfSun} </span>
+                                                        <div className="forecast-item">
+
                                                             <span> {forecastday.AirAndPollen[5].Category} </span>
+                                                            <span>{forecastday.HoursOfSun} </span>
                                                         </div>
-                                                        <div className="item">
+                                                        <div className="forecast-item">
                                                             <span>{forecastday.AirAndPollen[0].Category}</span>
                                                         </div>
                                                     </div>

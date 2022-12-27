@@ -8,7 +8,7 @@ import SortedList from "../sortedlist/SortedList";
 
 function Compare({mylocations, state, linesSave, setLinesSave, counter, setCounter}) {
 
-    const {favLocations, setFavLocFunction} = useContext(LocContext);
+
     const [tempResult, setTempResult] = useState(null);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);

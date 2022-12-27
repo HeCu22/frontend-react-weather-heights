@@ -49,7 +49,7 @@ function AuthContextProvider({children}) {
         setError('');
         try {
             const response = await axios.get("https://frontend-educational-backend.herokuapp.com/api/test/all");
-            // console.log(response.data);
+            console.log('api bereikbaar');
         } catch (e) {
             console.error(e);
             setError(e.message);
@@ -94,7 +94,6 @@ function AuthContextProvider({children}) {
                     username: data.username,
                     email: data.email,
                     roles: data.roles,
-                    info: data.info,
                 },
             })
 

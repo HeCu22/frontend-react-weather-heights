@@ -69,6 +69,10 @@
     padding: 0
 }
 
+.forecast-item {
+    display: flex;
+    min-width: 60px;
+}
 
 .precipitation {
     flex-direction: column;

@@ -11,6 +11,7 @@ function SignIn() {
 
     const {loginFunction, checkHerokuFunction} = useContext(AuthContext);
     const [error, setError] = useState('');
+    const [loading, toggleLoading] = useState(false);
 
 
     const [formState, setFormState] = useState({
@@ -30,7 +31,9 @@ function SignIn() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log('formsubmit', {formState});
+        console.log('formsubmit', {formState})
+        setError('');
+        toggleLoading(true);
         checkHerokuFunction();
         if (error) {
             console.log('error check heroku', error)
@@ -53,11 +56,14 @@ function SignIn() {
 
             }
         }
+        setFormState({...formState, inputPw: ''});
+        toggleLoading(false);
 
     }
 
     function handleChange(evt) {
         evt.preventDefault()
+        setError('');
         checkHerokuFunction();
         const value = evt.target.value;
         setFormState({...formState, [evt.target.name]: value});
@@ -96,7 +102,7 @@ function SignIn() {
                                 <br></br>
                                 <label htmlFor="input-pw">
                                     <span>Password:</span>
-                                    <input type="tekst"
+                                    <input type="password"
                                            id="input-pw"
                                            name="inputPw"
                                            value={formState.inputPw}
