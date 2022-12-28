@@ -83,7 +83,7 @@ function Citydetails(props) {
                                                 marked={marked}
                                                 setMarked={setMarked}
                                                 locationKey={location.Key}
-                                                cityName={city}
+                                                cityName={city.split(',')[0]}
                                             />
                                         }
 
@@ -266,8 +266,7 @@ function Citydetails(props) {
 
                                                         <div className="forecast-item">
 
-                                                            <span> {forecastday.AirAndPollen[5].Category} </span>
-                                                            <span>{forecastday.HoursOfSun} </span>
+                                                            <span> {forecastday.AirAndPollen[5].Category} {forecastday.HoursOfSun} </span>
                                                         </div>
                                                         <div className="forecast-item">
                                                             <span>{forecastday.AirAndPollen[0].Category}</span>
