@@ -4,11 +4,9 @@ import axios from "axios";
 async function fetchForecast(locationKey, forecastData, setForecastData, error, setError, loading, toggleLoading) {
     toggleLoading(true);
     setError('');
-
-    console.log('fetchforecast')
     try {
         const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
-        console.log((data));
+        // console.log((data));
         setForecastData((data));
     } catch (e) {
 

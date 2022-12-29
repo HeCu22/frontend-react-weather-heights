@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect} from 'react'
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
-import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signin.css';
 import Mainnav from "../../components/mainnav/Mainnav";
 import Button from "../../components/button/Button";
@@ -22,7 +21,7 @@ function SignIn() {
     const source = axios.CancelToken.source();
     // mocht pagina ge-unmount worden voor klaar met data ophalen, abort request
     useEffect(() => {
-        console.log('cleanup');
+
         checkHerokuFunction();
         return function cleanup() {
             source.cancel();
@@ -31,7 +30,6 @@ function SignIn() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log('formsubmit', {formState})
         setError('');
         toggleLoading(true);
         checkHerokuFunction();
@@ -39,20 +37,18 @@ function SignIn() {
             console.log('error check heroku', error)
         } else {
             setError('');
-            console.log('formsubmit', {formState});
+
             try {
                 const {data: {accessToken}} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin',
                     {
                         "username": formState.inputUser,
                         "password": formState.inputPw,
                     });
-                console.log('accessToken', accessToken);
+
                 loginFunction(accessToken);
             } catch (e) {
-
                 console.error(e);
                 setError(e.response.status);
-                console.log('error login', e.response);
 
             }
         }
@@ -71,7 +67,7 @@ function SignIn() {
 
     return (
         <>
-
+            {loading && <span>Loading...</span>}
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>

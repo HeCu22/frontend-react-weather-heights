@@ -19,21 +19,18 @@ function AuthContextProvider({children}) {
         console.log('de contextAuth is zojuist opnieuw opgestart')
         // is er een token?
         const token = localStorage.getItem('weatherheightsToken');
-        console.log(token);
-
 
         if (token && isTokenValid(token)) {
             // is het nog geldig ?
             // token decoderen
             const decodedToken = jwtDecode(token);
-            console.log('decoded token', decodedToken);
 
             getUserdetails(token, decodedToken.sub)
 
 
         } else {
             // anders state leeg!
-            console.log('no or invalid token')
+
             setAuth({
                 ...auth,
                 status: 'done',
@@ -49,11 +46,10 @@ function AuthContextProvider({children}) {
         setError('');
         try {
             const response = await axios.get("https://frontend-educational-backend.herokuapp.com/api/test/all");
-            console.log('api bereikbaar');
         } catch (e) {
             console.error(e);
             setError(e.message);
-            console.log('error checkheroku', e.message);
+
         }
     }
 
@@ -70,7 +66,7 @@ function AuthContextProvider({children}) {
                     }
                 }
             );
-            console.log('get', data);
+
             if (data.roles.find((role) => {
                 return role.name === "ROLE_ADMIN";
             })) {
@@ -100,7 +96,7 @@ function AuthContextProvider({children}) {
         } catch (e) {
             console.error(e)
             setError(e.message);
-            console.log('error userdata of', id, e.message);
+
         }
 
     }
@@ -121,13 +117,11 @@ function AuthContextProvider({children}) {
 
     function login(token) {
 
-
-        console.log('token', token);
         // token opslaan in local storage
         localStorage.setItem('weatherheightsToken', token);
         // token decoderen
         const decodedToken = jwtDecode(token);
-        console.log('decoded token', decodedToken);
+
         // nieuwe data opvragen van gebruiker
         getUserdetails(token, decodedToken.sub);
         // loggen

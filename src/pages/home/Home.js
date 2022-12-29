@@ -11,7 +11,7 @@ import Mainnav from "../../components/mainnav/Mainnav";
 import {Link} from "react-router-dom";
 
 function Home() {
-    const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
+    const {isAuthenticated} = useContext(AuthContext);
     const [more, toggleMore] = useState(false);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
@@ -21,10 +21,7 @@ function Home() {
 
     regions.sort((a, b) => a.regioncapital - b.regioncapital);
 
-    // console.log('regions', regions)
-
     function goForward() {
-        console.log('blader', start, end);
         setStart(end)
         toggleMore(false);
         if (end > regions.length + 4) {
@@ -38,7 +35,6 @@ function Home() {
 
 
     function goBackward() {
-        console.log('bladerterug', start, end);
         setEnd(start);
         toggleMore(false);
 
@@ -52,11 +48,11 @@ function Home() {
     }
 
     useEffect(() => {
-        console.log('🍌 Ik ben voor de eerste keer gemount in home');
+        // console.log('gemount in home');
     }, []);
 
     useEffect(() => {
-        console.log('♻️ Ik ben geupdate in home');
+        // console.log('geupdate in home');
     }, [more]);
 
 

@@ -1,21 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
-
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
-import {AuthContext} from "../../context/AuthContext";
 import {LocContext} from "../../context/LocContext";
-
 import Mainnav from "../../components/mainnav/Mainnav";
-import {Link} from "react-router-dom";
-
 import './MyLocations.css';
 import GridSlider from "../../components/gridslider/GridSlider";
 import regions from "../../data/regions.json";
 
 function MyLocations(props) {
-    const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [more, toggleMore] = useState(false);
     const [error, setError] = useState('')
@@ -50,11 +44,11 @@ function MyLocations(props) {
     }
 
     useEffect(() => {
-        console.log('🍌 Ik ben voor de eerste keer gemount in mylocations');
+        // console.log('gemount in mylocations');
     }, []);
 
     useEffect(() => {
-        console.log('♻️ Ik ben geupdate in locations',more);
+        // console.log('geupdate in locations',more);
     }, [more]);
 
     return (

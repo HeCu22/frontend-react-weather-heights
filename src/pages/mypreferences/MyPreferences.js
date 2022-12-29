@@ -2,19 +2,17 @@ import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import {LocContext} from "../../context/LocContext";
 import Mainnav from "../../components/mainnav/Mainnav";
-import {Link} from "react-router-dom";
 import './MyPreferences.css';
 import Compare from "../../components/compare/Compare";
 import Grid from "../../components/grid/Grid";
-import CounterResult from "../../components/CounterResult";
 import GridSlider from "../../components/gridslider/GridSlider";
 import {ReactComponent as Sort} from "../../assets/icons/adjust-v.svg";
 import {ReactComponent as Filter} from "../../assets/icons/adjust-h.svg";
 
 
 function MyPreferences(props) {
-    const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
-    const {favLocations, setFavLocFunction} = useContext(LocContext);
+    const {isAuthenticated} = useContext(AuthContext);
+    const {favLocations} = useContext(LocContext);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
     const [performCompare, setPerformCompare] = useState(false)
@@ -45,40 +43,30 @@ function MyPreferences(props) {
             e.target.type === "checkbox" ? e.target.checked : e.target.value;
         setState({...state, [e.target.name]: value})
         setPerformCompare(false);
-
     }
 
     function compare() {
-        {
             setCounter(counter + 1);
-            console.log(counter);
             setPerformCompare(true);
-        }
-
     }
 
     useEffect(() => {
-        console.log('🍌 Ik ben voor de eerste keer gemount in myPreferences');
+        // console.log('gemount in myPreferences');
 
     }, []);
 
     useEffect(() => {
 
-        console.log('♻️ Ik ben geupdate in myPreferences');
+        // console.log('geupdate in myPreferences');
 
     }, [counter]);
 
     return (
         <>
-
-
-            {/*{counter < 4 && <CounterResult amount={counter}/>}*/}
             {error &&
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
-            {/*{counter > 6 && <p>Meer dan 6!!!!!</p>}*/}
-
 
             <Mainnav>
                 <ul className="outer-row">
@@ -229,7 +217,6 @@ function MyPreferences(props) {
                 </div>
             </main>
 
-            {console.log('Ik ben gerenderd', lineSave)}
         </>
     );
 }

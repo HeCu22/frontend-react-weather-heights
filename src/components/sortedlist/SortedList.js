@@ -8,24 +8,15 @@ function SortedList({lines, state, counter, setCounter}) {
     const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [topList, setToplist] = useState(null);
 
-    const currentDay = new Date();
-    console.log('Sorted List', currentDay);
-    console.log('props sorted list', lines, state);
-
-
     const arrayList = lines;
-
-    console.log('arraylist', arrayList);
-    console.log('state', state);
 
 
     function filter(list) {
-        console.log('list', list);
+
         const filter = list.filter((record) => {
-            console.log('record', record);
-            return record.temp > state.tempmin && record.temp < state.tempmax && record.wind <= state.windkmh;  /* && record.rain <= state.rainmm; */
+            return record.temp > state.tempmin && record.temp < state.tempmax && record.wind <= state.windkmh && record.rain <= state.rainmm;
         })
-        console.log('filter', filter);
+
         return filter;
     }
 
@@ -46,20 +37,20 @@ function SortedList({lines, state, counter, setCounter}) {
             // temp must be equal
             if (state.rainsort) {
                 if (a.rain > b.rain) {
-                    return -1;
+                    return 1;
                 }
                 if (a.rain < b.rain) {
-                    return 1;
+                    return -1;
                 }
             }
 
             // rain must be equal
             if (state.windsort) {
                 if (a.wind > b.wind) {
-                    return -1;
+                    return 1;
                 }
                 if (a.wind < b.wind) {
-                    return 1;
+                    return -1;
                 }
             }
 
@@ -74,10 +65,7 @@ function SortedList({lines, state, counter, setCounter}) {
 
 
     useEffect(() => {
-        console.log('♻️ Ik ben geupdate in SortedList');
-        if (counter > 6) {
-            console.log('🍓 Ik ben hoger dan 6!');
-        }
+
 
         const resultfilter = filter(arrayList);
         setToplist(resultfilter);
@@ -87,10 +75,9 @@ function SortedList({lines, state, counter, setCounter}) {
         const newFavLoc = resultsort.map((newrec) => {
             return ({key: newrec.key, city: newrec.city});
         })
-        console.log('new', newFavLoc)
-        setFavLocFunction(newFavLoc);
-
-
+        // optie om mylocations pook te sorteren achterwege gelaten voor deze versie
+       // setFavLocFunction(newFavLoc);
+        console.log('new', newFavLoc);
     }, [counter, state]);
 
     return (

@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react';
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
-import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signup.css';
 import Mainnav from "../../components/mainnav/Mainnav";
 import Button from "../../components/button/Button";
@@ -30,7 +29,7 @@ function SignUp() {
 
         toggleLoading(true);
         setMessage("");
-        console.log('state',formState);
+
         setError('');
         try {
             await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
@@ -46,7 +45,7 @@ function SignUp() {
 
             console.error(e);
             setError(e.response.status);
-            console.log('error', e.response.status);
+
         }
         toggleLoading(false);
         setFormState({...formState, inputPw: ''});
@@ -59,6 +58,8 @@ function SignUp() {
 
     return (
         <>
+            {loading && <span>Loading...</span>}
+
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>

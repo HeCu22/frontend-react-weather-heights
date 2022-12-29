@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Mainnav from "../../components/mainnav/Mainnav";
 import './Profile.css';
@@ -7,10 +7,7 @@ import {AuthContext} from "../../context/AuthContext";
 
 function Profile() {
 
-    const {isAuthenticated, userDetails, user, checkHerokuFunction} = useContext(AuthContext);
-    const [error, setError] = useState('');
-
-    console.log('user', user, isAuthenticated);
+    const {user} = useContext(AuthContext);
 
     return (
         <>

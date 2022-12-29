@@ -1,5 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {ReactComponent as Goto} from "../../assets/icons/go.svg";
+import React, {useEffect, useState} from 'react';
 import {ReactComponent as Back} from "../../assets/icons/back-arrow.svg";
 import {ReactComponent as Forward} from "../../assets/icons/forward-arrow.svg";
 import imConstruct from "../../helpers/imConstruct";
@@ -9,7 +8,6 @@ import regions from '../../data/regions.json';
 import depcapitals from '../../data/depcapitals.json';
 import Button from "../../components/button/Button";
 import Article from "../../components/article/Article";
-import {AuthContext} from "../../context/AuthContext";
 
 
 import './Departments.css';
@@ -20,13 +18,11 @@ import {Link, useParams} from "react-router-dom";
 function Departments(props) {
     const {department} = useParams();
 
-    const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
     const [currConditions, setCurrConditions] = useState(null);
     const [more, toggleMore] = useState(false);
-    const [marked, setMarked] = useState("white");
-    const [checked, toggleChecked] = useState(false);
+
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
     const [start, setStart] = useState(0);
@@ -55,7 +51,6 @@ function Departments(props) {
     })
 
     function goForward() {
-        console.log('blader', start, end);
         setStart(end)
         toggleMore(false);
         if (end > regionDepartments.length + 4) {
@@ -68,7 +63,7 @@ function Departments(props) {
     }
 
     function goBackward() {
-        console.log('bladerterug', start, end);
+
         setEnd(start);
 
         if (start > 3) {
@@ -81,11 +76,11 @@ function Departments(props) {
     }
 
     useEffect(() => {
-        console.log('🍌 Ik ben voor de eerste keer gemount in departments');
+        // console.log('gemount in departments');
     }, []);
 
     useEffect(() => {
-        console.log('♻️ Ik ben geupdate in departments');
+        // console.log('geupdate in departments');
     }, [more]);
 
 
@@ -176,7 +171,7 @@ function Departments(props) {
                                                 const departmentCapital = depcapitals.find((depcapital) => {
                                                     return depcapital.departmentcode === regDep.code.slice(-2)
                                                 })
-                                                console.log(departmentCapital.departmentcode, regDep.code, counter);
+
                                                 return <Article key={regDep.code.concat(more)}
                                                                 fieldClass="card"
                                                                 pictureClass="small-picture-span"

@@ -5,7 +5,6 @@ import iconMapper from "../../helpers/iconMapper";
 import './Article.css';
 import fetchConditions from "../../helpers/fetchConditions"
 import fetchLocationCity from "../../helpers/fetchLocationCity";
-import fetchLocationPC from "../../helpers/fetchLocactionPC";
 import fetchLocationData from "../../helpers/fetchLocationData";
 import test from "../../data/test.json";
 import tslocation from "../../data/tslocation.json";
@@ -34,60 +33,39 @@ function Article({
     const [loading, toggleLoading] = useState(false);
     const [currConditions, setCurrConditions] = useState(null)
     let teller = counter;
-    console.log('article props', tag,
-        imagecode,
-        locationKey,
-        region,
-        city,
-        department,
-        departmentname, more);
 
     useEffect(() => {
-        console.log('🍌 Ik ben gemount in article');
-
         // lees alleen location data bij de eerste  keer
         if (more && locationKey) {
-
             fetchLocationData(locationKey, location, setLocation, error, setError, loading, toggleLoading);
-            console.log('fetchkey');
             // setLocation(tslocation[1]);
             teller = teller + 1;
-
         } else {
             if (more && !location && city) {
                 fetchLocationCity(city.concat(',', department), location, setLocation, error, setError, loading, toggleLoading);
                 // setLocation(tslocation[0])
                 teller = teller + 1;
-
-                console.log('fetchcity');
-
             }
         }
 
-        console.log('counter mount', teller);
         setCounter(teller)
 
     }, []);
 
     useEffect(() => {
-
         // lees weerdata zodra location data gelezen en in state
-        console.log('♻ useeffect update more', locationKey, city, location, currConditions);
-
         if (more && !currConditions && location) {
             fetchConditions((location.Key), currConditions, setCurrConditions, error, setError, loading, toggleLoading);
             // setCurrConditions(test[0])
             teller = teller + 1;
-            console.log('fetchkey');
         }
         setCounter(teller);
-        console.log('counter update', teller);
     }, [location]);
 
 
     return (
         <>
-            {/*{counter  && <CounterResult amount={counter}/>}*/}
+
             <article className={fieldClass}>
 
 

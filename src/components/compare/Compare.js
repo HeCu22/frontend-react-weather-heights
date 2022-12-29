@@ -1,8 +1,6 @@
-import React, {useState, useEffect, useContext} from "react";
-
+import React, {useState, useEffect} from "react";
 import './Compare.css';
 import axios from "axios";
-import {LocContext} from "../../context/LocContext";
 import SortedList from "../sortedlist/SortedList";
 
 
@@ -25,7 +23,6 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
                 for (let indexI = 0; indexI < lengthA; indexI++) {
                     if (indexI < lengthA) {
-                        console.log('index', indexI, mylocations[indexI].key);
 
                         // when accuwaeather api is used
                         const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${mylocations[indexI].key}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
@@ -66,15 +63,14 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                         //     icon: data.weather[0].icon
                         // })
 
-                        console.log('linesSave', linesSave);
+                        // console.log('linesSave', linesSave);
 
-                        console.log('data', (data));
+                        // console.log('data', (data));
 
 
                     }
                 }
                 if (linesSave && !tempResult) {
-                    console.log('set')
                     setTempResult(linesSave);
 
                 }
@@ -90,16 +86,13 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
 
     useEffect(() => {
-        console.log('🍌 Ik ben voor de eerste keer gemount in compare');
+
         if (counter === 1) {
             toggleLoading(false);
 
-
-            console.log('mylocations', mylocations.length);
             if (mylocations.length > 0) {
                 fetchTemp();
                 if (linesSave && !tempResult) {
-                    console.log('set')
                     setTempResult(linesSave);
                     setLinesSave(linesSave);
                 }
@@ -108,7 +101,8 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
         } else {
             setTempResult(linesSave)
-        };
+        }
+        ;
     }, []);
 
 
@@ -119,8 +113,6 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                 <span>  Something went wrong fetching the data  </span>
             }
             {loading && <span>Loading...</span>}
-
-            {console.log('temp', tempResult, 'mylocations', lengthA)}
 
             <div className="compare-header">
                 <h1>Top locations</h1>
@@ -133,8 +125,6 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
             {(tempResult && tempResult.length === lengthA && Object.keys(tempResult).length === lengthA) &&
                 <>
-                    {console.log(tempResult.length, Object.keys(tempResult).length, mylocations.length)}
-
                     <SortedList
                         key={tempResult.key}
                         lines={tempResult}
@@ -143,7 +133,6 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                         setCounter={setCounter}
 
                     />
-
 
                 </>
             }

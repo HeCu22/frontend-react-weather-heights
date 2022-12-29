@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import './Searchcity.css';
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
-import Button from "../../components/button/Button";
 import departments from "../../data/adminarea.json";
 import france from "../../assets/images/Départements_de_France_English.svg_.png";
-
 
 
 function Searchcity(props) {
@@ -27,8 +25,6 @@ function Searchcity(props) {
         const value = e.target.value;
         setState({...state, [e.target.name]: value});
     }
-
-    console.log('departments', departments.length)
 
     return (
         <>
