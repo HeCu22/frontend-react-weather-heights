@@ -11,25 +11,60 @@ import Mainnav from "../../components/mainnav/Mainnav";
 import {Link} from "react-router-dom";
 
 function Home() {
-    const {isAuthenticated, userLogoutFunction, email} = useContext(AuthContext);
+    const {isAuthenticated} = useContext(AuthContext);
     const [more, toggleMore] = useState(false);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
+    const [start, setStart] = useState(0);
+    const [end, setEnd] = useState(4);
+    const [counter,setCounter] = useState(0);
 
     regions.sort((a, b) => a.regioncapital - b.regioncapital);
-    console.log('regions', regions);
+
+    function goForward() {
+        setStart(end)
+        toggleMore(false);
+        if (end > regions.length + 4) {
+            setEnd(regions.length);
+
+        } else {
+            setEnd(end + 4)
+        }
+        ;
+    }
+
+
+    function goBackward() {
+        setEnd(start);
+        toggleMore(false);
+
+        if (start > 3 ) {
+            setStart(start - 4);
+
+        } else {
+            setStart(0);
+        }
+        ;
+    }
+
+    useEffect(() => {
+        // console.log('gemount in home');
+    }, []);
+
+    useEffect(() => {
+        // console.log('geupdate in home');
+    }, [more]);
+
 
     return (
         <>
 
-            {error &&
-                <span>  Something went wrong fetching the data  </span>
-            }
             {loading && <span>Loading...</span>}
+
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
-                    <li><Link to="/"> Regions</Link></li>
+                    <li> Regions</li>
                     <li><Link to="/departments/75"> Departments </Link></li>
                     {isAuthenticated &&
                         <li><Link to="/mylocations"> MyLocations </Link></li>
@@ -49,7 +84,7 @@ function Home() {
                             <h1>Weather Heights France </h1>
                             <div className="outer-row">
                                 <Article
-                                    key="IDF"
+                                    key={"IDF".concat(more)}
                                     fieldClass="top-card"
                                     pictureClass="mid-picture-span"
                                     tag="IDF"
@@ -60,6 +95,9 @@ function Home() {
                                     department="75"
                                     departmentname="Ville de Paris"
                                     more={more}
+                                    error={error}
+                                    setError={setError}
+                                    counter={counter} setCounter={setCounter}
                                 />
 
 
@@ -73,22 +111,34 @@ function Home() {
                 <div className="inner-container">
                     <div className="cards">
                         <p>Regions</p>
-                        <div className="cards-mid-content">
-                            <Button fieldClass="cards-button"
-                                    clickHandler={() => toggleMore(!more)}
-                                    isDisabled={false}> see also current weather of capitals below... </Button>
+                        {(error !== '') &&
+                            <span className="signal">  {error} Something went wrong fetching the data  </span>
+                        }
+                            {end >= regions.length && <span className="signal">Last page</span>}
+                        <span>
+                            <Button fieldClass="go-button"
+                                    clickHandler={goBackward}
+                                    isDisabled={start === 0}> <Back/> </Button>
+                            <Button
+                                fieldClass="go-button"
+                                clickHandler={goForward}
+                                isDisabled={end >= regions.length}> <Forward/></Button></span>
+
                         </div>
-                        <span><Back/> <Forward/></span>
-                    </div>
+                    <Button fieldClass="cards-button"
+                                clickHandler={() => toggleMore(!more)}
+                                isDisabled={more}> see more... </Button>
+
                     <div className="outer-container main-background">
                         <div className="inner-container">
 
                             <div className="outer-row">
 
-                                {regions.length > 0 && regions.map((region, index) => {
 
-                                    if (index < regions.length) {
-                                        return <Article key={region.code}
+                                {regions.length > 0 && regions.slice(start, end).map((region, index) => {
+                                    //maximaal 4 entries en sla hoofdstad regio over
+                                    if (index < 4 && region.name !== region.regionname) {
+                                        return <Article key={region.code.concat(more)}
                                                         fieldClass="card"
                                                         pictureClass="small-picture-span"
                                                         tag={region.code}
@@ -99,6 +149,9 @@ function Home() {
                                                         department={region.regioncapital}
                                                         departmentname={region.regionname}
                                                         more={more}
+                                                        error={error}
+                                                        setError={setError}
+                                                        counter={counter} setCounter={setCounter}
                                         />
                                     }
 

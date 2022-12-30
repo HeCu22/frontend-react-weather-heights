@@ -42,3 +42,8 @@ ul {
     padding: 0px;
     gap: 48px;
 }
+
+svg {
+    width: 32;
+    height: 33;
+}

@@ -7,8 +7,7 @@
         Other
     4. Areas
         Header
-        Introduction
-        JokeList
+
         Button search
         Button next
         Footer
@@ -46,15 +45,13 @@ body {
 
 }
 
-main {
-    /*padding: 0 20px;*/
-}
+
 
 /* ------------------------------- 2. Typography ----------------------------------- */
 
-/* ------------------------------- Layout ----------------------------------- */
+
 /* ------------------------------- Reusables -------------------------------- */
-/* top-navigation */
+
 
 .outer-container {
     display: flex;
@@ -63,16 +60,27 @@ main {
     justify-content: center;
     /*background-color: greenyellow;*/
 }
-
 /* De buitenste container is altijd de volledige schermbreedte. Het is een flexbox container die zijn inhoud altijd netjes horizontaal centreert */
+.inner-container {
+    flex-basis: 1400px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*background-color: var(--main-header);*/
+}
+
 .outer-row {
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 6px;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .row {
     display: flex;
     flex-direction: row;
@@ -83,6 +91,82 @@ main {
     display: flex;
     flex-direction: column;
 }
+
+.max {
+    height: 414px;
+    /*flex-basis: 200px;*/
+    flex-grow: 0;
+    flex-shrink: 1;
+
+}
+
+.favorite-icon, .search-icon {
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+}
+
+.search-icon > path, .favorite-icon > path {
+    fill: grey;
+
+}
+
+.moved {
+    width: 100%;
+}
+
+.marked  {
+    fill: white;
+}
+
+.signal {
+    color: var(--signal);
+    font-weight: bold;
+}
+
+/* ------------------------------- Layout ----------------------------------- */
+
+footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+section {
+    background-color: #E7CEBA;
+    font-size: 10px;
+    height: 100px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section p {
+    max-width: 200px;
+}
+
+
+/* --------------- Headers ------------------ and ----- navigation ------------------*/
+
+/* Top Nav  */
+.top-navigation {
+    flex-basis: 50px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+
+}
+
+.top-nav-menu {
+    display: flex;
+    height: 25px;
+    margin-top: 5px;
+
+}
+
 
 .top-nav-background {
     background-color: #E9A372;
@@ -96,35 +180,13 @@ main {
 
 .main-background {
     background-color: var(--main-body);
-
+    min-height: 48vh;
 }
 
-.inner-container {
-    flex-basis: 1400px;
-    flex-grow: 0;
-    flex-shrink: 1;
-    margin: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /*background-color: var(--main-header);*/
+.no-main-header {
+    min-height: 78vh;
+    /*padding: 0 20px;*/
 }
-
-/* Top Nav  */
-.top-navigation {
-    flex-basis: 50px;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-wrap: wrap;
-
-}
-
-.top-nav-menu {
-    display: flex;
-    height: 30px;
-
-}
-
 
 .main-nav {
     display: flex;
@@ -141,9 +203,9 @@ main {
 
 .main-header-background {
     background: url('./assets/header-paris.jpg');
-
     background-repeat: no-repeat;
     background-size: cover;
+
 }
 
 .impression01 {
@@ -167,16 +229,7 @@ main {
 
 }
 
-.favorite-icon, .search-icon {
-    width: 32px;
-    height: 32px;
-    padding: 5px;
-}
 
-.search-icon > path, .favorite-icon > path {
-    fill: grey;
-
-}
 
 
 .left-nav {
@@ -229,7 +282,7 @@ main {
     font-size: 14px;
 }
 
-
+/* ------------------------------- cards -------------------------------- */
 
 .cards {
     width: 100%;
@@ -245,6 +298,8 @@ main {
 }
 
 .card {
+    padding-top: 8px;
+    width: 300px;
     height: 300px;
     flex-basis: 300px;
     flex-grow: 0;
@@ -256,9 +311,13 @@ main {
 
 .top-card {
     border-color: var(--eggshell);
-
+    font-size: 1.5em;
 }
 
+.top-card .weather-detail {
+    text-align: center;
+}
+/* ------------------------------- Buttons -------------------------------- */
 button {
     color: white;
     background: #E9A372;
@@ -294,53 +353,51 @@ button:hover {
 
 button:disabled {
     cursor: not-allowed;
-    border-color: #D08169;
-    color: gray;
+    background-color: transparent;
+    /*border-color: #D08169;*/
+    color: transparent;
 }
 
-.max {
-    height: 414px;
-    /*flex-basis: 200px;*/
-    flex-grow: 0;
-    flex-shrink: 1;
+
+.cards-button {
+    width: fit-content;
+    background: transparent;
+    border-color: var(--bordertile);
+    margin-top: 5px;
+    padding: 10px 10px 10px 10px;
+    color: var(--bordertile);
+    line-height: unset;
+    height: unset;
+    font-size: 18px;
+}
+
+
+.cards-button:hover {
+    background-color: var(--main-tile);
+    color: white;
 
 }
 
-.moved {
-    width: 100%;
-}
-
-.marked  {
-    fill: white;
-}
-
-.signal {
+.cards-button:hover:after {
     color: var(--signal);
-    font-weight: bold;
+    content: "making data calls!";
+    /*transition: all .4s ease-in-out;*/
 }
 
-
-footer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.go-button {
+    width: fit-content;
+    background: transparent;
+    border: none;
+    line-height: unset;
+    height: unset;
+    font-size: 18px;
+    padding: 8px 0 0 0;
 }
 
-section {
-    background-color: #E7CEBA;
-    font-size: 10px;
-    height: 100px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+.go-button:hover {
+    background-color: initial}
 
-section p {
-    max-width: 200px;
-}
+
 
 
 

@@ -5,14 +5,14 @@ import iconMapper from "../../helpers/iconMapper";
 import './Article.css';
 import fetchConditions from "../../helpers/fetchConditions"
 import fetchLocationCity from "../../helpers/fetchLocationCity";
-import fetchLocationPC from "../../helpers/fetchLocactionPC";
 import fetchLocationData from "../../helpers/fetchLocationData";
 import test from "../../data/test.json";
 import tslocation from "../../data/tslocation.json";
 import LocMarker from "../locmarker/LocMarker";
+import CounterResult from "../CounterResult";
 
-
-function Article({  fieldClass,
+function Article({
+                     fieldClass,
                      pictureClass,
                      tag,
                      imagecode,
@@ -21,82 +21,58 @@ function Article({  fieldClass,
                      city,
                      department,
                      departmentname,
-                     more
+                     more,
+                     error,
+                     setError,
+                     counter, setCounter
                  }) {
     const [location, setLocation] = useState(null);
     const [marked, setMarked] = useState("white");
     const [checked, toggleChecked] = useState(false);
-    const [error, setError] = useState('');
+
     const [loading, toggleLoading] = useState(false);
-    const [currConditions, setCurrConditions] = useState(null);
-    console.log('article props', tag,
-        imagecode,
-        locationKey,
-        region,
-        city,
-        department,
-        departmentname);
+    const [currConditions, setCurrConditions] = useState(null)
+    let teller = counter;
 
     useEffect(() => {
-        console.log('useeffect mount')
-        if (locationKey) {
-            console.log('locationKey', locationKey);
-            if (more) {
-                // fetchLocationData(locationKey, location, setLocation, error, setError, loading, toggleLoading);
-                setLocation(tslocation[1]);
-
-            }
+        // lees alleen location data bij de eerste  keer
+        if (more && locationKey) {
+            fetchLocationData(locationKey, location, setLocation, error, setError, loading, toggleLoading);
+            // setLocation(tslocation[1]);
+            teller = teller + 1;
         } else {
-            if (!location && city) {
-                if (more) {
-                    // fetchLocationCity(city.concat(',', department), location, setLocation, error, toggleError, loading, toggleLoading);
-                    setLocation(tslocation[0]);
-
-                }
-
-            } else {
-                if (!location && !city) {
-                    if (more) {
-                        // fetchLocationPC(department, location, setLocation, error, setError, loading, toggleLoading);
-                        setLocation(tslocation[0]);
-
-                    }
-                }
+            if (more && !location && city) {
+                fetchLocationCity(city.concat(',', department), location, setLocation, error, setError, loading, toggleLoading);
+                // setLocation(tslocation[0])
+                teller = teller + 1;
             }
         }
+
+        setCounter(teller)
 
     }, []);
 
     useEffect(() => {
-        console.log('useeffect update more', location, currConditions);
-        if (more && !location && city) {
-                // fetchLocationCity(city.concat(',', department), location, setLocation, error, setError, loading, toggleLoading);
-                setLocation(tslocation[0]);
-
-            }
+        // lees weerdata zodra location data gelezen en in state
         if (more && !currConditions && location) {
-            // fetchConditions((location.Key), currConditions, setCurrConditions, error, setError, loading, toggleLoading);
-            console.log('Loc more');
-            setCurrConditions(test[0]);
-
-
+            fetchConditions((location.Key), currConditions, setCurrConditions, error, setError, loading, toggleLoading);
+            // setCurrConditions(test[0])
+            teller = teller + 1;
         }
-
-    }, [more, location]);
+        setCounter(teller);
+    }, [location]);
 
 
     return (
         <>
 
-            {console.log('render', (currConditions), (location))}
             <article className={fieldClass}>
-                {error &&
-                    <span>  Something went wrong fetching the data  </span>
-                }
+
 
                 {loading && <span>Loading...</span>}
                 <span className="tag">{tag}</span>
                 <h1> {region} </h1>
+                {/*// indien gelezen via city*/}
                 {city ?
                     <h2><Link to={`/details/${city},${department}`}> {city} </Link>
                         {locationKey &&
@@ -125,6 +101,7 @@ function Article({  fieldClass,
                                     marked={marked}
                                     setMarked={setMarked}
                                     locationKey={location.Key}
+                                    cityName={city}
                                 />
                             </>
                         }
@@ -185,10 +162,10 @@ function Article({  fieldClass,
                     }
                 </div>
                 {/* search was done via locationKey */}
-                {(locationKey && location &&!city) &&
+                {(locationKey && location && !city) &&
                     <p>
                         <Link
-                        to={`/departments/${location.AdministrativeArea.ID}`}> {location.AdministrativeArea.ID} </Link>
+                            to={`/departments/${location.AdministrativeArea.ID}`}> {location.AdministrativeArea.ID} </Link>
                         <span> {location.AdministrativeArea.EnglishName} </span>
                     </p>
                 }
@@ -200,7 +177,7 @@ function Article({  fieldClass,
                     </p>
                 }
                 {/* search was done via postalcode */}
-                {(!city && location.includes("_PC")) &&
+                {(!city && locationKey.includes("_PC")) &&
                     <p><span
                         className="small-text"> {department} {departmentname} ,Arrondissement: {location.SupplementalAdminAreas[0].EnglishName} </span>
 

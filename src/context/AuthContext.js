@@ -16,24 +16,21 @@ function AuthContextProvider({children}) {
 
 
     useEffect(() => {
-        console.log('de contextAuth is zojuist opnieuw opgestart')
+        // console.log('de contextAuth is zojuist opnieuw opgestart')
         // is er een token?
         const token = localStorage.getItem('weatherheightsToken');
-        console.log(token);
-
 
         if (token && isTokenValid(token)) {
             // is het nog geldig ?
             // token decoderen
             const decodedToken = jwtDecode(token);
-            console.log('decoded token', decodedToken);
 
             getUserdetails(token, decodedToken.sub)
 
 
         } else {
             // anders state leeg!
-            console.log('invalid token')
+
             setAuth({
                 ...auth,
                 status: 'done',
@@ -49,11 +46,10 @@ function AuthContextProvider({children}) {
         setError('');
         try {
             const response = await axios.get("https://frontend-educational-backend.herokuapp.com/api/test/all");
-            // console.log(response.data);
         } catch (e) {
             console.error(e);
-            setError(e.response.status);
-            console.log('error checkheroku', e.response);
+            setError(e.message);
+
         }
     }
 
@@ -70,7 +66,7 @@ function AuthContextProvider({children}) {
                     }
                 }
             );
-            console.log('get', data);
+
             if (data.roles.find((role) => {
                 return role.name === "ROLE_ADMIN";
             })) {
@@ -94,14 +90,13 @@ function AuthContextProvider({children}) {
                     username: data.username,
                     email: data.email,
                     roles: data.roles,
-                    info: data.info,
                 },
             })
 
         } catch (e) {
             console.error(e)
-            setError(e.response.status);
-            console.log('error userdata of', id, e.response);
+            setError(e.message);
+
         }
 
     }
@@ -112,8 +107,7 @@ function AuthContextProvider({children}) {
 
 
     function checkheroku(token) {
-        checkHeroku()
-        console.log('heroku');
+        checkHeroku();
         if (error) {
             console.log('error', error)
         }
@@ -123,17 +117,15 @@ function AuthContextProvider({children}) {
 
     function login(token) {
 
-
-        console.log('token', token);
         // token opslaan in local storage
         localStorage.setItem('weatherheightsToken', token);
         // token decoderen
         const decodedToken = jwtDecode(token);
-        console.log('decoded token', decodedToken);
+
         // nieuwe data opvragen van gebruiker
         getUserdetails(token, decodedToken.sub);
         // loggen
-        console.log('Gebruiker is ingelogd!');
+        // console.log('Gebruiker is ingelogd!');
         // redirect
         history.push('/');
     }
@@ -148,7 +140,7 @@ function AuthContextProvider({children}) {
             user: null,
         });
         // loggen
-        console.log('user is uitgelogd');
+        // console.log('user is uitgelogd');
         // redirect
         history.push('/');
     }

@@ -8,19 +8,19 @@ function LocMarker({checked, toggleChecked, marked, setMarked, locationKey, city
     const {favLocations, setFavLocFunction} = useContext(LocContext);
 
 
-    console.log('prop', checked, marked, locationKey, cityName);
+    // console.log('prop', checked, marked, locationKey, cityName);
     if (favLocations) {
         const lookupLoc = favLocations.find((found) => {
             return found.key === `${locationKey}`;
         });
 
         if (lookupLoc) {
-            console.log('found', true);
+            // console.log('found', true);
             toggleChecked(true);
             setMarked("var(--bordertile)");
         }
+        // console.log('prop2', checked, marked);
     }
-    console.log('prop2', checked, marked);
 
     function toggleMarkOnClick(e) {
         if (checked) {
@@ -30,7 +30,7 @@ function LocMarker({checked, toggleChecked, marked, setMarked, locationKey, city
 
         } else {
             setMarked("var(--bordertile)");
-            console.log('push', favLocations);
+            // console.log('push', favLocations);
             if (Object.keys(favLocations).length > 0 && !favLocations[0].key) {
                 favLocations[0] = ({key: locationKey, city: cityName})
             } else {
@@ -47,7 +47,7 @@ function LocMarker({checked, toggleChecked, marked, setMarked, locationKey, city
 
     return (
         <>
-            {console.log('check', checked)}
+            {/*{console.log('check', checked)}*/}
 
             <span className="star-wrapper">
                 <input type="checkbox"

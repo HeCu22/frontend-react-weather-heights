@@ -36,14 +36,3 @@ h2 {
      /*padding: 16px;*/
 }
 
-.cards-button {
-    width: 100%;
-    background: var(--main-tile);
-    border-color: var(--bordertile);
-    margin-top: 5px;
-    /*padding: 10px 10px 10px 10px;*/
-    color: var(--bordertile);
-    line-height: unset;
-    height: unset;
-    font-size: 18px;
-}

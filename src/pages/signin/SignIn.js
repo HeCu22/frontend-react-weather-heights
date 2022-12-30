@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect} from 'react'
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
-import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signin.css';
 import Mainnav from "../../components/mainnav/Mainnav";
 import Button from "../../components/button/Button";
@@ -11,6 +10,7 @@ function SignIn() {
 
     const {loginFunction, checkHerokuFunction} = useContext(AuthContext);
     const [error, setError] = useState('');
+    const [loading, toggleLoading] = useState(false);
 
 
     const [formState, setFormState] = useState({
@@ -21,7 +21,7 @@ function SignIn() {
     const source = axios.CancelToken.source();
     // mocht pagina ge-unmount worden voor klaar met data ophalen, abort request
     useEffect(() => {
-        console.log('cleanup');
+
         checkHerokuFunction();
         return function cleanup() {
             source.cancel();
@@ -30,34 +30,36 @@ function SignIn() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log('formsubmit', {formState});
+        setError('');
+        toggleLoading(true);
         checkHerokuFunction();
         if (error) {
             console.log('error check heroku', error)
         } else {
             setError('');
-            console.log('formsubmit', {formState});
+
             try {
                 const {data: {accessToken}} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin',
                     {
                         "username": formState.inputUser,
                         "password": formState.inputPw,
                     });
-                console.log('accessToken', accessToken);
+
                 loginFunction(accessToken);
             } catch (e) {
-
                 console.error(e);
                 setError(e.response.status);
-                console.log('error login', e.response);
 
             }
         }
+        setFormState({...formState, inputPw: ''});
+        toggleLoading(false);
 
     }
 
     function handleChange(evt) {
         evt.preventDefault()
+        setError('');
         checkHerokuFunction();
         const value = evt.target.value;
         setFormState({...formState, [evt.target.name]: value});
@@ -65,7 +67,7 @@ function SignIn() {
 
     return (
         <>
-
+            {loading && <span>Loading...</span>}
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -74,7 +76,7 @@ function SignIn() {
                 </ul>
             </Mainnav>
 
-            <main className="outer-container empty-header-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="mid">
                         <h1>Sign In</h1>
@@ -96,7 +98,7 @@ function SignIn() {
                                 <br></br>
                                 <label htmlFor="input-pw">
                                     <span>Password:</span>
-                                    <input type="tekst"
+                                    <input type="password"
                                            id="input-pw"
                                            name="inputPw"
                                            value={formState.inputPw}

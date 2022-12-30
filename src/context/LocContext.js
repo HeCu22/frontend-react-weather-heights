@@ -7,7 +7,7 @@ function LocContextProvider({children}) {
     );
 
     useEffect(() => {
-        console.log('de contextLoc is zojuist opnieuw opgestart');
+        // console.log('de contextLoc is zojuist opnieuw opgestart');
         if (JSON.parse(localStorage["weatherheightsMyLocations"] || null)) {
             const locationsInStorage = JSON.parse(localStorage.getItem('weatherheightsMyLocations'));
             if (locationsInStorage) {

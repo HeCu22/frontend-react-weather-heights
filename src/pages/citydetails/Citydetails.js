@@ -17,7 +17,7 @@ import LocMarker from "../../components/locmarker/LocMarker";
 
 function Citydetails(props) {
     const {city} = useParams();
-    const words = city.split(',');
+    const [words, setWords] = useState(city.split(','));
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
     const [more, toggleMore] = useState(false);
@@ -32,9 +32,13 @@ function Citydetails(props) {
 
     useEffect(() => {
         if (!location) {
-            fetchLocationCity((city), location, setLocation, error, setError, loading, toggleLoading);
+            let searchcity = city;
+            if (words[1] === "undefined") {searchcity = words[0].concat(",FR")}
+            // console.log('fetchcity', searchcity)
+            fetchLocationCity((searchcity), location, setLocation, error, setError, loading, toggleLoading);
             setBackground("outer-container impression01");
             // setLocation(tslocation[0]);
+
         }
     }, []);
 
@@ -56,9 +60,7 @@ function Citydetails(props) {
 
     return (
         <>
-            {error &&
-                <span>  Something went wrong fetching the data  </span>
-            }
+
             {loading && <span>Loading...</span>}
 
             <Mainnav>
@@ -72,10 +74,10 @@ function Citydetails(props) {
                 <div className="inner-container">
                     <div className="outer-row">
                         <div className="header-content">
-                            {location &&
+                            {location ?
                                 <>
                                     <h1>Weather Heights France {location.AdministrativeArea.EnglishName}</h1>
-                                    <h2>{city.split(',')[0]}
+                                    <h2>{words[0]}
                                         {location &&
                                             <LocMarker
                                                 key={location.Key}
@@ -84,7 +86,7 @@ function Citydetails(props) {
                                                 marked={marked}
                                                 setMarked={setMarked}
                                                 locationKey={location.Key}
-                                                cityName={city}
+                                                cityName={words[0]}
                                             />
                                         }
 
@@ -93,11 +95,19 @@ function Citydetails(props) {
                                         className="small-text"> Coordinates: {location.GeoPosition.Latitude.toFixed(2)} / {location.GeoPosition.Longitude.toFixed(2)} </span>
                                     </p>
                                 </>
+                                : <>
+                                    <h1>Weather Heights </h1>
+                                    {words[1] === "undefined" ?
+                                        <h2>{words[0]} </h2>
+                                        : <h2>{words[0]} department {words[1]}</h2>}
+
+                                </>
                             }
 
                             <Button fieldClass="header-button"
                                     clickHandler={() => toggleMore(!more)}
-                                    isDisabled={false}> See more <Goto className="search-icon"/></Button>
+                                    isDisabled={more}> See more <Goto className="go-icon"/>
+                            </Button>
 
                             <div className='row'>
                                 {currConditions &&
@@ -130,11 +140,12 @@ function Citydetails(props) {
             </main>
             <main className="outer-container main-background">
                 <div className="inner-container">
+
+                    {(error !== '') &&
+                        <span className="signal">  {error}, Something went wrong fetching the data  </span>
+                    }
                     <div className="tiles">
                         <div className="tile">
-                            {error &&
-                                <span>  Something went wrong fetching the data  </span>
-                            }
                             {loading && <span>Loading...</span>}
 
                             <div className="currentconditions">
@@ -207,9 +218,6 @@ function Citydetails(props) {
                             }
                         </div>
                         <div className="tile">
-                            {errorFc &&
-                                <span>  Something went wrong fetching the data  </span>
-                            }
                             {loading && <span>Loading...</span>}
                             <div className="forecast-header">
                                 <h5>Forecast</h5>
@@ -250,23 +258,23 @@ function Citydetails(props) {
                                                     <div className="forecast-sub-line">
 
 
-                                                        <div className="item">
-                                                            <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(1)}</span>
+                                                        <div className="forecast-item">
+                                                            <span>{forecastday.Temperature.Minimum.Value.toFixed(0)}/{forecastday.Temperature.Maximum.Value.toFixed(0)}</span>
                                                         </div>
-                                                        <div className="item">
+                                                        <div className="forecast-item">
                                                             <span>{forecastday.Day.Rain.Value.toFixed(0)}/{forecastday.Day.Snow.Value.toFixed(0)}</span>
                                                         </div>
 
-                                                        <div className="item">
+                                                        <div className="forecast-item">
                                                     <span> {forecastday.Day.Wind.Direction.English}
                                                         {forecastday.Day.Wind.Speed.Value.toFixed(0)}/{forecastday.Day.WindGust.Speed.Value.toFixed(0)}</span>
                                                         </div>
 
-                                                        <div className="item">
-                                                            <span>{forecastday.HoursOfSun} </span>
-                                                            <span> {forecastday.AirAndPollen[5].Category} </span>
+                                                        <div className="forecast-item">
+
+                                                            <span> {forecastday.AirAndPollen[5].Category} {forecastday.HoursOfSun} </span>
                                                         </div>
-                                                        <div className="item">
+                                                        <div className="forecast-item">
                                                             <span>{forecastday.AirAndPollen[0].Category}</span>
                                                         </div>
                                                     </div>

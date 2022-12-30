@@ -1,15 +1,12 @@
-import React, {useState, useEffect, useContext} from "react";
-
+import React, {useState, useEffect} from "react";
 import './Compare.css';
-import test from "../../data/compare.json";
 import axios from "axios";
-import {LocContext} from "../../context/LocContext";
 import SortedList from "../sortedlist/SortedList";
 
 
 function Compare({mylocations, state, linesSave, setLinesSave, counter, setCounter}) {
 
-    const {favLocations, setFavLocFunction} = useContext(LocContext);
+
     const [tempResult, setTempResult] = useState(null);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
@@ -26,9 +23,11 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
                 for (let indexI = 0; indexI < lengthA; indexI++) {
                     if (indexI < lengthA) {
-                        console.log('index', indexI, mylocations[indexI].key);
 
+                        // when accuwaeather api is used
                         const {data} = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${mylocations[indexI].key}?apikey=${process.env.REACT_APP_API_KEY}&details=true&metric=true`);
+
+                        // for test purpose, when openwaeather api is used
                         // const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${mylocations[indexI].key}&lang=en&appid=${process.env.REACT_APP_API_OW_KEY}&units=metric`);
 
 
@@ -46,14 +45,12 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                             sunhrs: data.DailyForecasts[0].HoursOfSun,
                             airqual: data.DailyForecasts[0].AirAndPollen[0].Category
                         })
-
-                        // let rain = 0;
                         //
+                        // for test purpose, when openwaeather api is used
+                        // let rain = 0;
                         // if ((data.rain)) {
                         //     rain = data.rain[indexI];
                         // }
-                        //
-                        //
                         // lines[indexI] = ({
                         //     key: mylocations[indexI].key,
                         //     city: mylocations[indexI].city,
@@ -66,15 +63,14 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                         //     icon: data.weather[0].icon
                         // })
 
-                        console.log('linesSave', linesSave);
+                        // console.log('linesSave', linesSave);
 
-                        console.log('data', (data));
+                        // console.log('data', (data));
 
 
                     }
                 }
                 if (linesSave && !tempResult) {
-                    console.log('set')
                     setTempResult(linesSave);
 
                 }
@@ -90,16 +86,13 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
 
     useEffect(() => {
-        console.log('🍌 Ik ben voor de eerste keer gemount in compare');
+
         if (counter === 1) {
             toggleLoading(false);
 
-
-            console.log('mylocations', mylocations.length);
             if (mylocations.length > 0) {
                 fetchTemp();
                 if (linesSave && !tempResult) {
-                    console.log('set')
                     setTempResult(linesSave);
                     setLinesSave(linesSave);
                 }
@@ -108,7 +101,8 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
         } else {
             setTempResult(linesSave)
-        };
+        }
+
     }, []);
 
 
@@ -120,12 +114,10 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
             }
             {loading && <span>Loading...</span>}
 
-            {console.log('temp', tempResult, 'mylocations', lengthA)}
-
             <div className="compare-header">
-                <h5>Comparison</h5>
+                <h1>Top locations</h1>
                 <div className="compare-sub-header">
-                    <p>ForecastToday</p>
+                    <p>Forecasted Today</p>
 
                 </div>
 
@@ -133,17 +125,12 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
 
             {(tempResult && tempResult.length === lengthA && Object.keys(tempResult).length === lengthA) &&
                 <>
-                    {console.log(tempResult.length, Object.keys(tempResult).length, mylocations.length)}
-
                     <SortedList
                         key={tempResult.key}
                         lines={tempResult}
                         state={state}
-                        counter={counter}
-                        setCounter={setCounter}
 
                     />
-
 
                 </>
             }

@@ -1,15 +1,12 @@
 import React from "react";
 import axios from "axios";
 
-
 async function fetchConditions(locationKey, currConditions, setCurrConditions, error, setError, loading, toggleLoading) {
     toggleLoading(true);
     setError('');
-
-    console.log('fetchconditions')
-    try {
+       try {
         const {data: [data]} = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true`);
-        console.log((data));
+        // console.log((data));
         setCurrConditions((data));
     } catch (e) {
         console.error(e);

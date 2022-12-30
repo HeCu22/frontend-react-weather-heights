@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react';
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
-import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signup.css';
 import Mainnav from "../../components/mainnav/Mainnav";
 import Button from "../../components/button/Button";
@@ -21,16 +20,16 @@ function SignUp() {
         inputUser: "",
         inputPw: "",
         inputEmail: "",
-        inputExtra: "",
     })
 
     async function handleSubmit(e) {
         e.preventDefault()
+        setError('');
         checkHerokuFunction();
 
         toggleLoading(true);
         setMessage("");
-        console.log('state',formState);
+
         setError('');
         try {
             await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup',
@@ -38,7 +37,6 @@ function SignUp() {
                     "username": formState.inputUser,
                     "email": formState.inputEmail,
                     "password": formState.inputPw,
-                    "info": formState.inputExtra,
                     "roles": ["user"],
                 });
             setMessage("User successfully registered")
@@ -47,9 +45,10 @@ function SignUp() {
 
             console.error(e);
             setError(e.response.status);
-            console.log('error', e.response.status);
+
         }
         toggleLoading(false);
+        setFormState({...formState, inputPw: ''});
     }
 
     function handleChange(evt) {
@@ -59,6 +58,8 @@ function SignUp() {
 
     return (
         <>
+            {loading && <span>Loading...</span>}
+
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -66,7 +67,7 @@ function SignUp() {
                 </ul>
             </Mainnav>
 
-            <main className="outer-container empty-header-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="mid">
                         <h1>Register</h1>
@@ -102,23 +103,14 @@ function SignUp() {
                                 <br></br>
                                 <label htmlFor="input-pw">
                                     <span>Password:</span>
-                                    <input type="tekst"
+                                    <input type="password"
                                            id="input-pw"
                                            name="inputPw"
                                            value={formState.inputPw}
                                            onChange={handleChange}/>
 
                                 </label>
-                                <br></br>
-                                <label htmlFor="input-extra">
-                                    <span>Extra information:</span>
-                                    <input type="tekst"
-                                           id="input-extra"
-                                           name="inputExtra"
-                                           value={formState.inputExtra}
-                                           onChange={handleChange}/>
 
-                                </label>
                             </legend>
 
 

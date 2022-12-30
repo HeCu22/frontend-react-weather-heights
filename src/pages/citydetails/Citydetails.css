@@ -1,14 +1,12 @@
-.conditions {
-    display: flex;
-    flex-direction: column;
+
+.go-icon {
+    /*position: absolute;*/
+    stroke: white;
 }
 
-.header-background {
-    display: flex;
-    flex-direction: row;
+.header-button:disabled > .go-icon {
+    stroke: none;
 }
-
-
 
 .tile, .tilefirst {
     flex-basis: 300px;
@@ -71,6 +69,10 @@
     padding: 0
 }
 
+.forecast-item {
+    display: flex;
+    min-width: 60px;
+}
 
 .precipitation {
     flex-direction: column;

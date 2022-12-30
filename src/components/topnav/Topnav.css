@@ -5,10 +5,22 @@ a {
 
 .top-nav-menu button {
     border: none;
-    height: 68px;
+    height: 64px;
     border-radius: 0;
     line-height: 30px;
     padding-left: 0;
+}
+
+.top-nav-menu ul {
+    gap: 1px;
+}
+.top-nav-menu li {
+    border-right: solid 1px whitesmoke;
+    padding: 0 8px;
+}
+
+li:last-child {
+    border: none;
 }
 
 
