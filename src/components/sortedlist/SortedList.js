@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SortedList.css';
 import iconMapper from "../../helpers/iconMapper";
-import {LocContext} from "../../context/LocContext";
+// import {LocContext} from "../../context/LocContext";
 
 
-function SortedList({lines, state, counter, setCounter}) {
-    const {favLocations, setFavLocFunction} = useContext(LocContext);
+function SortedList({lines, state}) {
+    // const {favLocations, setFavLocFunction} = useContext(LocContext);
     const [topList, setToplist] = useState(null);
 
     const arrayList = lines;
@@ -21,10 +21,7 @@ function SortedList({lines, state, counter, setCounter}) {
     }
 
     function sort(list) {
-        // const result = list.sort((a, b) => a.tempmax - b.tempmax)
-        const result = list;
-
-        const sortall = result.sort((a, b) => {
+        const sortall = list.sort((a, b) => {
             if (state.tempsort) {
                 if (a.temp > b.temp) {
                     return -1;
@@ -66,19 +63,20 @@ function SortedList({lines, state, counter, setCounter}) {
 
     useEffect(() => {
 
-
         const resultfilter = filter(arrayList);
         setToplist(resultfilter);
 
         const resultsort = sort(resultfilter);
         setToplist(resultsort)
-        const newFavLoc = resultsort.map((newrec) => {
-            return ({key: newrec.key, city: newrec.city});
-        })
-        // optie om mylocations pook te sorteren achterwege gelaten voor deze versie
-       // setFavLocFunction(newFavLoc);
-        console.log('new', newFavLoc);
-    }, [counter, state]);
+
+        // optie om mylocations ook te sorteren achterwege gelaten voor deze versie
+        // const newFavLoc = resultsort.map((newrec) => {
+        //     return ({key: newrec.key, city: newrec.city});
+        // })
+        // setFavLocFunction(newFavLoc);
+        // console.log('new', newFavLoc);
+
+    }, [state]);
 
     return (
         <>

@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { Route, Switch, Redirect } from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import {AuthContext} from "./context/AuthContext";
 import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
@@ -12,51 +12,53 @@ import './App.css';
 import Searchcity from "./pages/searchcity/Searchcity";
 import Citydetails from "./pages/citydetails/Citydetails";
 import Departments from "./pages/departments/Departments";
+import Footer from "./components/footer/Footer";
 
 function App() {
-  const {isAuthenticated} = useContext(AuthContext);
+    const {isAuthenticated} = useContext(AuthContext);
 
-  return (
-    <>
-    <Topnav/>
+    return (
+        <>
+            <Topnav/>
 
-      <Switch>
+            <Switch>
 
 
-        <Route exact path="/details/:city">
-          <Citydetails />
-        </Route>
-        <Route exact path="/details/">
-          <Citydetails />
-        </Route>
-        <Route path="/departments/:department">
-          <Departments/>
-        </Route>
-        <Route path="/search">
-          <Searchcity/>
-        </Route>
-        <Route path="/mylocations">
-          <MyLocations />
-        </Route>
-        <Route path="/mypreferences">
-          <MyPreferences />
-        </Route>
-        <Route path="/profile">
-          {isAuthenticated ? <Profile /> : <Redirect to="/" />}
-        </Route>
-        <Route path="/signin">
-          <SignIn/>
-        </Route>
-        <Route path="/signup">
-          <SignUp/>
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+                <Route exact path="/details/:city">
+                    <Citydetails/>
+                </Route>
+                <Route exact path="/details/">
+                    <Citydetails/>
+                </Route>
+                <Route path="/departments/:department">
+                    <Departments/>
+                </Route>
+                <Route path="/search">
+                    <Searchcity/>
+                </Route>
+                <Route path="/mylocations">
+                    <MyLocations/>
+                </Route>
+                <Route path="/mypreferences">
+                    <MyPreferences/>
+                </Route>
+                <Route path="/profile">
+                    {isAuthenticated ? <Profile/> : <Redirect to="/"/>}
+                </Route>
+                <Route path="/signin">
+                    <SignIn/>
+                </Route>
+                <Route path="/signup">
+                    <SignUp/>
+                </Route>
+                <Route path="/">
+                    <Home/>
+                </Route>
 
-      </Switch>
-    </>
-  );
+            </Switch>
+            <Footer/>
+        </>
+    );
 }
 
 export default App;

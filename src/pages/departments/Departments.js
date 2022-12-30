@@ -19,8 +19,6 @@ function Departments(props) {
     const {department} = useParams();
 
     const [background, setBackground] = useState("outer-container main-header-background");
-    const [location, setLocation] = useState(null);
-    const [currConditions, setCurrConditions] = useState(null);
     const [more, toggleMore] = useState(false);
 
     const [error, setError] = useState('');
@@ -42,7 +40,6 @@ function Departments(props) {
     // hier zoek ik de naam van doorgegeven department op
     const adminDepartment = adminarea.find((departmentFound) => {
         return departmentFound.ID === `${department}`
-        // return departmentFound.EnglishName === region.name
     })
 
     // om na te gaan wat hoofdstad van de regio is en de location key daarvan
@@ -114,7 +111,7 @@ function Departments(props) {
                                     <div className="outer-row">
                                         <div>
                                             <Article
-                                                key={regioncapital.key}
+                                                key={regioncapital.key.concat(more)}
                                                 fieldClass="top-card"
                                                 pictureClass="mid-picture-span"
                                                 tag={region.parent}

@@ -1,0 +1,14 @@
+.aw-max {
+    flex-basis: 100px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    width: 100%;
+}
+
+.aw-logo {
+    padding: 0 16px;
+}
+
+footer p {
+    margin: initial;
+}

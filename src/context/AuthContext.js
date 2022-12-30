@@ -16,7 +16,7 @@ function AuthContextProvider({children}) {
 
 
     useEffect(() => {
-        console.log('de contextAuth is zojuist opnieuw opgestart')
+        // console.log('de contextAuth is zojuist opnieuw opgestart')
         // is er een token?
         const token = localStorage.getItem('weatherheightsToken');
 
@@ -125,7 +125,7 @@ function AuthContextProvider({children}) {
         // nieuwe data opvragen van gebruiker
         getUserdetails(token, decodedToken.sub);
         // loggen
-        console.log('Gebruiker is ingelogd!');
+        // console.log('Gebruiker is ingelogd!');
         // redirect
         history.push('/');
     }
@@ -140,7 +140,7 @@ function AuthContextProvider({children}) {
             user: null,
         });
         // loggen
-        console.log('user is uitgelogd');
+        // console.log('user is uitgelogd');
         // redirect
         history.push('/');
     }

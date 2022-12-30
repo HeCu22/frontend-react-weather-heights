@@ -91,7 +91,7 @@ function MyPreferences(props) {
                 </ul>
             </Mainnav>
 
-            <main className="outer-container">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="tiles">
                         <div className="tile">
@@ -127,6 +127,32 @@ function MyPreferences(props) {
 
                                     <p>Sun hours: </p>
 
+                                    <label htmlFor="rain-mm" className="row">
+                                        <span>Rain mm per day : </span>
+                                        <input
+                                            type="number"
+                                            id="rain-mm"
+                                            name="rainmm"
+                                            value={state.rainmm}
+                                            onChange={handleChange}/>
+
+                                        <span id="added-text">
+                                            max
+                                        </span>
+
+                                        <input type="checkbox"
+                                               className=""
+                                               id="rain-sort"
+                                               name="rainsort"
+                                               checked={state.rainsort}
+                                               onChange={handleChange}
+                                        />
+
+
+                                    </label>
+
+                                    <br></br>
+
                                     <label htmlFor="wind-kmh" className="row">
                                         <span>Wind km per hour:</span>
                                         <input
@@ -153,31 +179,6 @@ function MyPreferences(props) {
 
                                     <p>Wind gusts: </p>
 
-
-                                    <label htmlFor="rain-mm" className="row">
-                                        <span>Rain mm per day : </span>
-                                        <input
-                                            type="number"
-                                            id="rain-mm"
-                                            name="rainmm"
-                                            value={state.rainmm}
-                                            onChange={handleChange}/>
-
-                                        <span id="added-text">
-                                            max
-                                        </span>
-
-                                        <input type="checkbox"
-                                               className=""
-                                               id="rain-sort"
-                                               name="rainsort"
-                                               checked={state.rainsort}
-                                               onChange={handleChange}
-                                        />
-
-
-                                    </label>
-                                    <br></br>
                                     <br></br>
                                     <h4>More aspects in overview</h4>
                                     <p>Realfeal (°C):</p>

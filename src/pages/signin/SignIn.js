@@ -76,7 +76,7 @@ function SignIn() {
                 </ul>
             </Mainnav>
 
-            <main className="outer-container empty-header-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="mid">
                         <h1>Sign In</h1>

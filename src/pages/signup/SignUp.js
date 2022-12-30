@@ -37,7 +37,7 @@ function SignUp() {
                     "username": formState.inputUser,
                     "email": formState.inputEmail,
                     "password": formState.inputPw,
-                    "roles": ["user","admin"],
+                    "roles": ["user"],
                 });
             setMessage("User successfully registered")
 
@@ -67,7 +67,7 @@ function SignUp() {
                 </ul>
             </Mainnav>
 
-            <main className="outer-container empty-header-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="mid">
                         <h1>Register</h1>

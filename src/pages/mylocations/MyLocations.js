@@ -68,7 +68,7 @@ function MyLocations(props) {
 
             </Mainnav>
 
-            <main className="outer-container main-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="cards">
                         <p>MyLocations</p>

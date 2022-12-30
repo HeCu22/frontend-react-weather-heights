@@ -17,7 +17,7 @@ import LocMarker from "../../components/locmarker/LocMarker";
 
 function Citydetails(props) {
     const {city} = useParams();
-    const words = city.split(',');
+    const [words, setWords] = useState(city.split(','));
     const [background, setBackground] = useState("outer-container main-header-background");
     const [location, setLocation] = useState(null);
     const [more, toggleMore] = useState(false);
@@ -32,7 +32,10 @@ function Citydetails(props) {
 
     useEffect(() => {
         if (!location) {
-            fetchLocationCity((city), location, setLocation, error, setError, loading, toggleLoading);
+            let searchcity = city;
+            if (words[1] === "undefined") {searchcity = words[0].concat(",FR")}
+            // console.log('fetchcity', searchcity)
+            fetchLocationCity((searchcity), location, setLocation, error, setError, loading, toggleLoading);
             setBackground("outer-container impression01");
             // setLocation(tslocation[0]);
 
@@ -74,7 +77,7 @@ function Citydetails(props) {
                             {location ?
                                 <>
                                     <h1>Weather Heights France {location.AdministrativeArea.EnglishName}</h1>
-                                    <h2>{city.split(',')[0]}
+                                    <h2>{words[0]}
                                         {location &&
                                             <LocMarker
                                                 key={location.Key}
@@ -83,7 +86,7 @@ function Citydetails(props) {
                                                 marked={marked}
                                                 setMarked={setMarked}
                                                 locationKey={location.Key}
-                                                cityName={city.split(',')[0]}
+                                                cityName={words[0]}
                                             />
                                         }
 
@@ -93,8 +96,11 @@ function Citydetails(props) {
                                     </p>
                                 </>
                                 : <>
-                                <h1>Weather Heights  </h1>
-                                    <h2>{city.split(',')[0]} department {city.split(',')[1]}</h2>
+                                    <h1>Weather Heights </h1>
+                                    {words[1] === "undefined" ?
+                                        <h2>{words[0]} </h2>
+                                        : <h2>{words[0]} department {words[1]}</h2>}
+
                                 </>
                             }
 

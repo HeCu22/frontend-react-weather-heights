@@ -84,7 +84,7 @@ function Home() {
                             <h1>Weather Heights France </h1>
                             <div className="outer-row">
                                 <Article
-                                    key="IDF"
+                                    key={"IDF".concat(more)}
                                     fieldClass="top-card"
                                     pictureClass="mid-picture-span"
                                     tag="IDF"

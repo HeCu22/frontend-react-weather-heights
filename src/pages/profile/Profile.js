@@ -17,7 +17,7 @@ function Profile() {
                     <li> Weather Heights</li>
                 </ul>
             </Mainnav>
-            <main className="outer-container empty-header-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="mid">
                         <h1>Profile Page</h1>

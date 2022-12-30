@@ -102,7 +102,7 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
         } else {
             setTempResult(linesSave)
         }
-        ;
+
     }, []);
 
 
@@ -129,8 +129,6 @@ function Compare({mylocations, state, linesSave, setLinesSave, counter, setCount
                         key={tempResult.key}
                         lines={tempResult}
                         state={state}
-                        counter={counter}
-                        setCounter={setCounter}
 
                     />
 
