@@ -1,4 +1,4 @@
-**# Installatie Handleiding Weather Heights
+## Installatie Handleiding Weather Heights
 React applicatie voor weeradvies,
 Versie 2.0
 
