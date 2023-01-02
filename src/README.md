@@ -61,7 +61,7 @@ Registreer een account voor u gaat inloggen.
 Een gedeelte van de content is alleen beschikbaar voor ingelogde gebruikers (zoals bijvoorbeeld een profiel-pagina). Gebruikers kunnen zich zowel registreren als inloggen. Hiervoor wordt gebruik gemaakt van React Context en de NOVI-backend. De backend draait op een Heroku server. Let op: de database met gebruikers wordt vaak binnen één uur weer geleegd. Dus u moet zelf eerst een account aanmaken en hiermee inloggen. Let hierbij op de volgende vereisten:
 * Het emailadres moet daadwerkelijk een @ bevatten
 * Het wachtwoord en gebruikersnaam moeten minimaal 6 tekens bevatten.
-
+ 
 JWT-decode wordt gebruikt voor het coderen en decoderen van 'tokens' en staat al in de package.json en het is niet meer nodig het te installeren.
 
 ## Randvoorwaarden
@@ -86,21 +86,21 @@ Als het geinstalleerd is, ziet u vervolgens het nummer van de huidige geïnstall
 NPM initialiseren als NPM nog niet geconfigureerd is.
 
 * npm i parcel --save-dev
-
+  
 Parcel installeren
 
 * npm i parcel-plugin-nuke-dist --save-dev
 
-Parcel plugin Nuke Distribution installeren.
+Parcel plugin Nuke Distribution installeren. 
 Vervolgens om dat parcel nog niet geconfigureerd was moet de men de Script tag vervangen in package.json "scripts": { "start": "parcel src/index.html", "build": "parcel build src/index.html" }
 
 * npm i axios
-
+  
 Als Axios nog niet geconfigureerd is en als u een request wil maken naar een API dan kunt u hiervoor Axios installeren. Dit moet men doen als Axios nog niet in het package.json staat.
 
 * node -v
 
-Node kan men gebruiken als run-time engine om JavaScript code buiten de browser uit te voeren.
+Node kan men gebruiken als run-time engine om JavaScript code buiten de browser uit te voeren. 
 Installeren van Node.js kan via de website "https://nodejs.org/en/download/". Download en installeer.
 Met dit commando test u of de installatie succesvol was. Als Node.js aanwezig is zult u een versienummer te zien krijgen, zoals bijvoorbeeld v13.9.3.
 
@@ -125,7 +125,7 @@ Als u geen administrator gebruiker dan deze extensie toevoegen.
 
 Hetvolgende commando is nodig om jwt decode te kunnen importeren en tokens te kunnen decoderen en is dus al uitgevoerd voor de Weather Heights applicatie.
 * npm install jwt-decode
-
+    
 Om react Router te kunnen gebruiken hebben we het volgende comando nodig en al uitgevoerd voor Weather Heights en hoeft u dus niet meer te doen:
 * npm install react-router-dom@5.2.0
 
@@ -169,8 +169,8 @@ Het "Open weather" endpoint dat ik gebruik om te testen is: "...ttp://api.openwe
 (om te runnen heeft u het NIET nodig)
 
 7. WebStorm Weather Heights:
-   Maak een eigen .env bestand in de rootmap aan en vul deze met de variabel-namen zoals beschreven in .env.dist bestand en ken daar bovengenoemde apiKey aan toe.
-   Run daarna in WebStorm terminal het comando:
+Maak een eigen .env bestand in de rootmap aan en vul deze met de variabel-namen zoals beschreven in .env.dist bestand en ken daar bovengenoemde apiKey aan toe.
+Run daarna in WebStorm terminal het comando:
 * npm run build
 
 Bovenstaand comando in de WebStorm terminal zorgt ervoor dat de goede APIkey gaat werken.
@@ -179,10 +179,8 @@ Bovenstaand comando in de WebStorm terminal zorgt ervoor dat de goede APIkey gaa
    · vervolgens run met commando:
 * npm run start
 
-  · vervolgens ziet u een link verschijnen zoals: ‘https://localhost:3000’
-  Click op de link.
-  · Vervolgens ziet u het hoofdmenu van Weather Heights.
+   · vervolgens ziet u een link verschijnen zoals: ‘https://localhost:3000’
+     Click op de link.
+   · Vervolgens ziet u het hoofdmenu van Weather Heights.
 
 **
-
-
