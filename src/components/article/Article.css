@@ -1,5 +1,4 @@
 
-
 article {
     position: relative;
     text-align: center;
@@ -12,20 +11,32 @@ article {
 article p {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 10px;
     font-style: normal;
     font-weight: 300;
     font-size: 18px;
+    margin: unset;
 
 }
 
-article  h1, h2 {
+article h1, h2 {
     font-size: 1em;
 }
 
-article  h3, h4 {
+.card h2 {
+    display: flex;
+justify-content: flex-end;
+    max-width: 266px;
+}
+
+article h3, h4 {
     font-size: 1em;
 
+}
+
+article .weather-detail{
+text-align: right;
+    margin: 5px 10px 0 0;
 }
 
 article p span {
@@ -33,31 +44,39 @@ article p span {
     margin: 1px;
 }
 
-article > p {
+article .small-text {
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
 }
+
+article a {
+    color: var(--bordertile);
+}
+
 
 .tag {
     position: absolute;
     top: 0;
     left: 0;
     color: #20ACE9;
-    font-size: 8px;
+    font-size: 12px;
     padding: 4px;
 }
 
-.pictures {
+article .pictures {
+    /*background-color: gold;*/
     flex-basis: 100px;
     flex-grow: 0;
     flex-shrink: 1;
     display: flex;
     flex-direction: row;
-
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
 .small-picture-span {
+
     height: 100px;
     flex-basis: 100px;
     flex-grow: 0;
@@ -68,4 +87,13 @@ article > p {
 
 .small-picture-img {
     width: 100%;
+    border-radius: 8px;
+}
+
+.mid-picture-span {
+    height: 120px;
+    flex-basis: 120px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    /*padding: 16px;*/
 }

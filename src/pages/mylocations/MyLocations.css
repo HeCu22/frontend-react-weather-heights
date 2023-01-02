@@ -1,0 +1,42 @@
+
+.small-text {
+    font-size: 10px;
+}
+.big-tekst {
+    font-size: 52px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+.invitation-tekst {
+    color: var(--offwhite);
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+}
+
+.marked {
+    color: var(--bordertile);
+}
+
+.cards-mid-content {
+    flex-basis: 200px;
+    flex-grow: 0.6;
+    flex-shrink: 1;
+    margin-bottom: 10px;
+    color: #e5e4cf;
+}
+
+.cards-button {
+    width: 100%;
+    background: var(--main-tile);
+    border-color: var(--bordertile);
+    margin-top: 5px;
+    /*padding: 10px 10px 10px 10px;*/
+    color: var(--bordertile);
+    line-height: unset;
+    height: unset;
+    font-size: 18px;
+}
