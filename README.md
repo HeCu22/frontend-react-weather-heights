@@ -141,9 +141,7 @@ Om de applicatie Weither Heighst te installeren op een laptop of personal comput
 
 6. API key
 
-De API key die ik gebruik is en deze kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffende environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
-Bij deze applicatie maak ik gebruik van HTTP requests naar de Accuweather API (https://accuweather.com/.....) om zo de juiste data op te vragen en te verwerken in mijn applicatie. De documentatie over de verschillende endpoints kun u hier vinden.
-In deze versie is gebruik gemaakt van de endpoints:
+
 * Current Conditions endpoint ....."http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true"
 * City Search (results narrowed by countryCode)  …"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={process.env.REACT_APP_API_KEY}&q={city)&offset=25"
 * 5 Days of Daily Forecasts  ....."http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationKey}?apikey={process.env.REACT_APP_API_KEY}&details=true&metric=true"
