@@ -1,4 +1,4 @@
-**# Installatie Handleiding Weather Heights
+## Installatie Handleiding Weather Heights
 React applicatie voor weeradvies,
 Versie 2.0
 
@@ -158,7 +158,7 @@ Om de applicatie Weither Heighst te installeren op een laptop of personal comput
 
 6. API key
 
-De API key die ik gebruik is ....... en deze kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffende environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
+De API key die ik gebruik is iVlBSPKXxBblFMS3PQHkuUemNsAlPxlF en deze kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffende environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
 Bij deze applicatie maak ik gebruik van HTTP requests naar de Accuweather API (....ttps://accuweather.com/.....) om zo de juiste data op te vragen en te verwerken in mijn applicatie. De documentatie over de verschillende endpoints kunt u hier vinden.
 In deze versie is voor het testen ook gebruik gemaakt van de endpoints:
 * Current Conditions endpoint: "http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true"
