@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Mainnav from "../../components/mainnav/Mainnav";
 import './Profile.css';
+import {AuthContext} from "../../context/AuthContext";
 
 
 function Profile() {
+
+    const {user} = useContext(AuthContext);
 
     return (
         <>
@@ -14,17 +17,27 @@ function Profile() {
                     <li> Weather Heights</li>
                 </ul>
             </Mainnav>
-            <main className="outer-container empty-header-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="mid">
-                        <h1>Profielpagina</h1>
+                        <h1>Profile Page</h1>
 
                         <section className="formSpace">
-                            <h2>Gegevens</h2>
-                            <p><strong>Gebruikersnaam:</strong> hardcoded-test</p>
-                            <p><strong>Email:</strong> hardcoded@test.com</p>
-                            <h2>profiel-content</h2>
-                            <p></p>
+                            <h2>User Details</h2>
+                            <p><strong>User name:</strong> {user.username}</p>
+                            <p><strong>Email:</strong> {user.email}</p>
+                            <h2>Profile-content</h2>
+                            <p>Extra information: {user.info}</p>
+                            <ul>
+                                {user.roles.map((role) => {
+                                    return <li key={role.id}>
+                                        {role.name}
+                                    </li>
+                                })}
+
+                            </ul>
+
+
                         </section>
                         <p>Terug naar de <Link to="/">Homepagina</Link></p>
                     </div>

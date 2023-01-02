@@ -2,59 +2,72 @@ import React, {useContext, useState, useEffect} from 'react'
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
-import {ReactComponent as Logo} from "../../assets/icons/logo-weather-heights.svg";
 import './Signin.css';
 import Mainnav from "../../components/mainnav/Mainnav";
+import Button from "../../components/button/Button";
 
 function SignIn() {
-    const [error, toggleError] = useState(false);
-    const {loginFunction} = useContext(AuthContext);
+
+    const {loginFunction, checkHerokuFunction} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [loading, toggleLoading] = useState(false);
+
 
     const [formState, setFormState] = useState({
-        inputEmail: "",
         inputPw: "",
+        inputUser: "",
     })
 
     const source = axios.CancelToken.source();
-    // mocht onze pagina ge-unmount worden voor we klaar zijn met data ophalen, aborten we het request
+    // mocht pagina ge-unmount worden voor klaar met data ophalen, abort request
     useEffect(() => {
-        console.log('cleanup');
+
+        checkHerokuFunction();
         return function cleanup() {
             source.cancel();
         }
     }, []);
 
     async function handleSubmit(e) {
-        e.preventDefault();
-        toggleError(false);
-        console.log({formState});
-        try {
-            const {data: {accessToken}} = await axios.post(`http://localhost:3000/login`,
-                {
-                    email: formState.inputEmail,
-                    password: formState.inputPw,
-                },
-                { cancelToken: source.token,
-                }
-            );
-            loginFunction(accessToken);
-        } catch (e) {
+        e.preventDefault()
+        setError('');
+        toggleLoading(true);
+        checkHerokuFunction();
+        if (error) {
+            console.log('error check heroku', error)
+        } else {
+            setError('');
 
-            console.error(e);
-            toggleError(true);
+            try {
+                const {data: {accessToken}} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin',
+                    {
+                        "username": formState.inputUser,
+                        "password": formState.inputPw,
+                    });
+
+                loginFunction(accessToken);
+            } catch (e) {
+                console.error(e);
+                setError(e.response.status);
+
+            }
         }
+        setFormState({...formState, inputPw: ''});
+        toggleLoading(false);
 
     }
 
     function handleChange(evt) {
         evt.preventDefault()
+        setError('');
+        checkHerokuFunction();
         const value = evt.target.value;
         setFormState({...formState, [evt.target.name]: value});
     }
 
     return (
         <>
-
+            {loading && <span>Loading...</span>}
             <Mainnav>
                 <ul className="outer-row">
                     <li> France</li>
@@ -63,26 +76,29 @@ function SignIn() {
                 </ul>
             </Mainnav>
 
-            <main className="outer-container empty-header-background">
+            <main className="outer-container no-main-header">
                 <div className="inner-container">
                     <div className="mid">
                         <h1>Sign In</h1>
                         <form className="formSpace" onSubmit={handleSubmit}>
+                            {error &&
+                                <span className="signal">  Usercode or Password failed. Please try again...  </span>
+                            }
                             <legend>
                                 <label htmlFor="input-user">
-                                    <span> user email:</span>
+                                    <span> user code:</span>
 
                                     <input type="tekst"
                                            id="input-user"
-                                           name="inputEmail"
-                                           value={formState.inputEmail}
+                                           name="inputUser"
+                                           value={formState.inputUser}
                                            onChange={handleChange}/>
 
                                 </label>
                                 <br></br>
                                 <label htmlFor="input-pw">
                                     <span>Password:</span>
-                                    <input type="tekst"
+                                    <input type="password"
                                            id="input-pw"
                                            name="inputPw"
                                            value={formState.inputPw}
@@ -92,10 +108,14 @@ function SignIn() {
                                 </label>
                             </legend>
 
-                            <button type="submit"
-                                    disabled={(formState.inputEmail.length > 0 && formState.inputPw.length > 0) === false ? true : false}>
-                                Inloggen
-                            </button>
+                            <Button
+                                fieldClass="signin-button"
+                                type="submit"
+                                isDisabled={(formState.inputUser.length > 5 && formState.inputPw.length > 5) === false ? true : false}
+                                clickHandler={handleSubmit}
+                            >
+                                Login
+                            </Button>
 
                         </form>
                         <p>Still no account? <Link to="/signup">Register</Link> first</p>

@@ -14,12 +14,21 @@ function Topnav(props) {
                     <div className="top-navigation">
                         <nav className="top-nav-menu">
                             <ul>
+                                <li><Link to="/">regions</Link></li>
+
+                                <li><Link to="/mylocations">myLoc</Link></li>
+
+
+                                <li><Link to="/mypreferences">myPref</Link></li>
+
+
                                 {isAuthenticated ?
                                     <>
-                                    <li><Link to="/">myLocations</Link></li>
-                                    <li><Link to="/">myPreferences</Link></li>
+
+
                                     <li><Link to="/profile">Profile</Link></li>
-                                    <li><button
+
+                                        <li><button
                                         type="button"
                                         onClick={logoutFunction}
                                     >
@@ -29,7 +38,9 @@ function Topnav(props) {
                                     :
                                     <>
                                     <li><Link to="/signup">Register</Link></li>
-                                    <li><Link to="/signin">Login</Link></li>
+
+
+                                        <li><Link to="/signin">Login</Link></li>
                                     </>
                                 }
                             </ul>

@@ -7,8 +7,7 @@
         Other
     4. Areas
         Header
-        Introduction
-        JokeList
+
         Button search
         Button next
         Footer
@@ -30,10 +29,11 @@
     --main-header: #E7CEBA;
     --button-find: #E9A372;
     --offwhite: #e5e4cf;
-    --button-go: #3E2F36l;
+    --button-go: #3E2F36;
     --bordertile: #20ACE9;
     --main-body: #f5f5f5;
     --main-tile: #ffffff;
+    --signal: #BC4C2A;
 
 }
 
@@ -45,32 +45,42 @@ body {
 
 }
 
-main {
-    /*padding: 0 20px;*/
-}
+
 
 /* ------------------------------- 2. Typography ----------------------------------- */
 
-/* ------------------------------- Layout ----------------------------------- */
+
 /* ------------------------------- Reusables -------------------------------- */
-/* top-navigation */
+
 
 .outer-container {
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: center;
+    /*background-color: greenyellow;*/
+}
+/* De buitenste container is altijd de volledige schermbreedte. Het is een flexbox container die zijn inhoud altijd netjes horizontaal centreert */
+.inner-container {
+    flex-basis: 1400px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*background-color: var(--main-header);*/
 }
 
-/* De buitenste container is altijd de volledige schermbreedte. Het is een flexbox container die zijn inhoud altijd netjes horizontaal centreert */
 .outer-row {
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 6px;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .row {
     display: flex;
     flex-direction: row;
@@ -82,30 +92,64 @@ main {
     flex-direction: column;
 }
 
-.top-nav-background {
-    background-color: #E9A372;
-
-}
-
-.main-nav-background {
-    background: var(--main-header);
-
-}
-
-.main-background {
-    background: var(--main-body);
-
-}
-
-.inner-container {
-    flex-basis: 1400px;
+.max {
+    height: 414px;
+    /*flex-basis: 200px;*/
     flex-grow: 0;
     flex-shrink: 1;
-    margin: 0 20px;
+
+}
+
+.favorite-icon, .search-icon {
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+}
+
+.search-icon > path, .favorite-icon > path {
+    fill: grey;
+
+}
+
+.moved {
+    width: 100%;
+}
+
+.marked  {
+    fill: white;
+}
+
+.signal {
+    color: var(--signal);
+    font-weight: bold;
+}
+
+/* ------------------------------- Layout ----------------------------------- */
+
+footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+section {
+    background-color: #E7CEBA;
+    font-size: 10px;
+    height: 100px;
+    flex-grow: 1;
+    flex-shrink: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
+
+section p {
+    max-width: 200px;
+}
+
+
+/* --------------- Headers ------------------ and ----- navigation ------------------*/
 
 /* Top Nav  */
 .top-navigation {
@@ -118,9 +162,31 @@ main {
 
 .top-nav-menu {
     display: flex;
-    height: 30px;
+    height: 25px;
+    margin-top: 5px;
+
 }
 
+
+.top-nav-background {
+    background-color: #E9A372;
+
+}
+
+.main-nav-background {
+    background: var(--main-header);
+
+}
+
+.main-background {
+    background-color: var(--main-body);
+    min-height: 48vh;
+}
+
+.no-main-header {
+    min-height: 78vh;
+    /*padding: 0 20px;*/
+}
 
 .main-nav {
     display: flex;
@@ -137,9 +203,9 @@ main {
 
 .main-header-background {
     background: url('./assets/header-paris.jpg');
-
     background-repeat: no-repeat;
     background-size: cover;
+
 }
 
 .impression01 {
@@ -149,22 +215,21 @@ main {
     background-size: cover;
 }
 
+.impression13 {
+    background: url('./assets/images/impression13.jpg');
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 .icon-logo {
     width: 105px;
     height: 70px;
 
 }
 
-.favorite-icon, .search-icon {
-    width: 32px;
-    height: 32px;
-    padding: 5px;
-}
 
-.search-icon > path, .favorite-icon > path {
-    fill: grey;
-
-}
 
 
 .left-nav {
@@ -207,14 +272,17 @@ main {
     flex-grow: 0.8;
     flex-shrink: 1;
     margin-bottom: 10px;
-    color: #e5e4cf;
+    color: var(--offwhite);
+    display: flex;
+    flex-direction: column;
+    text-shadow: 1px 1px 2px black;
 }
 
 .header-content p {
     font-size: 14px;
 }
 
-
+/* ------------------------------- cards -------------------------------- */
 
 .cards {
     width: 100%;
@@ -230,6 +298,8 @@ main {
 }
 
 .card {
+    padding-top: 8px;
+    width: 300px;
     height: 300px;
     flex-basis: 300px;
     flex-grow: 0;
@@ -239,7 +309,15 @@ main {
     justify-content: center;
 }
 
+.top-card {
+    border-color: var(--eggshell);
+    font-size: 1.5em;
+}
 
+.top-card .weather-detail {
+    text-align: center;
+}
+/* ------------------------------- Buttons -------------------------------- */
 button {
     color: white;
     background: #E9A372;
@@ -263,6 +341,7 @@ button {
 }
 
 
+
 button:hover {
     background-color: #BC4C2A;
     color: white;
@@ -274,43 +353,51 @@ button:hover {
 
 button:disabled {
     cursor: not-allowed;
-    border-color: #D08169;
-    color: gray;
+    background-color: transparent;
+    /*border-color: #D08169;*/
+    color: transparent;
 }
 
-.max {
-    height: 414px;
-    /*flex-basis: 200px;*/
-    flex-grow: 0;
-    flex-shrink: 1;
+
+.cards-button {
+    width: fit-content;
+    background: transparent;
+    border-color: var(--bordertile);
+    margin-top: 5px;
+    padding: 10px 10px 10px 10px;
+    color: var(--bordertile);
+    line-height: unset;
+    height: unset;
+    font-size: 18px;
+}
+
+
+.cards-button:hover {
+    background-color: var(--main-tile);
+    color: white;
 
 }
 
-.moved {
-    width: 100%;
+.cards-button:hover:after {
+    color: var(--signal);
+    content: "making data calls!";
+    /*transition: all .4s ease-in-out;*/
 }
 
-footer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.go-button {
+    width: fit-content;
+    background: transparent;
+    border: none;
+    line-height: unset;
+    height: unset;
+    font-size: 18px;
+    padding: 8px 0 0 0;
 }
 
-section {
-    background-color: #E7CEBA;
-    font-size: 10px;
-    height: 100px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+.go-button:hover {
+    background-color: initial}
 
-section p {
-    max-width: 200px;
-}
+
 
 
 

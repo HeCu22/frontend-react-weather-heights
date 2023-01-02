@@ -1,0 +1,98 @@
+div .tile {
+    flex-basis: 650px;
+    flex-grow: 0.4;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--main-tile);
+    border: 1px solid var(--bordertile);
+    border-radius: 8px;
+    margin: 10px 0;
+    padding-left: 2px;
+}
+
+
+.tiles {
+    width: 100%;
+    flex-basis: 16px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
+    font-size: 14px;
+    margin: 0 10px;
+}
+
+.tiles {
+    flex-wrap: wrap;
+    margin: 0;
+    gap: 2px;
+}
+
+div .compare-values {
+    width: 100%;
+    flex-basis: 16px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+}
+
+
+div .compare-values h5 {
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 72px;
+}
+
+.filter:hover:after, .sort:hover:after {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    content: "filter values";
+    transition: all .4s ease-in-out;
+}
+
+.sort:hover:after {
+    content: "sort values"
+}
+
+
+#input-city {
+    background: var(--main-body);
+    width: 100%;
+    padding: 0 10px;
+    margin: 10px 20px;
+    height: 60px;
+    border: solid 2px var(--bordertile);
+    border-radius: 8px;
+}
+
+::placeholder {
+    color: gray;
+}
+
+.row {
+    gap: 1px
+}
+
+button {
+    width: fit-content;
+
+    padding: 8px 60px 8px 60px;
+}
+
+#temp-min, #temp-max, #wind-kmh, #rain-mm {
+    width: 40px;
+}
+
+
+#added-text {
+    padding-left: 6px;
+    font-size: 16px;
+}

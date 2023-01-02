@@ -1,23 +1,24 @@
 import React from "react";
 import axios from "axios";
-import fetchConditions from "./fetchConditions";
 
 
-async function fetchLocationCity(city, location, setLocation, error, toggleError, loading, toggleLoading) {
+async function fetchLocationCity(city, location, setLocation, error, setError, loading, toggleLoading) {
     toggleLoading(true);
-    console.log('fetch location city', (city), `https://dataservice.accuweather.com/locations/v1/search?q=${city},FR&apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
-    try {
-        toggleError(false);
-        const {data: [data]} = await axios.get(`https://dataservice.accuweather.com/locations/v1/search?q=${city},FR&apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
-        console.log('data city', (data));
+    setError('');
+      try {
+
+        const {data: [data]} = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/fr/search?q=${city}&apikey=${process.env.REACT_APP_API_KEY}&offset=1`);
+        // console.log('data city', (data));
         setLocation((data));
 
 
     } catch (e) {
-        console.error(e);
-        toggleError(true);
+        console.error(e)
+        // console.log('e', e.message);
+        setError(e.message);
 
     }
+    toggleLoading(false);
 }
 
 export default fetchLocationCity;
