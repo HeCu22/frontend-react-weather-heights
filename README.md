@@ -151,7 +151,7 @@ Om de applicatie Weither Heigst te installeren op een laptop of personal compute
 
 6. API key
 
-De API key die ik gebruik is iVlBSPKXxBblFMS3PQHkuUemNsAlPxlF en deze kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffnde environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
+De API key die ik gebruik is >..... en deze kent u toe aan de environmental variabele REACT_APP_API_KEY in het .env bestand in de rootmap. De betreffnde environmental variabele is ook genoemd in het .env.dist bestand in de rootmap.
 Bij deze applicatie maak ik gebruik van HTTP requests naar de Accuweather API (https://accuweather.com/.....) om zo de juiste data op te vragen en te verwerken in mijn applicatie. De documentatie over de verschillende endpoints kun je hier vinden.
 In deze versie is gebuik gemaakt van de endpoints:
 * Current Conditions endpoint ....."http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_API_KEY}&details=true"
