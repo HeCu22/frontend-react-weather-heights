@@ -33,10 +33,15 @@ function Citydetails(props) {
     useEffect(() => {
         if (!location) {
             let searchcity = city;
-            if (words[1] === "undefined") {searchcity = words[0].concat(",FR")}
-            // console.log('fetchcity', searchcity)
+            if (words[1] === "undefined") {
+                searchcity = words[0].concat(",FR")
+                setBackground("outer-container impression00");
+            } else {
+                setBackground(`outer-container impression00 impression${words[1]}`);
+            }
+            console.log('fetchcity', searchcity)
             fetchLocationCity((searchcity), location, setLocation, error, setError, loading, toggleLoading);
-            setBackground("outer-container impression01");
+
             // setLocation(tslocation[0]);
 
         }
@@ -60,7 +65,7 @@ function Citydetails(props) {
 
     return (
         <>
-
+            {console.log(background)}
             {loading && <span>Loading...</span>}
 
             <Mainnav>

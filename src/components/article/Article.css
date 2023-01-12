@@ -16,7 +16,7 @@ article p {
     font-weight: 300;
     font-size: 18px;
     margin: unset;
-
+    padding-left: 4px;
 }
 
 article h1, h2 {
@@ -25,7 +25,7 @@ article h1, h2 {
 
 .card h2 {
     display: flex;
-justify-content: flex-end;
+    justify-content: flex-end;
     max-width: 266px;
 }
 
@@ -34,8 +34,8 @@ article h3, h4 {
 
 }
 
-article .weather-detail{
-text-align: right;
+article .weather-detail {
+    text-align: right;
     margin: 5px 10px 0 0;
 }
 
@@ -87,8 +87,13 @@ article .pictures {
 
 .small-picture-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 15% 100%;
     border-radius: 8px;
+
 }
+
 
 .mid-picture-span {
     height: 120px;

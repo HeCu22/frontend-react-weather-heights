@@ -18,7 +18,7 @@ import {Link, useParams} from "react-router-dom";
 function Departments(props) {
     const {department} = useParams();
 
-    const [background, setBackground] = useState("outer-container main-header-background");
+    const [background, setBackground] = useState(`outer-container impression${department}`);
     const [more, toggleMore] = useState(false);
 
     const [error, setError] = useState('');
@@ -31,6 +31,7 @@ function Departments(props) {
             return departfound.code === string
         }
     )
+
 
     // hier filter ik de departments behorende bij de regio van doorgegeven department uit
     const regionDepartments = departments.filter((regionDepartment) => {

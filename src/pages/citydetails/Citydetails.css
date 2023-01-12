@@ -147,3 +147,145 @@ svg {
     min-width: 38px;
     max-height: 45px;
 }
+
+.impression00 {
+    background: url("../../assets/images/impression00.jpg");
+
+}
+
+.impression01 {
+     background: url("../../assets/images/impression01.jpg");
+
+ }
+
+.impression03 {
+    background: url("../../assets/images/impression04.jpg");
+
+}
+
+
+.impression07 {
+    background: url('../../assets/images/impression07.jpg');
+
+}
+
+
+.impression11 {
+    background: url("../../assets/images/impression11.jpg");
+
+}
+
+.impression12 {
+    background: url("../../assets/images/impression12.jpg");
+
+}
+
+.impression13, .impression04,.impression05, .impression06, .impression63, .impression83, .impression84{
+    background: url('../../assets/images/impression84.jpg');
+}
+
+.impression21, .impression25, .impression39, .impression58, .impression70, .impression71, .impression89, .impression90 {
+    background-image: url("../../assets/images/impression21.jpg");
+}
+
+.impression22, .impression29, .impression56, .impression35 {
+    background: url("../../assets/images/impression22.jpg");
+}
+
+.impression26 {
+    background: url("../../assets/images/impression26.jpg");
+}
+
+.impression30 {
+    background: url("../../assets/images/impression30.jpg");
+}
+
+.impression31, .impression09, .impression32, .impression46, .impression48, .impression65, .impression66, .small-picture-img81 {
+    background: url('../../assets/images/impression31.jpg');
+
+
+}
+
+.impression33, .impression16, .impression17, .impression19, .impression23, .impression24, .impression40, .impression47, .impression64, .impression79, .impression86, .impression87 {
+    background: url('../../assets/images/impression33.jpg');
+}
+
+.impression34 {
+    background: url('../../assets/images/impression34.jpg');
+}
+
+
+.impression63, .impression03, .impression15, .impression43 {
+    background: url('../../assets/images/impression63.jpg');
+
+}
+.impression75 {
+    background: url('../../assets/images/impression75.jpg');
+
+}
+.impression84 {
+    background: url('../../assets/images/impression84.jpg');
+}
+
+.impression00, .impression01,
+.impression02, .impression03, .impression04, .impression05, .impression06, .impression07, .impression08, .impression09, .impression10, .impression11,
+.impression12, .impression13, .impression14, .impression15, .impression16, .impression17, .impression20, .impression21, .impression22,
+.impression25, .impression26, .impression27, .impression29, .impression30, .impression31, .impression32, .impression33,
+.impression34, .impression35, .impression38, .impression39, .impression40, .impression42, .impression43,
+.impression46, .impression58, .impression63, .impression75, .impression77, .impression78,
+.impression84, .impression91, .impression92, .impression93, .impression94
+{
+    /*background: url('./assets/images/impression01.jpg');*/
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 5% 20%;
+    min-height: 32vh;
+
+}
+
+.impression21::before {
+    width: 0;
+    height: 0;
+    background-color: navajowhite;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /*content: "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription";*/
+    font-weight: bold;
+    color: black;
+
+}
+
+.impression41, .impression28, .impression37, .impression45, .impression18, .impression36 {
+    background-image: url('../../assets/images/impression41.jpg'), url('../../assets/images/impression36.jpg'), url("../../assets/images/impression37.jpg");
+    background-color: var(--button-go);
+    /*background-repeat: no-repeat;*/
+
+    background-size: 70em 32em, 43em 32em, 48em 32em;
+    /*background-size: cover;*/
+    background-position: left, center, right;
+    min-height: 32vh;
+
+}
+
+.impression44, .impression53, .impression72, .impression85, .impression49 {
+    background: url('../../assets/images/impression85.jpg');
+    background-color: var(--button-go);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    min-height: 32vh;
+}
+
+/*.impression59,*/
+/*    background-image: url('../../assets/images/impression41.jpg'), url('../../assets/images/impression36.jpg'), url("../../assets/images/impression37.jpg");*/
+/*    background-color: var(--button-go);*/
+/*    !*background-repeat: no-repeat;*!*/
+
+/*    background-size: 70em 32em, 43em 32em, 48em 32em;*/
+/*    !*background-size: cover;*!*/
+/*    background-position: left, center, right;*/
+/*    min-height: 32vh;*/
+
+/*}*/

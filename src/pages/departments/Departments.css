@@ -31,14 +31,6 @@ h2 {
     color: #e5e4cf;
 }
 
-/*.cards-button {*/
-/*    width: 100%;*/
-/*    background: var(--main-tile);*/
-/*    border-color: var(--bordertile);*/
-/*    margin-top: 5px;*/
-/*    !*padding: 10px 10px 10px 10px;*!*/
-/*    color: var(--bordertile);*/
-/*    line-height: unset;*/
-/*    height: unset;*/
-/*    font-size: 18px;*/
-/*}*/
+span.mid-picture-span img {
+    border: 1px solid var(--offwhite);
+}

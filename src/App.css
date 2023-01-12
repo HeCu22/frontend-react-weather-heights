@@ -46,7 +46,6 @@ body {
 }
 
 
-
 /* ------------------------------- 2. Typography ----------------------------------- */
 
 
@@ -60,6 +59,7 @@ body {
     justify-content: center;
     /*background-color: greenyellow;*/
 }
+
 /* De buitenste container is altijd de volledige schermbreedte. Het is een flexbox container die zijn inhoud altijd netjes horizontaal centreert */
 .inner-container {
     flex-basis: 1400px;
@@ -115,7 +115,7 @@ body {
     width: 100%;
 }
 
-.marked  {
+.marked {
     fill: white;
 }
 
@@ -208,28 +208,12 @@ section p {
 
 }
 
-.impression01 {
-    background: url('./assets/images/impression01.jpg');
-
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.impression13 {
-    background: url('./assets/images/impression13.jpg');
-
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 
 .icon-logo {
     width: 105px;
     height: 70px;
 
 }
-
-
 
 
 .left-nav {
@@ -312,11 +296,13 @@ section p {
 .top-card {
     border-color: var(--eggshell);
     font-size: 1.5em;
+    min-width: 45vh;
 }
 
 .top-card .weather-detail {
     text-align: center;
 }
+
 /* ------------------------------- Buttons -------------------------------- */
 button {
     color: white;
@@ -341,14 +327,12 @@ button {
 }
 
 
-
 button:hover {
     background-color: #BC4C2A;
     color: white;
     content: "search";
     transition: all .4s ease-in-out;
 }
-
 
 
 button:disabled {
@@ -395,7 +379,8 @@ button:disabled {
 }
 
 .go-button:hover {
-    background-color: initial}
+    background-color: initial
+}
 
 
 
